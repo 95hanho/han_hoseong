@@ -1,0 +1,60 @@
+// 태블릿용 -------------------------------------------------------------
+@media all and (min-width: 768px) {
+	.wrapper {
+		main {
+			section#iconsWrap {
+				display: block;
+			}
+			aside {
+				display: flex;
+			}
+		}
+		aside#bannerMain {
+			.todayschedule {
+				width: 500px;
+			}
+			.schedule {
+				width: 500px;
+			}
+		}
+		footer#mainFooter {
+			.menu-btn {
+				background-image: url(../img/exc_intranet/intralogo.gif);
+				background-size: cover;
+				width: 184px;
+				height: 58px;
+				&:hover {
+					box-shadow: 0.1px 2px 1px 2.5px #777;
+				}
+				i {
+					font-size: 0px !important;
+				}
+			}
+			.current-url {
+				width: calc(100% - 200px);
+			}
+		}
+		#mainMenu {
+			width: 648px;
+			height: 640px;
+			flex-wrap: nowrap;
+			.menuInfo {
+			}
+			.menuList {
+				width: 270px;
+				height: 100%;
+				border-bottom: none;
+				background-color: transparent;
+				/* 스크롤 */
+				&::-webkit-scrollbar {
+					width: 1px;
+				}
+			}
+			.menuQuick {
+				width: calc(100% - 318px);
+				height: 100%;
+				margin-left: 0;
+			}
+		}
+	}
+}

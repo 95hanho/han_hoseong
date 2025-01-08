@@ -1,0 +1,50 @@
+@charset "UTF-8";
+@media all and (min-width: 768px) {
+  .wrapper main section#iconsWrap {
+    display: block;
+  }
+  .wrapper main aside {
+    display: flex;
+  }
+  .wrapper aside#bannerMain .todayschedule {
+    width: 500px;
+  }
+  .wrapper aside#bannerMain .schedule {
+    width: 500px;
+  }
+  .wrapper footer#mainFooter .menu-btn {
+    background-image: url(../img/exc_intranet/intralogo.gif);
+    background-size: cover;
+    width: 184px;
+    height: 58px;
+  }
+  .wrapper footer#mainFooter .menu-btn:hover {
+    box-shadow: 0.1px 2px 1px 2.5px #777;
+  }
+  .wrapper footer#mainFooter .menu-btn i {
+    font-size: 0px !important;
+  }
+  .wrapper footer#mainFooter .current-url {
+    width: calc(100% - 200px);
+  }
+  .wrapper #mainMenu {
+    width: 648px;
+    height: 640px;
+    flex-wrap: nowrap;
+  }
+  .wrapper #mainMenu .menuList {
+    width: 270px;
+    height: 100%;
+    border-bottom: none;
+    background-color: transparent;
+    /* 스크롤 */
+  }
+  .wrapper #mainMenu .menuList::-webkit-scrollbar {
+    width: 1px;
+  }
+  .wrapper #mainMenu .menuQuick {
+    width: calc(100% - 318px);
+    height: 100%;
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,1892 @@
+@charset "UTF-8";
+* {
+  font-family: "Noto Sans KR";
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  color: #fff;
+  min-width: 375px;
+  overflow: auto;
+  /* 스크롤 */
+}
+.wrapper #login-wrap {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f4f4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+.wrapper #login-wrap h1 {
+  position: relative;
+  padding: 10px 0 10px 10px;
+  font-weight: bold;
+}
+.wrapper #login-wrap h1 span {
+  position: absolute;
+  font-size: 16px;
+  color: #f00;
+  margin-left: 10px;
+  top: -7px;
+  left: 5px;
+}
+.wrapper #login-wrap .login-form {
+  text-align: center;
+  padding: 20px 0;
+}
+.wrapper #login-wrap .login-form .login-input {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+}
+.wrapper #login-wrap .login-form .login-input .login-txt > div {
+  padding-bottom: 5px;
+}
+.wrapper #login-wrap .login-form .login-input .login-txt > div input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 20px;
+}
+.wrapper #login-wrap .login-form .login-input .login-txt > div input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+}
+.wrapper #login-wrap .login-form .login-input .login-submit {
+  margin-left: 5px;
+}
+.wrapper #login-wrap .login-form .login-input .login-submit button {
+  padding: 0 15px;
+  align-self: center;
+  height: 90%;
+  font-size: 20px;
+}
+.wrapper main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.wrapper main section#iconsWrap {
+  display: block;
+  position: relative;
+  z-index: 2;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  overflow: hidden;
+  /* 스크롤 */
+}
+.wrapper main section#iconsWrap .lefttop-btn .folder-add {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  background-color: rgba(37, 45, 54, 0.8);
+  z-index: 4;
+  color: #fff;
+  padding: 2px 20px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 4px 4px 13px #333;
+}
+.wrapper main section#iconsWrap .lefttop-btn .folder-add:hover {
+  background-color: rgb(45, 55, 66);
+}
+.wrapper main section#iconsWrap .lefttop-btn .folder-add.iconMoveOn {
+  background-color: rgb(45, 55, 66);
+}
+.wrapper main section#iconsWrap .lefttop-btn .folder-add.iconMoveOn:hover {
+  font-weight: bold;
+  color: #f00;
+  background-color: #fff;
+}
+.wrapper main section#iconsWrap .lefttop-btn .folder-add span {
+  margin-left: 10px;
+}
+.wrapper main section#iconsWrap::-webkit-scrollbar {
+  height: 0px;
+}
+.wrapper main section#iconsWrap > ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper main section#iconsWrap > ul > li {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.wrapper main section#iconsWrap > ul > li button.icon-btn {
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  padding: 2px;
+  border: 1px solid rgba(255, 255, 255, 0);
+  cursor: auto;
+}
+.wrapper main section#iconsWrap > ul > li button.icon-btn.folder-add {
+  color: #fff;
+  cursor: pointer;
+}
+.wrapper main section#iconsWrap > ul > li button.icon-btn.folder-add:hover {
+  color: #ff0;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 3;
+}
+.wrapper main section#iconsWrap > ul > li button.icon-btn.folder-add:active {
+  color: #f00;
+}
+.wrapper main section#iconsWrap > ul > li button.icon-btn.moving:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.wrapper main section#iconsWrap > ul > li button.folder-rename {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  color: #333;
+}
+.wrapper main section#iconsWrap > ul > li button.folder-rename:hover {
+  color: #f00;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid #000;
+  border-radius: 7px;
+  z-index: 5;
+  padding: 5px;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child .icon-child-rename {
+  position: absolute;
+  width: 100%;
+  top: -35px;
+  left: 0;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child .icon-child-rename::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 0.12;
+  background: #000;
+  border-radius: 40%;
+  content: "";
+  filter: blur(25px);
+}
+.wrapper main section#iconsWrap > ul > li .icon-child .icon-child-rename input {
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1.5px 1.5px 1px #111;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 240px;
+  min-height: 240px;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child ul li {
+  width: 120px;
+  height: 120px;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child ul li > button {
+  width: 100%;
+  height: 100%;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child.three ul {
+  width: 360px;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child.no-over {
+  top: 0;
+  left: 0;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child.over-width {
+  top: 0;
+  right: 0;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child.over-height {
+  bottom: 0;
+  left: 0;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child.over-all {
+  bottom: 0;
+  right: 0;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child.over-title {
+  top: 35px;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child.over-titleWidth {
+  top: 35px;
+  right: 0;
+}
+.wrapper main section#iconsWrap .icon-img {
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.wrapper main section#iconsWrap .icon-img img {
+  width: 64px;
+  height: 64px;
+}
+.wrapper main section#iconsWrap .dir-icon {
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  color: #fff;
+}
+.wrapper main section#iconsWrap .dir-icon i {
+  display: flex;
+}
+.wrapper main section#iconsWrap .icon-name {
+  min-height: 31.3px;
+  font-size: 13px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper main section#iconsWrap .icon-name p {
+  word-break: keep-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 두 줄까지 표시 */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis; /* 생략 부호 설정 */
+  text-shadow: 1.5px 1.5px 1px #111;
+  color: #fff;
+}
+.wrapper main section#iconsScr > div.side {
+  position: fixed;
+  display: flex;
+  width: 50px;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.wrapper main section#iconsScr > div.side > button {
+  width: 100%;
+  color: #fff;
+  height: calc(100% - 100px);
+}
+.wrapper main section#iconsScr > div.side.left {
+  visibility: hidden;
+}
+.wrapper main section#iconsScr > div.side.right {
+  right: 0;
+}
+.wrapper main section#iconsScr > div.side:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.wrapper main section#iconsScr > div.side:hover i {
+  color: yellow;
+  font-size: 32px;
+}
+.wrapper main section#iconsScr > div.tbo {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.wrapper main section#iconsScr > div.tbo > button {
+  width: calc(100% - 100px);
+  height: 100%;
+  color: #fff;
+}
+.wrapper main section#iconsScr > div.tbo.top {
+  visibility: hidden;
+}
+.wrapper main section#iconsScr > div.tbo.bottom {
+  top: auto;
+  bottom: 60px;
+}
+.wrapper main section#iconsScr > div.tbo:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.wrapper main section#iconsScr > div.tbo:hover i {
+  color: yellow;
+  font-size: 32px;
+}
+.wrapper #popupMain .popup-btns {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  right: 10px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 4px 4px 13px #333;
+  padding: 0px 10px 0 15px;
+  background-color: rgba(37, 45, 54, 0.8);
+  z-index: 4;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+}
+.wrapper #popupMain .popup-btns:hover {
+  background-color: rgb(45, 55, 66);
+}
+.wrapper #popupMain .popup-btns .module {
+  padding-right: 15px;
+}
+.wrapper #popupMain .popup-btns .module button {
+  color: #fff;
+  font-size: 20px;
+  position: relative;
+}
+.wrapper #popupMain .popup-btns .module button > span {
+  position: absolute;
+  font-size: 13px;
+  color: #fff;
+  background-color: #f00;
+  width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  bottom: 0;
+  right: -11px;
+  font-weight: 800;
+  line-height: 24px;
+}
+.wrapper #popupMain .popup-btns .module button:hover {
+  color: #ccc;
+}
+.wrapper #popupMain .app-popup {
+  position: fixed;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 4px 4px 13px #333;
+  top: 65px;
+  z-index: 99999;
+}
+.wrapper #popupMain .app-popup.schedule-space {
+  right: 70.5px;
+}
+.wrapper #popupMain .app-popup.schedule-space:after {
+  right: 61px;
+}
+.wrapper #popupMain .app-popup.schedule-space .title {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid lightgray;
+}
+.wrapper #popupMain .app-popup.schedule-space .title span {
+  width: calc(100% - 55px);
+  height: 100%;
+  display: inline-block;
+  color: #000;
+  padding: 10px 15px;
+  font-size: 18px;
+}
+.wrapper #popupMain .app-popup.schedule-space .title button {
+  display: inline-block;
+  width: 50px;
+  height: 100%;
+  font-size: 24px;
+  line-height: 0px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list {
+  padding-bottom: 10px;
+  max-height: calc(100vh - 240px);
+  overflow: auto;
+  /* 스크롤 */
+}
+.wrapper #popupMain .app-popup.schedule-space .list::-webkit-scrollbar {
+  width: 3px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div {
+  padding: 0 10px 5px 10px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div > button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div > button i {
+  color: #888;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs {
+  max-height: 150px;
+  overflow: auto;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box {
+  background: #fff;
+  width: 100%;
+  min-height: 40px;
+  border-radius: 5px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box:nth-child(n+2) {
+  margin-top: 3px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box > button,
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box > label {
+  margin: 0 10px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff; /* 체크박스 배경 색상 */
+  border: 2px solid #aaa; /* 체크박스 테두리 */
+  border-radius: 50%; /* 둥근 모양 */
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox input[type=checkbox] {
+  display: none;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox .marking {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff; /* 체크 마크 색상 */
+  display: none; /* 기본적으로 안 보이게 설정 */
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox.checked {
+  background-color: #aaa; /* 체크된 배경 색상 */
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox.checked .marking {
+  display: block; /* 체크된 상태일 때 보이게 설정 */
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content {
+  min-width: 0;
+  flex-grow: 1;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h4,
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 {
+  margin: 0;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h4 {
+  font-size: 15px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 {
+  font-size: 12px;
+  color: #777;
+  display: flex;
+  align-items: center;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 i {
+  margin-left: 5px;
+  color: #f00;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 span {
+  color: #f00;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box > button > i {
+  opacity: 0;
+  transition: all 0.5s;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box:hover > button > i {
+  opacity: 1;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div.complete {
+  margin-top: 5px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div.complete > button {
+  position: relative;
+  background-color: #ccc;
+  border-radius: 5px 5px 0 0;
+  padding: 10px 0;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div.complete > button > button {
+  position: absolute;
+  right: 5px;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div.complete .schedule-box {
+  background-color: #eee;
+  opacity: 0.6;
+}
+.wrapper #popupMain .app-popup.schedule-space .list > div.complete .schedule-box:first-child {
+  border-radius: 0 0 5px 5px;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule {
+  padding: 0 10px 10px 10px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid lightgray;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule h5 {
+  margin: 0;
+  padding: 10px 0 0 0;
+  color: #f00;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule > form > div {
+  position: relative;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule input[type=text] {
+  font-size: 18px;
+  min-width: 0;
+  border: none;
+  border-bottom: 3px solid #fff;
+  background-color: transparent;
+  color: #555;
+  width: 235px;
+  padding-right: 35px;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule input[type=text]:focus {
+  outline: none;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule .submit-btn {
+  position: absolute;
+  right: 52px;
+  padding: 0;
+  bottom: 0;
+  height: 100%;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule .date-wrap #datepicker {
+  height: 0;
+  text-align: right;
+  padding: 0;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule label {
+  display: inline-block;
+  padding: 0 5px;
+  vertical-align: bottom;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule label i {
+  color: #333;
+}
+.wrapper #popupMain .app-popup.schedule-space .new-schedule label.date-view {
+  display: block;
+  color: #000;
+  text-align: right;
+}
+.wrapper #popupMain .app-popup.banner-space {
+  right: 50.3px;
+}
+.wrapper #popupMain .app-popup.banner-space:after {
+  right: 35px;
+}
+.wrapper #popupMain .app-popup.banner-space .title {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid lightgray;
+}
+.wrapper #popupMain .app-popup.banner-space .title span {
+  width: calc(100% - 55px);
+  height: 100%;
+  display: inline-block;
+  color: #000;
+  padding: 10px 15px;
+  font-size: 18px;
+}
+.wrapper #popupMain .app-popup.banner-space .title button {
+  display: inline-block;
+  width: 50px;
+  height: 100%;
+  font-size: 24px;
+  line-height: 0px;
+}
+.wrapper #popupMain .app-popup.banner-space .list > button {
+  width: 100%;
+  height: 60px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+}
+.wrapper #popupMain .app-popup.banner-space .list > button > i {
+  font-size: 24px;
+}
+.wrapper #popupMain .app-popup.banner-space .list > button .etc-control {
+  height: 100%;
+  min-width: 0;
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 10px 0 10px;
+}
+.wrapper #popupMain .app-popup.banner-space .list > button .etc-control h3,
+.wrapper #popupMain .app-popup.banner-space .list > button .etc-control h4 {
+  margin: 0;
+  padding: 0;
+  height: 50%;
+}
+.wrapper #popupMain .app-popup.banner-space .list > button .etc-control h3 {
+  font-size: 16px;
+}
+.wrapper #popupMain .app-popup.banner-space .list > button .etc-control h4 {
+  color: #aaa;
+  font-size: 14px;
+}
+.wrapper #popupMain .app-popup.banner-space .list > hr {
+  margin: 0 10px;
+}
+.wrapper #popupMain .app-popup.banner-space .all-control {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+.wrapper #popupMain .app-popup.banner-space .all-control span {
+  display: inline-block;
+  width: 250px;
+  height: 30px;
+  background-color: rgb(85, 107, 207);
+  color: #fff;
+  border-radius: 15px;
+  line-height: 28px;
+}
+.wrapper #popupMain .app-popup.banner-space .all-control:hover span {
+  background-color: rgb(85, 141, 206);
+}
+.wrapper #popupMain .app-popup.banner-space .all-control.disabled {
+  cursor: not-allowed;
+}
+.wrapper #popupMain .app-popup.banner-space .all-control.disabled span {
+  background-color: #999;
+}
+.wrapper #popupMain .app-popup.alert-space {
+  right: 18.8px;
+}
+.wrapper #popupMain .app-popup.alert-space:after {
+  right: 18px;
+}
+.wrapper #popupMain .app-popup.alert-space .title {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid lightgray;
+}
+.wrapper #popupMain .app-popup.alert-space .title span {
+  width: calc(100% - 55px);
+  height: 100%;
+  display: inline-block;
+  color: #000;
+  padding: 10px 15px;
+  font-size: 18px;
+}
+.wrapper #popupMain .app-popup.alert-space .title button {
+  display: inline-block;
+  width: 50px;
+  height: 100%;
+  font-size: 24px;
+  line-height: 0px;
+}
+.wrapper #popupMain .app-popup.alert-space .list {
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+  /* 스크롤 */
+}
+.wrapper #popupMain .app-popup.alert-space .list::-webkit-scrollbar {
+  width: 3px;
+}
+.wrapper #popupMain .app-popup.alert-space .list::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button {
+  width: 100%;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  border-bottom: 1px solid lightgray;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button i {
+  font-size: 30px;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button .content {
+  min-width: 0;
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 0 0 10px;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button .content h2,
+.wrapper #popupMain .app-popup.alert-space .list > button .content h3,
+.wrapper #popupMain .app-popup.alert-space .list > button .content h4,
+.wrapper #popupMain .app-popup.alert-space .list > button .content h5 {
+  margin: 0;
+  padding: 0;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button .content h2 {
+  font-size: 17px;
+  font-weight: bolder;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button .content h3 {
+  font-size: 15px;
+  font-weight: bolder;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button .content h4 {
+  font-size: 13px;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button .content h5 {
+  text-align: right;
+  font-size: 12px;
+  color: #555;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button:hover {
+  background-color: rgb(240, 240, 240);
+  box-shadow: 0 0 5px;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button.noImg .content {
+  padding: 0;
+}
+.wrapper #popupMain .app-popup.alert-space .list > button.pin {
+  background-color: #ffcbcb;
+  box-shadow: 0 0 5px;
+}
+.wrapper #popupMain .app-popup:after {
+  height: 20.4px;
+  width: 19.8px;
+  position: absolute;
+  display: block;
+  opacity: 1;
+  z-index: 3;
+  border: 13.3px solid transparent;
+  content: "";
+  overflow: visible;
+  --nipple-color: var(--color-bg);
+  --nipple-color: rgba(255, 255, 255, 0.9);
+  border-bottom-color: var(--nipple-color);
+  top: -23.6px;
+}
+.wrapper aside#bannerMain {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+.wrapper aside#bannerMain.moving {
+  z-index: 0;
+  opacity: 0.5;
+}
+.wrapper aside#bannerMain .todayschedule {
+  width: 300px;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px 5px 0 0;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment {
+  position: relative;
+  width: 100%;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment h4 {
+  padding: 10px 0 5px;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment .goal_txt {
+  font-size: 30px;
+  border: none;
+  position: relative;
+  background-color: transparent;
+  border-bottom: 3px solid #fff;
+  text-align: center;
+  font-weight: bolder;
+  color: #fff;
+  caret-color: #fff;
+  width: 100%;
+  max-width: calc(100vw - 30px);
+  padding: 0 50px;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment .goal_txt:hover {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #222;
+  border-radius: 5px 5px 0 0;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment .goal_txt:focus {
+  outline: none;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 0;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment .goal_txt::-moz-placeholder {
+  font-weight: 1000;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment .goal_txt::placeholder {
+  font-weight: 1000;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment button {
+  position: absolute;
+  bottom: 4.6px;
+  right: 10px;
+  color: #fff;
+}
+.wrapper aside#bannerMain .todayschedule .bottom-ment button:hover {
+  color: #999;
+}
+.wrapper aside#bannerMain .schedule {
+  width: 300px;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+}
+.wrapper aside#bannerMain .schedule h3 {
+  text-align: center;
+  padding: 10px 0 5px;
+  margin: 0;
+}
+.wrapper aside#bannerMain .schedule h6 {
+  text-align: right;
+  padding: 0;
+  margin: 0;
+}
+.wrapper aside#bannerMain .schedule h6 button {
+  color: #fff;
+}
+.wrapper aside#bannerMain .schedule .schedule-list ul,
+.wrapper aside#bannerMain .schedule .schedule-list li {
+  margin: 0;
+  padding: 0;
+}
+.wrapper aside#bannerMain .schedule .schedule-list li {
+  padding: 7px 0;
+  border-radius: 5px;
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap {
+  width: 40px;
+  height: 100%;
+  text-align: center;
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff; /* 체크박스 배경 색상 */
+  border: 2px solid #aaa; /* 체크박스 테두리 */
+  border-radius: 5px; /* 둥근 모양 */
+  cursor: pointer;
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox input[type=checkbox] {
+  display: none;
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox .marking {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff; /* 체크 마크 색상 */
+  display: none; /* 기본적으로 안 보이게 설정 */
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox.checked {
+  background-color: #aaa; /* 체크된 배경 색상 */
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox.checked .marking {
+  display: block; /* 체크된 상태일 때 보이게 설정 */
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .work {
+  position: relative;
+  width: calc(100% - 45px);
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .work .title {
+  width: calc(100% - 60px);
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.wrapper aside#bannerMain .schedule .schedule-list li .work .clock {
+  width: 45px;
+  padding: 0 15px 0 5px;
+  display: inline-block;
+  font-size: 15px;
+  color: rgb(233, 233, 123);
+}
+.wrapper aside#bannerMain .schedule .schedule-list li:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-weight: bold;
+}
+.wrapper aside#bannerMain .schedule .schedule-list li:hover .clock {
+  color: #f00;
+}
+.wrapper aside#bannerMain .weather {
+  position: fixed;
+  margin-right: 5px;
+  top: 80px;
+  right: 0;
+}
+.wrapper aside#bannerMain .weather h3 {
+  margin: 0;
+  text-align: right;
+  font-size: 17px;
+}
+.wrapper aside#bannerMain .weather > div {
+  text-align: right;
+}
+.wrapper aside#bannerMain .weather > div img {
+  width: 150px;
+  height: 60px;
+}
+.wrapper footer#mainFooter {
+  position: fixed;
+  z-index: 99999;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 58px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+}
+.wrapper footer#mainFooter .menu-btn {
+  display: block;
+  border-radius: 0 10px 10px 0;
+  border-radius: 0 5px 5px 0;
+  width: 50px;
+  height: 100%;
+  text-align: center;
+  background-color: #9ab3d9;
+  color: #555;
+  font-size: 25px;
+}
+.wrapper footer#mainFooter .current-url {
+  position: relative;
+  width: calc(100% - 65px);
+  height: 100%;
+  display: block;
+  overflow: hidden;
+}
+.wrapper footer#mainFooter .current-url > div {
+  height: 100%;
+  overflow-x: scroll;
+}
+.wrapper footer#mainFooter .current-url > div::-webkit-scrollbar {
+  height: 0px;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap {
+  display: inline-flex;
+  height: 100%;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block {
+  display: inline-block;
+  height: 100%;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box {
+  position: relative;
+  text-align: left;
+  width: 150px;
+  height: 100%;
+  padding: 0 5px;
+  overflow: hidden;
+  background-color: rgba(41, 41, 41, 0.3);
+  color: #fff;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .page-title {
+  padding: 0 5px;
+  display: inline-block;
+  width: calc(100% - 28px);
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .page-title span {
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 97%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.2s;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .close-page {
+  position: absolute;
+  right: 10px;
+  visibility: hidden;
+  opacity: 0;
+  color: #f00;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box.hover .close-page {
+  visibility: visible;
+  opacity: 1;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box.on {
+  background-color: rgba(61, 61, 61, 0.5);
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box.on .underline {
+  border-top: 2px solid rgb(255, 242, 61);
+  width: 100%;
+  height: 2px;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box:hover {
+  background-color: rgba(94, 94, 94, 0.5);
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box:hover .underline {
+  width: 100%;
+  height: 3px;
+}
+.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block:nth-child(n+2) {
+  margin-left: 2px;
+}
+.wrapper footer#mainFooter .current-url > button {
+  display: none;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  color: #fff;
+  font-size: 30px;
+  padding: 0 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.wrapper footer#mainFooter .current-url > button.left {
+  left: 0;
+}
+.wrapper footer#mainFooter .current-url > button.right {
+  right: 0;
+}
+.wrapper footer#mainFooter .current-url > button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+.wrapper footer#mainFooter .current-url > button:active {
+  color: #ff0;
+}
+.wrapper footer#mainFooter .right-wrap {
+  text-align: center;
+  display: block;
+  height: 100%;
+  align-items: center;
+}
+.wrapper footer#mainFooter .right-wrap .main-btn {
+  font-size: 0;
+  border-left: 1px solid #fff;
+  width: 17px;
+  height: 100%;
+}
+.wrapper footer#mainFooter .right-wrap .main-btn:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.wrapper .page-wrap {
+  position: fixed;
+  visibility: hidden;
+  border: 1px solid rgb(25, 79, 107);
+  box-shadow: 3px 3px 8px #333;
+  transition: all 0.03s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.wrapper .page-wrap .page-top {
+  position: relative;
+  width: 100%;
+  height: 35px;
+  background-color: rgb(211, 227, 253);
+  border-bottom: 1px solid rgb(151, 151, 151);
+  display: flex;
+  align-items: center;
+}
+.wrapper .page-wrap .page-top .move-btn {
+  text-align: left;
+  padding: 0 10px;
+  flex-grow: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: 17px;
+  content: "";
+  height: 100%;
+  cursor: auto;
+}
+.wrapper .page-wrap .page-top .right-wrap {
+  height: 100%;
+}
+.wrapper .page-wrap .page-top .right-wrap > button {
+  width: 50px;
+  height: 100%;
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper .page-wrap .page-top .right-wrap > button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.wrapper .page-wrap .page-screen {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 35px);
+  background-color: #fff;
+}
+.wrapper .page-wrap .page-screen .page-cover {
+  display: block;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+}
+.wrapper .page-wrap .page-screen iframe {
+  width: 100%;
+  height: 100%;
+}
+.wrapper .page-wrap .page-resize-top {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 8px;
+  cursor: n-resize;
+}
+.wrapper .page-wrap .page-resize-right {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 8px;
+  height: 100%;
+  cursor: e-resize;
+}
+.wrapper .page-wrap .page-resize-bottom {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 8px;
+  cursor: n-resize;
+}
+.wrapper .page-wrap .page-resize-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  cursor: e-resize;
+}
+.wrapper .page-wrap .page-resize-topLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nw-resize;
+}
+.wrapper .page-wrap .page-resize-topRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: ne-resize;
+}
+.wrapper .page-wrap .page-resize-bottomLeft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: sw-resize;
+}
+.wrapper .page-wrap .page-resize-bottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: se-resize;
+}
+.wrapper .page-wrap.off {
+  width: 20vw;
+  height: 20vw;
+  bottom: 58px;
+  left: 0;
+}
+.wrapper .page-wrap.on {
+  /* TEST */
+  visibility: visible;
+  width: 960px;
+  height: 700px;
+  top: 0;
+  left: 0;
+  transition: all 0.1s;
+}
+.wrapper .page-wrap.max-screen {
+  width: 100vw;
+  height: calc(100% - 58px);
+  top: 0;
+  left: 0;
+}
+.wrapper .page-wrap.moving {
+  transition: all 0s;
+}
+.wrapper .page-wrap.moving .page-top {
+  background-color: rgb(150, 163, 184);
+}
+.wrapper .page-wrap.moving .page-cover {
+  opacity: 0;
+}
+.wrapper .page-wrap.moving .page-screen {
+  opacity: 0.5;
+}
+.wrapper .page-wrap .full-close {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #000;
+  font-size: 25px;
+  line-height: 0px;
+}
+.wrapper .page-wrap .full-close:hover {
+  border: 1px solid black;
+}
+.wrapper #mainFooter.full {
+  bottom: -65px;
+}
+.wrapper #pages .full {
+  top: -35px;
+  height: calc(100% + 35px);
+}
+.wrapper #mainMenu {
+  position: fixed;
+  z-index: 99998;
+  width: 100%;
+  height: calc(100vh - 58px);
+  background-color: rgba(37, 37, 37, 0.95);
+  bottom: calc(-100% - 640px);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  transition: all 0.1s;
+}
+.wrapper #mainMenu.on {
+  bottom: 58px;
+}
+.wrapper #mainMenu .menuInfo {
+  width: 48px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.wrapper #mainMenu .menuInfo.open {
+  background-color: rgba(50, 48, 54, 0.99);
+  width: 255px;
+}
+.wrapper #mainMenu .menuInfo.setting .highlight {
+  left: -255px;
+}
+.wrapper #mainMenu .menuInfo .highlight {
+  position: relative;
+  width: 510px;
+  height: 100%;
+  display: flex;
+  transition: all 0.2s;
+}
+.wrapper #mainMenu .menuInfo .highlight > div {
+  position: relative;
+  width: 255px;
+}
+.wrapper #mainMenu .menuInfo .highlight > div .bottom-space {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.wrapper #mainMenu .menuInfo .highlight > div .top-space > button,
+.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 6px 12px;
+  text-align: left;
+  color: #fff;
+  height: 48px;
+}
+.wrapper #mainMenu .menuInfo .highlight > div .top-space > button:hover,
+.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button:hover {
+  background-color: rgb(80, 80, 80);
+}
+.wrapper #mainMenu .menuInfo .highlight > div .top-space > button span:nth-child(2),
+.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button span:nth-child(2) {
+  padding-left: 12px;
+  font-size: 15px;
+}
+.wrapper #mainMenu .menuInfo .highlight > div .top-space > button .bris-icon,
+.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button .bris-icon {
+  border: 1px solid #fff;
+  border-radius: 4px;
+  font-size: 18px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 20px;
+}
+.wrapper #mainMenu .menuInfo .highlight > div .top-space > button .bris-icon.mobile,
+.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button .bris-icon.mobile {
+  font-size: 11.5px;
+}
+.wrapper #mainMenu .menuInfo .highlight > div .top-space > button .noread,
+.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button .noread {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background-color: #f00;
+  border-radius: 100%;
+  top: 22.3px;
+  left: 26.4px;
+  text-align: center;
+  line-height: 20px;
+}
+.wrapper #mainMenu .menuInfo .right-open {
+  position: relative;
+  width: 48px;
+  height: 100%;
+}
+.wrapper #mainMenu .menuList {
+  width: calc(100% - 24px);
+  height: calc(50% - 19px);
+  overflow: auto;
+  padding: 10px;
+  margin-left: 48px;
+  border-bottom: 3px solid #fff;
+  background-color: #4e4e4e;
+  /* 스크롤 */
+}
+.wrapper #mainMenu .menuList .sort {
+  display: flex;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #888;
+  margin-bottom: 5px;
+}
+.wrapper #mainMenu .menuList .sort > div {
+  width: 50%;
+}
+.wrapper #mainMenu .menuList .sort .cur-menu button {
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+}
+.wrapper #mainMenu .menuList .sort .cur-menu button:hover {
+  color: #ff0;
+}
+.wrapper #mainMenu .menuList .sort .sort-btn {
+  display: flex;
+  justify-content: center;
+}
+.wrapper #mainMenu .menuList .sort .sort-btn button {
+  color: #fff;
+  display: inline-block;
+  padding: 0 10px;
+  height: 20px;
+}
+.wrapper #mainMenu .menuList .sort .sort-btn button:nth-child(1) {
+  border-left: 1px solid #fff;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-radius: 3px 0 0 3px;
+}
+.wrapper #mainMenu .menuList .sort .sort-btn button:nth-child(n+2) {
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+.wrapper #mainMenu .menuList .sort .sort-btn button:last-child {
+  border-radius: 0 3px 3px 0;
+}
+.wrapper #mainMenu .menuList .sort .sort-btn button.on {
+  background-color: rgb(129, 127, 118);
+}
+.wrapper #mainMenu .menuList .sort .sort-btn button:hover {
+  background-color: rgb(101, 99, 92);
+}
+.wrapper #mainMenu .menuList .menu-search {
+  position: relative;
+}
+.wrapper #mainMenu .menuList .menu-search input {
+  border: none;
+  background-color: transparent;
+  padding-left: 35px;
+  padding-right: 25px;
+  color: #fff;
+}
+.wrapper #mainMenu .menuList .menu-search input:focus {
+  box-shadow: none;
+}
+.wrapper #mainMenu .menuList .menu-search .search-icon {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  height: 100%;
+}
+.wrapper #mainMenu .menuList .menu-search .search-reset {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  height: 100%;
+}
+.wrapper #mainMenu .menuList ul {
+  margin: 0;
+  padding: 0;
+}
+.wrapper #mainMenu .menuList ul li {
+  width: 100%;
+}
+.wrapper #mainMenu .menuList ul li > button {
+  position: relative;
+  width: 100%;
+  height: 35px;
+  color: #fff;
+  display: block;
+  text-align: left;
+}
+.wrapper #mainMenu .menuList ul li > button > i {
+  width: 30px;
+  display: inline-block;
+  text-align: center;
+}
+.wrapper #mainMenu .menuList ul li > button.sortOn {
+  padding: 0 0 0 10px;
+}
+.wrapper #mainMenu .menuList ul li > button.sort-title {
+  font-size: 20px;
+  padding-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wrapper #mainMenu .menuList ul li > button.sort-title.on {
+  background-color: rgb(155, 152, 141);
+}
+.wrapper #mainMenu .menuList ul li > button:hover {
+  background-color: rgb(101, 99, 92);
+}
+.wrapper #mainMenu .menuList ul li > button .menu-modify {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  height: 100%;
+  padding: 0 2px;
+}
+.wrapper #mainMenu .menuList ul li > button .menu-modify:hover {
+  color: #ff0;
+}
+.wrapper #mainMenu .menuList > ul {
+  margin-top: 3px;
+}
+.wrapper #mainMenu .menuList.trash {
+  position: relative;
+  overflow: visible;
+}
+.wrapper #mainMenu .menuList .quick-trashcan {
+  position: absolute;
+  width: calc(100% + 48px);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  top: 0;
+  left: -48px;
+}
+.wrapper #mainMenu .menuList .quick-trashcan:hover {
+  color: #f00;
+}
+.wrapper #mainMenu .menuList::-webkit-scrollbar {
+  width: 5px;
+  height: 1px;
+}
+.wrapper #mainMenu .menuList::-webkit-scrollbar-thumb {
+  background-color: #fff;
+}
+.wrapper #mainMenu .menuList::-webkit-scrollbar-track {
+  background-color: rgb(37, 37, 37);
+  border-left: 1px solid rgb(37, 37, 37);
+}
+.wrapper #mainMenu .menuQuick {
+  width: calc(100% - 24px);
+  position: relative;
+  height: calc(50% + 21px);
+  padding: 10px 8px 10px 8px;
+  overflow: auto;
+  margin-left: 48px;
+  /* 스크롤 */
+}
+.wrapper #mainMenu .menuQuick .quick-group {
+  width: 100%;
+  color: #fff;
+}
+.wrapper #mainMenu .menuQuick .quick-group.move {
+  border: 1px solid #fff;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.wrapper #mainMenu .menuQuick .quick-group.new {
+  opacity: 0.8;
+}
+.wrapper #mainMenu .menuQuick .quick-group .title {
+  width: 100%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+.wrapper #mainMenu .menuQuick .quick-group .title input[type=text] {
+  font-size: 15px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+}
+.wrapper #mainMenu .menuQuick .quick-group .title input[type=text]:focus {
+  border: none;
+  outline: none;
+}
+.wrapper #mainMenu .menuQuick .quick-group .btns {
+  width: 100%;
+}
+.wrapper #mainMenu .menuQuick .quick-group .btns button {
+  color: #fff;
+  margin: 2px;
+  padding: 4px;
+  width: calc(33% - 4px);
+  text-align: left;
+  aspect-ratio: 1/1;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+}
+.wrapper #mainMenu .menuQuick .quick-group .btns button:hover {
+  background-color: rgb(77, 77, 77);
+  border: 1px solid rgb(158, 158, 158);
+}
+.wrapper #mainMenu .menuQuick .quick-group .btns button .btns-icon {
+  padding-bottom: 20px;
+  text-align: center;
+}
+.wrapper #mainMenu .menuQuick .quick-group .btns button h6 {
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  font-size: 12px;
+  padding-bottom: 5px;
+  word-break: keep-all;
+  padding: 1px 2px;
+}
+.wrapper #mainMenu .menuQuick .new-quick {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper #mainMenu .menuQuick::-webkit-scrollbar {
+  width: 5px;
+  height: 1px;
+}
+.wrapper #mainMenu .menuQuick::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+.wrapper #mainMenu .menuQuick::-webkit-scrollbar-track {
+  background-color: rgb(37, 37, 37);
+  border-left: 1px solid rgb(37, 37, 37);
+}
+.wrapper .pointer-space {
+  position: fixed;
+  pointer-events: none; /* 이 부분이 중요합니다. */
+  padding: 2px;
+  text-align: center;
+}
+.wrapper .pointer-space.icon {
+  top: -60px;
+  left: -60px;
+  width: 120px;
+  height: 120px;
+  z-index: 5;
+  opacity: 0.7;
+}
+.wrapper .pointer-space.menu {
+  top: -49.805px;
+  left: -49.805px;
+  width: 99.61px;
+  height: 99.61px;
+  padding: 4px;
+  z-index: 99999;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+.wrapper .pointer-space.menu h6 {
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  font-size: 12px;
+  padding-bottom: 5px;
+  word-break: keep-all;
+  text-align: left;
+  padding: 1px 2px;
+}
+.wrapper::-webkit-scrollbar {
+  height: 0px;
+}
+
+.icon-act:hover, .icon-act:focus {
+  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 3;
+}
+.icon-act:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.icon-act:focus {
+  height: auto;
+}
+.icon-act:focus p {
+  height: auto;
+  display: block;
+}
+
+.switch .switch_label {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  width: 58px;
+  height: 28px;
+  background: #999;
+  border: 2px solid #999;
+  border-radius: 20px;
+  transition: 0.2s;
+}
+.switch .switch_label:hover {
+  background: #888;
+}
+.switch .switch_label > span {
+  position: absolute;
+  top: 1.6px;
+  left: 3px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: #fff;
+  transition: 0.2s;
+}
+.switch .switch_checkbox {
+  position: absolute;
+  /* hidden */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.switch .switch_checkbox:checked + .switch_label {
+  background: rgb(110, 218, 110);
+  border: 2px solid rgb(121, 204, 121);
+}
+.switch .switch_checkbox:checked + .switch_label:hover {
+  background: rgb(121, 204, 121);
+}
+.switch .switch_checkbox:checked + .switch_label > span {
+  left: 34px;
+  background: #fff;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1254901961);
+}
+
+.add-shadow::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 0.12;
+  background: #000;
+  border-radius: 40%;
+  content: "";
+  filter: blur(25px);
+}
+
+/* 모달창 */
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  color: #000;
+}
+.modal .modal-background {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  z-index: 900;
+  cursor: auto;
+}
+.modal .modal-board {
+  position: absolute;
+  width: 100%;
+  max-width: 800px;
+  z-index: 901;
+}
+.modal .modal-board .modal-content {
+  height: 100%;
+  margin: 0 15px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border: 0.1px solid #686868;
+  border-radius: 20px;
+}
+.modal .modal-board .modal-content .modal-title {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 15px 50px 15px 20px;
+}
+.modal .modal-board .modal-content .modal-con {
+  position: relative;
+  max-height: calc(100vh - 220px);
+  font-size: 18px;
+  width: 100%;
+  padding: 0 20px 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.modal .modal-board .modal-content .modal-con #iconSelectList > button {
+  display: inline-grid;
+}
+.modal .modal-board .modal-content .modal-con .bg-preview {
+  display: block;
+  width: 50vw;
+  height: 50vh;
+  border: 1px solid black;
+  border-style: dashed;
+}
+.modal .modal-board .modal-content .modal-con .bg-preview.on {
+  border: none;
+}
+.modal .modal-board .modal-content .modal-con .bg-list {
+  width: 100%;
+  margin-left: 0;
+}
+.modal .modal-board .modal-content .modal-con .bg-list > button,
+.modal .modal-board .modal-content .modal-con .bg-list label {
+  width: 33.3%;
+  aspect-ratio: 1/1;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal .modal-board .modal-content .modal-con .bg-list > button.pick,
+.modal .modal-board .modal-content .modal-con .bg-list label.pick {
+  background-color: #aaa;
+}
+.modal .modal-board .modal-content .modal-con .bg-list > button:hover,
+.modal .modal-board .modal-content .modal-con .bg-list label:hover {
+  border: 3px solid #555;
+  padding: 0;
+}
+.modal .modal-board .modal-content .modal-btn_wrap {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.modal .modal-board .modal-content .modal-btn_wrap .modal_close {
+  background: url("../img/ico_close_40x40.png") no-repeat 0 0;
+  width: 16px;
+  height: 16px;
+  font-size: 0;
+  background-size: 100% auto;
+  vertical-align: top;
+}
+.modal.active .modal-board {
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+  animation-name: fadeInToCenter;
+}
+.modal.delay .modal-board {
+  animation-duration: 0.35s;
+  animation-name: fadeOutToBottom;
+}
+@keyframes fadeOutToBottom {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-40px);
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(101%);
+  }
+}
+@keyframes fadeInToCenter {
+  0% {
+    opacity: 0;
+    transform: translateY(101%);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
