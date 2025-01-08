@@ -6,8 +6,6 @@
   import MainMenuSubLi from '../mainMenu/mainMenuSubLi.svelte';
 	import { onMount } from 'svelte';
 	import { intraList } from '../../menus/intra';
-	import { brisList } from '../../menus/bris';
-	import { mBrisList } from '../../menus/mBris';
 	import { modal_bgModify, modal_menu, modal_result } from '../../store/modalSlice';
 	import { menuList } from '../../store/menuSlice';
 	import { moveMenu } from '../../store/iconSlice';
