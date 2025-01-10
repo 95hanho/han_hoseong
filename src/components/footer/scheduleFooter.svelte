@@ -6,7 +6,7 @@
 	import flatpickr from 'flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
 	import moment from 'moment';
-	import { setSchedules } from '../../compositions/api';
+	import { commonService } from '../../api/index';
 
 	export let scheduleView_store;
 	export let change_scheduleView_store;
@@ -71,7 +71,7 @@
 	const scheduleCheck = (e, index) => {
 		// console.log(e.target.checked, index);
 		$scheduleList[index].complete = e.target.checked;
-		setSchedules($scheduleList);
+		commonService.setSchedules($scheduleList);
 	}
 
 	let schedule_txt = "";

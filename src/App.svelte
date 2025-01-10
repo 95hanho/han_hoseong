@@ -1,15 +1,14 @@
 <script>
+	import { commonService } from './api/index.js';
 	import MainMenu from './components/main/mainMenu.svelte';
     import BannerMain from './components/main/bannerMain.svelte';
     import IconMain from './components/main/iconMain.svelte';
     import MainFooter from './components/main/mainFooter.svelte';
-  import { onMount,  } from 'svelte';
-	import { weather } from './compositions/banner';
+    import { onMount } from 'svelte';
 	import Login from './components/main/Login.svelte';
 	import PopupMain from './components/main/popupMain.svelte';
 	import ModalMain from './components/main/modalMain.svelte';
 	import { bg_info } from './store/modalSlice';
-	import { getBgInfo } from './compositions/api';
 
     document.addEventListener('click', function() {
         // console.log('클릭됐엉');
@@ -55,8 +54,7 @@
 
     onMount(() => {
         // menuUi.menuOnOff();
-        weather();
-        $bg_info = getBgInfo();
+        $bg_info = commonService.getBgInfo();
     });
 </script>
 

@@ -1,9 +1,10 @@
+<!-- 베너들 (팝업형태로 특수 기능 처리) -->
 <script>
   import weather from '../../assets/img/날씨예시.png'
   import weather2 from '../../assets/img/날씨예시2.png'
   import { banners } from '../../store/bannerSlice';
   import { fade } from 'svelte/transition';
-  import { folderUi } from '../../compositions/ui';
+  import { folderUi } from '../../lib/ui';
   import BannerSchedule from '../banner/bannerSchedule.svelte';
 	import { moveIcon, moveMenu } from '../../store/iconSlice';
 

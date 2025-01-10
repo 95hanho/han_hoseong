@@ -1,4 +1,6 @@
+<!-- 왼쪽 아래 메인 메뉴 -->
 <script>
+	import { commonService } from './../../api/index.js';
 	import { fade, slide } from 'svelte/transition';
     import { inPage } from "../../store/pageSlice";
     import MainMenuQuick from "../mainMenu/mainMenuQuick.svelte";
@@ -9,7 +11,6 @@
 	import { modal_bgModify, modal_menu, modal_result } from '../../store/modalSlice';
 	import { menuList } from '../../store/menuSlice';
 	import { moveMenu } from '../../store/iconSlice';
-	import { getMenus, getQuicks, setMenus, setQuicks } from '../../compositions/api';
 
     export let change_menuOn;
 
@@ -27,14 +28,13 @@
         hightlightOn = false;
         settingOn = false;
     }
-
     /* END 왼쪽 하이라이트 메뉴 열기 닫기 */
 
     // 
     let storeMenus = {};
 
     // 메뉴 보여줄 정렬타입
-    let menuViewType = 1;
+    let menuViewType = 1; // 1: 메뉴별, 2: 가나다 순
     // 왼쪽 메뉴리스트
     let curMenuNum = 0;
     $: menuSortList = Object.entries($menuList).reduce((acc, cur) =>  {
@@ -66,7 +66,7 @@
     // 오른쪽 즐겨찾기리스트
     let quickList = [];
     $: if(quickList && quickList.length > 0) {
-        setQuicks(quickList);
+        commonService.setQuicks(quickList);
     }
     $: if(quickList.some((v) => v.menus.length === 0)) {
         let findIdx = quickList.findIndex((v) => v.menus.length === 0)
@@ -92,7 +92,7 @@
         let originIdx = $menuList[$modal_menu.parent].findIndex((v) => v.menuIdx === $modal_menu.menuIdx);        
         $menuList[$modal_menu.parent][originIdx] = $modal_menu;
         $menuList = $menuList;
-        setMenus({
+        commonService.setMenus({
             ...storeMenus,
         });
         $modal_result = "";
@@ -118,23 +118,21 @@
     /* 테스트용 메뉴고유번호 붙이기 */
 
     onMount(() => {
-        if(!getMenus()) {
+        if(!commonService.getMenus()) {
             storeMenus = {
                 intra: intraList,
-                bris: brisList,
-                mBris: mBrisList,
             }
-            setMenus({
+            commonService.setMenus({
                 ...storeMenus,
             });
         } else {
             storeMenus = {
-                ...getMenus(),
+                ...commonService.getMenus(),
             }
             console.log(storeMenus);
         }
         /*  */
-        quickList = getQuicks();
+        quickList = commonService.getQuicks();
         console.log(quickList);
         /*  */
         curMenuNum = 1;
@@ -146,19 +144,7 @@
     <div class="menuList" class:trash={quickMenu_moveOn}>
         <div class="sort">
             <div class="cur-menu">
-                <button on:click={() => {
-                    menuOpen = -1;
-                    if(curMenuNum === 1) {
-                        $menuList = storeMenus.bris;
-                        curMenuNum = 2;
-                    } else if(curMenuNum === 2) {
-                        $menuList = storeMenus.mBris;
-                        curMenuNum = 3;
-                    } else {
-                        $menuList = storeMenus.intra;
-                        curMenuNum = 1;
-                    }
-                }}>{curMenuNum === 1 ? 'Intra' : curMenuNum === 2 ? 'Bris' : 'M-Bris'}<i class="icon-reload h3"></i></button>
+                <button>한호성</button>
             </div>
             <div>
                 <div class="sort-btn">
@@ -241,36 +227,11 @@
         <MainMenuQuick {quickList} {change_quickList} 
             {subMenu_moveOn}
             {quickMenu_moveOn} {change_quickMenu_moveOn} {change_menuOn}/>
-        <!-- <div class="quick-group">
-            <div class="title">그룹 이름 지정</div>
-            <div class="btns">
-                <button>AnyShare</button>
-                <button>명령 프롬프트</button>
-                <button>FileZilla</button>
-                <button>FileZilla</button>
-            </div>
-        </div>
-        <div class="quick-group">
-            <div class="title">그룹 이름 지정</div>
-            <div class="btns">
-                <button>AnyShare</button>
-                <button>명령 프롬프트</button>
-                <button>FileZilla</button>
-                <button>AnyShare</button>
-                <button>명령 프롬프트</button>
-                <button>FileZilla</button>
-            </div>
-        </div>
-        <div class="quick-group">
-            <div class="title">그룹 이름 지정</div>
-            <div class="btns">
-                <button>AnyShare</button>
-                <button>명령 프롬프트</button>
-            </div>
-        </div> -->
         <div class="quick-group" class:new-quick={!new_quick_move} 
             class:move={$moveMenu && new_quick_move}
             class:new={$moveMenu && new_quick_move}
+            role="button"
+            tabindex="0"
             on:mousemove={(e) => {
                 if($moveMenu) new_quick_move = true;
             }}
@@ -327,7 +288,9 @@
     <div class="menuInfo" class:open={hightlightOn}
         class:setting={settingOn}
         on:mouseenter={highlightOpen}
-        on:mouseleave={highlightClose}>
+        on:mouseleave={highlightClose}
+        role="button"
+        tabindex="0">
         <div class="highlight">
             <div>
                 <div class="top-space">

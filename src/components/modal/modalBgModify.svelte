@@ -1,13 +1,13 @@
 <script>
+	import { commonService } from './../../api/index.js';
   import { bg_info, modal_bgModify, modal_result } from '../../store/modalSlice.js';
-  import { modalUI } from '../../compositions/ui.js';
+  import { modalUI } from '../../lib/ui.js';
   import bg_ex1 from '../../assets/img/bg/coming-soon.jpg';
   import bg_ex2 from '../../assets/img/bg/cover-1.jpg';
   import bg_ex3 from '../../assets/img/bg/cover-9.jpg';
   import bg_ex4 from '../../assets/img/bg/cover.jpg';
   import bg_ex5 from '../../assets/img/bg/post-5.jpg';
 	import { slide } from 'svelte/transition';
-	import { setBgInfo } from '../../compositions/api.js';
 
 /* 모달 기본설정 */
   let modalEle = null;
@@ -80,7 +80,7 @@
       ["background-position"]: setting_bg["background-position"] === "center" ? "center" : `${positionX}% ${positionY}%`,
       ["background-color"]: setting_bg["background-color"] !== 'custom' ? setting_bg["background-color"] : customColor,
     }
-    setBgInfo($bg_info);
+    commonService.setBgInfo($bg_info);
   }
 
 </script>

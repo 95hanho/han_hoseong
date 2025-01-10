@@ -1,8 +1,8 @@
 <script>
+	import { commonService } from './../../api/index.js';
 	import { fade } from 'svelte/transition';
 	import { popup_command, scheduleList } from "../../store/popupSlice";
 	import { onMount } from 'svelte';
-	import { getSchedules, setSchedules } from '../../compositions/api';
 
   let goal_txt = ""; // 목표 텍스트
   let goal_focus = false;
@@ -18,7 +18,7 @@
           date: new Date().toISOString().substring(0, 10),
           complete: false,
         });
-        setSchedules($scheduleList);
+        commonService.setSchedules($scheduleList);
         goal_txt = "";
         make_scheduleList();
     }
@@ -54,7 +54,7 @@
   }
 
   onMount(() => {
-    $scheduleList = getSchedules();
+    $scheduleList = commonService.getSchedules();
     make_scheduleList();
   });
 </script>

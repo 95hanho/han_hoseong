@@ -1,3 +1,4 @@
+<!-- 로그인 -->
 <script>
   import loginImg from '../../assets/img/login_vision_20240613_0857.jpg';
 </script>

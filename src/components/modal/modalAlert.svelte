@@ -1,6 +1,6 @@
 <script>
   import { modal_alert, modal_alert_txt } from '../../store/modalSlice.js';
-import { modalUI } from './../../compositions/ui.js';
+import { modalUI } from '../../lib/ui.js';
   let modalEle = null;
   let closeBtn = null;
 

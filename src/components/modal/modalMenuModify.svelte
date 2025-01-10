@@ -1,6 +1,6 @@
 <script>
   import { modal_menuModify, modal_menu, modal_result } from '../../store/modalSlice.js';
-  import { modalUI } from '../../compositions/ui.js';
+  import { modalUI } from '../../lib/ui.js';
   import ico_quick_home from "../../assets/img/ico_quick_home.png";
 	import { onMount } from 'svelte';
 

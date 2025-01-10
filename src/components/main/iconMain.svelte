@@ -1,13 +1,14 @@
+<!-- 바탕화면 아이콘 화면 -->
 <script>
+	import { commonService } from './../../api/index.js';
 	import { moveIcon } from '../../store/iconSlice.js';
 	import { inPage } from '../../store/pageSlice.js';
     import ico_quick_home from '../../assets/img/ico_quick_home.png';
     import { onMount } from 'svelte';
-    import { initCalcWidthHeight, folderUi } from '../../compositions/ui.js';
+    import { initCalcWidthHeight, folderUi } from '../../lib/ui.js';
     import { scale, fade } from 'svelte/transition';
     import IconScr from '../icons/iconScr.svelte';
 	import { getElement } from 'jspreadsheet-ce';
-	import { getIcons, setIcons } from '../../compositions/api.js';
 
     let icons = []; // 아이콘
     let existIcons = []; // 존재하는 아이콘리스트
@@ -357,10 +358,10 @@
         e.stopPropagation();
         console.log('test', e, b, c);
     }
-    $: if(iconData.icons.length > 0) setIcons(iconData.icons);
+    $: if(iconData.icons.length > 0) commonService.setIcons(iconData.icons);
     $: console.log(iconData.icons);
     onMount(() => {
-        iconData.icons = getIcons();
+        iconData.icons = commonService.getIcons();
         icons_wrap_making();
         window.addEventListener('resize', icons_wrap_making);
     });

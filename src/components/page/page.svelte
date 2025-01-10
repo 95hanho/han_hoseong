@@ -1,3 +1,4 @@
+<!-- 페이지 -->
 <script>
 	import { fly } from "svelte/transition";
     import PageResize from "./pageResize.svelte";

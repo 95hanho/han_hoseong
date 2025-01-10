@@ -1,3 +1,4 @@
+<!-- 페이지 사이즈 조절 -->
 <script>
   import { onMount } from "svelte";
 

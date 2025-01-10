@@ -1,5 +1,6 @@
+<!-- 하단 작업표시줄 -->
 <script>
-    import { menuUi, pageUi } from "../../compositions/ui";
+    import { menuUi, pageUi } from "../../lib/ui";
     import Page from "../page/page.svelte";
     import { inPage } from "../../store/pageSlice";
 	import { onMount } from "svelte";

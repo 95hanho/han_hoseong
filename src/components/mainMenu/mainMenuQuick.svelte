@@ -1,3 +1,4 @@
+<!-- 메인메뉴 오른쪽 퀵메뉴 -->
 <script>
   import { moveIcon, moveMenu } from "../../store/iconSlice";
   import { inPage } from "../../store/pageSlice";
@@ -9,6 +10,8 @@
     export let change_quickMenu_moveOn;
     export let subMenu_moveOn;
     export let change_menuOn;
+
+    console.log('quickList', quickList);
 
     let on_subMenu_move = -1;
     const quick_mousemove = (e, qIdx) => {
@@ -94,6 +97,8 @@
     on:mousemove={(e) => quick_mousemove(e, qIdx)}
     on:mouseleave={(e) => quick_mouseleave(e)}
     on:mouseup={(e) => quick_mouseup(e, quick)}
+    role="button"
+    tabindex="0"
 >
     <div class="title"><input type="text" bind:value={quick.name} placeholder="그룹 이름 지정"
         on:change={() => change_quickList(quickList)}></div>

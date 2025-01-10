@@ -1,5 +1,6 @@
+<!-- 아이콘이 보이지 않는 범위 있을 시 스크롤버튼 -->
 <script>
-    import { folderUi } from "../../compositions/ui";
+    import { folderUi } from "../../lib/ui";
 
     export let iconMoveOn;
 

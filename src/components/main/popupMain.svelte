@@ -1,3 +1,4 @@
+<!-- todolist, 베너조작, 알람 등의 팝업관리 -->
 <script>
 	import { popup_command } from "../../store/popupSlice";
 	import AlertFooter from "../footer/alertFooter.svelte";
