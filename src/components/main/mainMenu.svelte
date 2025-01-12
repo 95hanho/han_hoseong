@@ -116,8 +116,8 @@
         });
     }
     /* 테스트용 메뉴고유번호 붙이기 */
-
     onMount(() => {
+        commonService.getMenus();
         if(!commonService.getMenus()) {
             storeMenus = {
                 intra: intraList,
@@ -126,6 +126,7 @@
                 ...storeMenus,
             });
         } else {
+            console.log('getMenus', commonService.getMenus());
             storeMenus = {
                 ...commonService.getMenus(),
             }

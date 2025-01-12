@@ -1,6 +1,11 @@
 // API 엔드포인트 목록 - API url 모음집
 // const API_ENDPOINTS = {
 const API_URL = {
+  MENU: "/api/menu",
+  QUICK: "/api/menu/quick",
+  ICON: "/api/menu/icons",
+  SCHEDULE: "/api/popup/schedule",
+  BACKGROUND: "/api/ui/background",
   // 테스트
   TEST: "/test", // GET
   TESTLOGIN: "/auth/login", // 로그인
