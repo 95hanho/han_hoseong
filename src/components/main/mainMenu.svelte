@@ -117,8 +117,8 @@
     }
     /* 테스트용 메뉴고유번호 붙이기 */
     onMount(() => {
-        commonService.getMenus();
-        if(!commonService.getMenus()) {
+        commonService.get_menus();
+        if(!commonService.get_local_menus()) {
             storeMenus = {
                 intra: intraList,
             }
@@ -126,9 +126,9 @@
                 ...storeMenus,
             });
         } else {
-            console.log('getMenus', commonService.getMenus());
+            console.log('get_menus', commonService.get_local_menus());
             storeMenus = {
-                ...commonService.getMenus(),
+                ...commonService.get_local_menus(),
             }
             console.log(storeMenus);
         }

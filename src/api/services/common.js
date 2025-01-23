@@ -2,11 +2,14 @@ import { get_normal } from "../apiFilter";
 import API_URL from "../endpoints";
 
 const commonService_doc = {
-  getMenus: () => {
+  get_menus: () => {
     get_normal(API_URL.MENU).then((res) => {
       console.log(res);
     });
     return JSON.parse(localStorage.getItem("menus")) || "";
+  },
+  get_local_menus = () => {
+    return JSON.parse(localStorage.getItem("menus")) || {};
   },
   setMenus: (obj) => {
     localStorage.setItem("menus", JSON.stringify(obj));
