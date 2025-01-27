@@ -118,7 +118,8 @@
     /* 테스트용 메뉴고유번호 붙이기 */
     onMount(() => {
         commonService.get_menus();
-        if(!commonService.get_local_menus()) {
+        if(Object.keys(commonService.get_local_menus()).length == 0) {
+            console.log(intraList);
             storeMenus = {
                 intra: intraList,
             }

@@ -3,12 +3,16 @@ import API_URL from "../endpoints";
 
 const commonService_doc = {
   get_menus: () => {
-    get_normal(API_URL.MENU).then((res) => {
-      console.log(res);
+    get_normal(API_URL.MENU).then((data) => {
+      console.log(data);
+      const obj = {};
+      data.menus.map((v) => {
+        obj[v.parent_name] = v.menu_list;
+      });
+      console.log(obj);
     });
-    return JSON.parse(localStorage.getItem("menus")) || "";
   },
-  get_local_menus = () => {
+  get_local_menus: () => {
     return JSON.parse(localStorage.getItem("menus")) || {};
   },
   setMenus: (obj) => {
