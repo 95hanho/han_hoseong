@@ -116,29 +116,27 @@
         });
     }
     /* 테스트용 메뉴고유번호 붙이기 */
-    onMount(() => {
-        commonService.get_menus();
-        if(Object.keys(commonService.get_local_menus()).length == 0) {
-            console.log(intraList);
+    onMount(async () => {
+        const menu_await = await commonService.get_menus();
+        console.log("menu_await", menu_await);
+        const menu_version = commonService.get_menu_version();
+        // 버전이 다르면 새로가져오기
+        if(menu_await.version !== menu_version) {
+            commonService.set_local_menus(menu_await.menus);
             storeMenus = {
-                intra: intraList,
+                hanho: menu_await.menus,
             }
-            commonService.setMenus({
-                ...storeMenus,
-            });
         } else {
-            console.log('get_menus', commonService.get_local_menus());
             storeMenus = {
-                ...commonService.get_local_menus(),
+                hanho: commonService.get_local_menus()
             }
-            console.log(storeMenus);
         }
         /*  */
         quickList = commonService.getQuicks();
         console.log(quickList);
         /*  */
         curMenuNum = 1;
-        $menuList = storeMenus.intra;
+        $menuList = storeMenus.hanho;
     });
 </script>
 

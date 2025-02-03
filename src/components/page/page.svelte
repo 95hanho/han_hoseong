@@ -119,7 +119,7 @@
                 c_vps();
             }}>
             <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.customColor : view.color}`} />
-            {view.type + ") " + view.title}
+            {view.parent + ") " + view.name}
         </button>
         <div class="right-wrap">
             <button on:click={() => {
@@ -166,8 +166,8 @@
         }}></button>
         {/if}
         <!--  -->
-        <!-- <iframe src={view.frame} title="12321" 
-        frameborder="0"></iframe> -->
+        <iframe src={view.url} title="12321" 
+        frameborder="0"></iframe>
         <!--  -->
     </div>
     {#if !view.maxScreen}

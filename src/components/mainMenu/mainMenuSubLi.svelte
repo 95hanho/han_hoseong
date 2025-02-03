@@ -63,23 +63,25 @@
 <li id="mainMenuSubLi">
     <button
         class:sortOn={sortOn}
-        title={subMenu.title}
+        title={subMenu.name}
         on:mousedown={(e) => subMenu_mousedown(e, 
             {
                 ...subMenu,
             }
         )}
         on:mousemove={(e) => subMenu_mousemove(e)}
-        on:click={(e) => {
-            $inPage = {
-                ...subMenu,
-            }
-            change_menuOn(false);
-            subMenu_mouseup();
+        on:click|preventDefault={(e) => {
+            if(subMenu.frame_on) {
+                $inPage = {
+                    ...subMenu,
+                }
+                change_menuOn(false);
+                subMenu_mouseup();
+            } else window.open(subMenu.url);
         }}
     >
         <i class={`bi ${subMenu.icon} fs-18px`} style={`color:${subMenu.color === 'custom' ? subMenu.customColor : subMenu.color}`}></i>
-        {subMenu.title}
+        {subMenu.name}
         <button class="menu-modify" on:mousedown|stopPropagation 
             on:click|stopPropagation={() => {
                 modal_menuModify.open({...subMenu});

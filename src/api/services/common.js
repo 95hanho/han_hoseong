@@ -2,20 +2,26 @@ import { get_normal } from "../apiFilter";
 import API_URL from "../endpoints";
 
 const commonService_doc = {
-  get_menus: () => {
+  get_menu_version: () => localStorage.getItem("menu_version") || 0,
+  set_menu_version: (v) => localStorage.setItem("menu_version", v),
+  get_menus: () =>
     get_normal(API_URL.MENU).then((data) => {
-      console.log(data);
+      // console.log({ ...data });
       const obj = {};
       data.menus.map((v) => {
+        v.menu_list.map((v2) => {
+          v2.frame_on = v.frame_on;
+        });
         obj[v.parent_name] = v.menu_list;
       });
-      console.log(obj);
-    });
-  },
+      // console.log(obj);
+      data.menus = obj;
+      return data;
+    }),
   get_local_menus: () => {
     return JSON.parse(localStorage.getItem("menus")) || {};
   },
-  setMenus: (obj) => {
+  set_local_menus: (obj) => {
     localStorage.setItem("menus", JSON.stringify(obj));
   },
   getQuicks: () => {
