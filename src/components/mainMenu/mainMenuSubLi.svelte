@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
     import { moveIcon, moveMenu } from "../../store/iconSlice";
 	import { modal_menuModify } from "../../store/modalSlice";
     import { inPage } from "../../store/pageSlice";
@@ -7,15 +8,16 @@
     export let sortOn;
     export let subMenu_moveOn;
     export let change_subMenu_moveOn;
-    export let change_menuOn;
+    const dispatch = createEventDispatcher();
 
     let downOn = false;
     let initX = 0; // 아이콘 클릭 시 첫 x
     let initY = 0; // 아이콘 클릭 시 첫 y
+    let moving_menu = null;
 
     const subMenu_mousedown = (e, sMenu) => {
         downOn = true;
-        $moveMenu = sMenu;
+        moving_menu = sMenu;
         initX = e.offsetX;
         initY = e.offsetY;
     }
@@ -23,10 +25,12 @@
         let moveX = e.offsetX;
         let moveY = e.offsetY;
         if(downOn && Math.abs(initX - moveX) + Math.abs(initY - moveY) > 15) {
+            $moveMenu = moving_menu;
             change_subMenu_moveOn(true);
         }
     }
     const subMenu_mouseup = (e) => {
+        moving_menu = null;
         $moveMenu = null;
         downOn = false;
         change_subMenu_moveOn(false);
@@ -48,10 +52,10 @@
             if(follower) follower.style.transform = `translate(${x}px, ${y}px)`;
         } else if(e.target.closest('#mainFooter')) {
             subMenu_mouseup();
-            change_menuOn(false);
+            dispatch("change_menuOn", false);
         } else if(e.target.closest('#iconsWrap')) {
             $moveIcon = $moveMenu;
-            change_menuOn(false);
+            dispatch("change_menuOn", false);
             subMenu_mouseup();
         } else {
             subMenu_mouseup();
@@ -60,7 +64,7 @@
 </script>
 
 {#each subMenus as subMenu, index}
-<li id="mainMenuSubLi">
+<li id={"mainMenuSubLi"+ index}>
     <button
         class:sortOn={sortOn}
         title={subMenu.name}
@@ -75,7 +79,7 @@
                 $inPage = {
                     ...subMenu,
                 }
-                change_menuOn(false);
+                dispatch("change_menuOn", false);
                 subMenu_mouseup();
             } else window.open(subMenu.url);
         }}
@@ -85,7 +89,7 @@
         <button class="menu-modify" on:mousedown|stopPropagation 
             on:click|stopPropagation={() => {
                 modal_menuModify.open({...subMenu});
-                change_menuOn(false);
+                dispatch("change_menuOn", false);
             }}>
             <i class="bi bi-three-dots fs-24px"></i>
         </button>

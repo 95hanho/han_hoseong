@@ -68,8 +68,8 @@
     </main>
     <PopupMain />
     <BannerMain/>
-    <MainFooter {menuOn} {change_menuOn}/>
-    <MainMenu {change_menuOn}/>
+    <MainFooter {menuOn} on:change_menuOn={change_menuOn}/>
+    <MainMenu on:change_menuOn={change_menuOn}/>
     <ModalMain />
     {/if}
 </div>

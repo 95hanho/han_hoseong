@@ -3,13 +3,12 @@
   import { moveIcon, moveMenu } from "../../store/iconSlice";
   import { inPage } from "../../store/pageSlice";
   import ico_quick_home from '../../assets/img/ico_quick_home.png';
+  import { createEventDispatcher } from "svelte";
         
     export let quickList;
-    export let change_quickList;
     export let quickMenu_moveOn;
-    export let change_quickMenu_moveOn;
     export let subMenu_moveOn;
-    export let change_menuOn;
+    const dispatch = createEventDispatcher();
 
     console.log('quickList', quickList);
 
@@ -37,7 +36,7 @@
                 quickList[qIdx].menus = quickList[qIdx].menus.filter((v, i) => i !== qSubIdx);
             }
             quick.menus.push($moveMenu);
-            change_quickList(quickList);
+            dispatch("change_quickList", quickList);
         }
     }
 
@@ -56,14 +55,14 @@
         let moveX = e.offsetX;
         let moveY = e.offsetY;
         if(downOn && Math.abs(initX - moveX) + Math.abs(initY - moveY) > 15) {
-            change_quickMenu_moveOn(true);
+            dispatch("change_quickMenu_moveOn", true);
         }
     }
     const quick2_mouseup = (e) => {
         $moveMenu = null;
         downOn = false;
         on_subMenu_move = -1;
-        change_quickMenu_moveOn(false);
+        dispatch("change_quickMenu_moveOn", false);
     }
     $:if(quickMenu_moveOn) {
         document.addEventListener('mousemove', quick2_moveOnFnc);
@@ -81,7 +80,7 @@
             follower.style.transform = `translate(${x}px, ${y}px)`;
         } else if(e.target.closest('#mainFooter')){
             quick2_mouseup();
-            change_menuOn(false);
+            dispatch("change_menuOn", false);
         } else if(e.target.closest('#iconsWrap')) {
             $moveIcon = $moveMenu;
             quick2_mouseup();
@@ -101,7 +100,7 @@
     tabindex="0"
 >
     <div class="title"><input type="text" bind:value={quick.name} placeholder="그룹 이름 지정"
-        on:change={() => change_quickList(quickList)}></div>
+        on:change={() => dispatch("change_quickList", quickList)}></div>
     <div class="btns">
         {#each quick.menus as qSub, qSubIdx}
         <button 
@@ -115,7 +114,7 @@
                 $inPage = {
                     ...qSub
                 }
-                change_menuOn(false);
+                dispatch("change_menuOn", false);
                 quick2_mouseup();
             }}
         >
@@ -126,7 +125,7 @@
                 <i class={`bi ${qSub.icon} fs-48px`} style={`color:${qSub.color === 'custom' ? qSub.customColor : qSub.color}`}></i>
                 {/if}
             </div>
-            <h6>{qSub.title}</h6>
+            <h6>{qSub.name}</h6>
         </button>
         {/each}
     </div>

@@ -433,7 +433,7 @@
                     </div>
                     {/if}
                     <div class="icon-name">
-                        <p>{icon.title}</p>
+                        <p>{icon.name}</p>
                     </div>
                 {/if}
             </button>
@@ -450,7 +450,7 @@
                     class:over-titleWidth={folderPositionNum == 6}
                 >
                     <div class="icon-child-rename">
-                        <input type="text" bind:value={icon.title}>
+                        <input type="text" bind:value={icon.name}>
                     </div>
                     <ul>
                         {#each icon.children as childIcon, childIdx}
@@ -475,7 +475,7 @@
                                 </div>
                                 {/if}
                                 
-                                <div class="icon-name"><p>{childIcon.title}</p></div>
+                                <div class="icon-name"><p>{childIcon.name}</p></div>
                             </button>
                         </li>
                         {/each}
@@ -504,7 +504,7 @@
         </div>
         {/if}
         <div class="icon-name">
-            <p>{movingIcon.title}</p>
+            <p>{movingIcon.name}</p>
         </div>
     </div>
     {/if}

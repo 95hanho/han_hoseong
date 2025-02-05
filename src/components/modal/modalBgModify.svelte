@@ -1,6 +1,6 @@
 <script>
 	import { commonService } from './../../api/index.js';
-  import { bg_info, modal_bgModify, modal_result } from '../../store/modalSlice.js';
+  import { bg_info, modal_bgModify } from '../../store/modalSlice.js';
   import { modalUI } from '../../lib/ui.js';
   import bg_ex1 from '../../assets/img/bg/coming-soon.jpg';
   import bg_ex2 from '../../assets/img/bg/cover-1.jpg';

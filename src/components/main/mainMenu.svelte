@@ -5,14 +5,14 @@
     import { inPage } from "../../store/pageSlice";
     import MainMenuQuick from "../mainMenu/mainMenuQuick.svelte";
     import ico_quick_home from '../../assets/img/ico_quick_home.png';
-  import MainMenuSubLi from '../mainMenu/mainMenuSubLi.svelte';
-	import { onMount } from 'svelte';
+    import MainMenuSubLi from '../mainMenu/mainMenuSubLi.svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { intraList } from '../../menus/intra';
 	import { modal_bgModify, modal_menu, modal_result } from '../../store/modalSlice';
 	import { menuList } from '../../store/menuSlice';
 	import { moveMenu } from '../../store/iconSlice';
 
-    export let change_menuOn;
+    const dispatch = createEventDispatcher();
 
     /* START 왼쪽 하이라이트 메뉴 열기 닫기 */
     let hightlightOn = false;
@@ -40,7 +40,7 @@
     $: menuSortList = Object.entries($menuList).reduce((acc, cur) =>  {
         acc.push(...cur[1]);
         return acc;
-    },[]).sort((a, b) => a.title > b.title ? 1 : -1);
+    },[]).sort((a, b) => a.name > b.name ? 1 : -1);
 
     // 메뉴검색 텍스트
     let menuSearchTxt = "";
@@ -52,13 +52,13 @@
     $: if(match_search && match_txt) {
         searchList = Object.entries($menuList).reduce((acc, cur) =>  {
             let list = cur[1].filter((v) => {
-                let title = v.title.replace(/\s|\.|>|\(|\)|·/g, "");
-                if(title.includes(match_txt)) return true;
+                let name = v.name.replace(/\s|\.|>|\(|\)|·/g, "");
+                if(name.includes(match_txt)) return true;
                 else return false;
             });
             acc.push(...list);
             return acc;
-        },[]).sort((a, b) => a.title > b.title ? 1 : -1);
+        },[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }
 
     let menuOpen = -1; // 오픈할 메뉴
@@ -68,6 +68,7 @@
     $: if(quickList && quickList.length > 0) {
         commonService.setQuicks(quickList);
     }
+    // 퀵 리스트 그룹 사라질 때 quickList에서 뺌
     $: if(quickList.some((v) => v.menus.length === 0)) {
         let findIdx = quickList.findIndex((v) => v.menus.length === 0)
         quickList = quickList.filter((v, i) => i !== findIdx);
@@ -96,7 +97,7 @@
             ...storeMenus,
         });
         $modal_result = "";
-        change_menuOn(true);
+        dispatch("change_menuOn", true);
         $modal_menu = {};
     }
 
@@ -170,7 +171,7 @@
         {#if menuSearchTxt.length > 0}
         <ul in:fade={{delay:200 ,duration:300}} out:fade={{duration:200}}>
         <MainMenuSubLi subMenus={searchList} sortOn={true} {subMenu_moveOn}
-        {change_subMenu_moveOn} {change_menuOn}  />
+        {change_subMenu_moveOn} />
         </ul>
         {:else if menuViewType === 1}
         <div in:fade={{delay:200 ,duration:300}} out:fade={{duration:200}}>
@@ -192,7 +193,7 @@
                 <li class="sub-menus" in:slide={{duration:500}} out:slide={{duration:500}}>
                     <ul>
                         <MainMenuSubLi subMenus={menuEntry[1]} sortOn={false} {subMenu_moveOn}
-                            {change_subMenu_moveOn} {change_menuOn} />
+                            {change_subMenu_moveOn} />
                     </ul>
                 </li>
                 {/if}
@@ -205,7 +206,7 @@
         {:else if menuViewType === 2}
         <ul in:fade={{delay:200 ,duration:300}} out:fade={{duration:200}}>
         <MainMenuSubLi subMenus={menuSortList} sortOn={true} {subMenu_moveOn}
-        {change_subMenu_moveOn} {change_menuOn}  />
+        {change_subMenu_moveOn} />
         </ul>
         {/if}
         {#if quickMenu_moveOn}
@@ -224,9 +225,10 @@
         {/if}
     </div>
     <div class="menuQuick">
-        <MainMenuQuick {quickList} {change_quickList} 
+        <MainMenuQuick {quickList} on:change_quickList={change_quickList} 
             {subMenu_moveOn}
-            {quickMenu_moveOn} {change_quickMenu_moveOn} {change_menuOn}/>
+            {quickMenu_moveOn} on:change_quickMenu_moveOn={change_quickMenu_moveOn} />
+        <!-- 퀵메뉴 맨밑 여유 빈칸 -->
         <div class="quick-group" class:new-quick={!new_quick_move} 
             class:move={$moveMenu && new_quick_move}
             class:new={$moveMenu && new_quick_move}
@@ -275,7 +277,7 @@
                                 </i>
                                 {/if}
                             </div>
-                            <h6>{$moveMenu.title}</h6>
+                            <h6>{$moveMenu.name}</h6>
                         </button>
                     </div>
                 </div>
@@ -305,10 +307,10 @@
                             frame: "https://eaintra.exc.co.kr/member/myINfo.asp",
                             menuIdx:1002,
                             parent: "개인정보",
-                            title: "개인정보수정",
+                            name: "개인정보수정",
                             type: "Intra"
                         }
-                        change_menuOn(false);
+                        dispatch("change_menuOn", true);
                     }}>
                         <span><i class="bi bi-person-circle fs-24px"></i></span>
                         <span>개인정보</span>
@@ -316,13 +318,13 @@
                     <button on:click={() => {
                         
                         $inPage = {
-                            title: "메시지",
+                            name: "메시지",
                             type: "Intra",
                             frame: "https://eaintra.exc.co.kr/message/frame_message_list.asp?m_no=&page=&searchType=&searchText=&mode=&starmode=&searchName=",
                             parent: "일반관리",
                             menuIdx: 1010
                         }
-                        change_menuOn(false);
+                        dispatch("change_menuOn", false);
                     }}>
                         <span><i class="bi bi-envelope fs-24px"></i></span>
                         <span>메시지</span>
@@ -334,10 +336,10 @@
                             frame: "https://eaintra.exc.co.kr/intra_mainPAge.asp",
                             menuIdx:1001,
                             parent: "메인",
-                            title: "인트라메인",
+                            name: "인트라메인",
                             type: "Intra"
                         }
-                        change_menuOn(false);
+                        dispatch("change_menuOn", false);
                     }}>
                         <span><i class="bi bi-house-door fs-24px"></i></span>
                         <span>메인페이지</span>
@@ -375,7 +377,7 @@
                 <div class="bottom-space">
                     <button on:click={() => {
                         modal_bgModify.open();
-                        change_menuOn(false);
+                        dispatch("change_menuOn", false);
                     }}>
                         <span><i class="bi bi-window fs-24px"></i></span>
                         <span>배경화면 설정</span>
@@ -396,7 +398,7 @@
             <i class={`bi ${$moveMenu.icon} fs-48px`} style={`color:${$moveMenu.color === 'custom' ? $moveMenu.customColor : $moveMenu.color}`}/>
         </div>
         {/if}
-        <h6 class="title">{$moveMenu.title}</h6>
+        <h6 class="title">{$moveMenu.name}</h6>
     </div>    
     {/if}
 </div>

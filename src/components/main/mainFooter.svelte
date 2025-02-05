@@ -3,10 +3,10 @@
     import { menuUi, pageUi } from "../../lib/ui";
     import Page from "../page/page.svelte";
     import { inPage } from "../../store/pageSlice";
-	import { onMount } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
 
     export let menuOn;
-    export let change_menuOn;
+    const dispatch = createEventDispatcher();
 
     $:if(menuOn) {
         menuUi.menuOnOff(false);
@@ -20,7 +20,7 @@
     // 메뉴 밖 마우스 나갈 시 메뉴 닫힘
     const outClickMenuOff = (e) => {
         if(!e.target.closest('#mainFooter') && !e.target.closest('#mainMenu')) {
-            change_menuOn(false);
+            dispatch("change_menuOn", false);
         }
     }
     
@@ -96,7 +96,7 @@
 <footer id="mainFooter" class:full={fullOn}>
     <!-- 왼쪽 -->
     <button class="menu-btn" on:click={() => {
-        change_menuOn(!menuOn);
+        dispatch("change_menuOn", !menuOn);
     }}>
         <i class="bi bi-menu-up"></i>
     </button>
@@ -129,7 +129,7 @@
                         }}>
                         <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.customColor : view.color}`} />
                         <div class="page-title">
-                            <span>{view.title}</span>
+                            <span>{view.name}</span>
                         </div>
                         <div class="underline"></div>
                         <button class="close-page" on:click={(e) => {
