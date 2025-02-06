@@ -8,7 +8,7 @@
     import MainMenuSubLi from '../mainMenu/mainMenuSubLi.svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { intraList } from '../../menus/intra';
-	import { modal_bgModify, modal_menu, modal_result } from '../../store/modalSlice';
+	import { modal_bgModify, modal_menu, modal_menuModify, modal_result } from '../../store/modalSlice';
 	import { menuList } from '../../store/menuSlice';
 	import { moveMenu } from '../../store/iconSlice';
 
@@ -93,12 +93,12 @@
         let originIdx = $menuList[$modal_menu.parent].findIndex((v) => v.menuIdx === $modal_menu.menuIdx);        
         $menuList[$modal_menu.parent][originIdx] = $modal_menu;
         $menuList = $menuList;
-        commonService.setMenus({
-            ...storeMenus,
+        commonService.set_menus({
+            ...$modal_menu,
         });
         $modal_result = "";
         dispatch("change_menuOn", true);
-        $modal_menu = {};
+        modal_menuModify.reset();
     }
 
     /* 테스트용 메뉴고유번호 붙이기 */

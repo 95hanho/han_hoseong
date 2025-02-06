@@ -18,7 +18,10 @@ const commonService_doc = {
       data.menus = obj;
       return data;
     }),
-  set_menus: () => {},
+  set_menus: (obj) => {
+    console.log(obj);
+
+  },
   get_local_menus: () => {
     return JSON.parse(localStorage.getItem("menus")) || {};
   },
