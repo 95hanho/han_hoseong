@@ -1,7 +1,7 @@
 <script>
 	import { slide } from 'svelte/transition';
 	import { fade } from 'svelte/transition';
-	import { onDestroy, onMount } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { scheduleList } from '../../store/popupSlice';
 	import flatpickr from 'flatpickr';
 	import 'flatpickr/dist/flatpickr.css';
@@ -9,7 +9,7 @@
 	import { commonService } from '../../api/index';
 
 	export let scheduleView_store;
-	export let change_scheduleView_store;
+	const dispatch = createEventDispatcher();
 
 	const test = (e) => {
 		let date = e.detail;
@@ -157,7 +157,7 @@
 		resetForm();
 	});
 	onDestroy(() => {
-		change_scheduleView_store([before_scheduleView, today_scheduleView, after_scheduleView, complete_scheduleView]);
+		dispatch('change_scheduleView_store', [before_scheduleView, today_scheduleView, after_scheduleView, complete_scheduleView])
 	})
 </script>
 

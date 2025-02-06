@@ -58,7 +58,7 @@
     </div>
   </div>
   {#if popupOnNum === 1}
-  <ScheduleFooter {scheduleView_store} {change_scheduleView_store}/>
+  <ScheduleFooter {scheduleView_store} on:change_scheduleView_store={change_scheduleView_store}/>
   {:else if popupOnNum === 2}
   <BannerFooter />
   {:else if popupOnNum === 3}

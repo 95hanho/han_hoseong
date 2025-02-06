@@ -2,17 +2,15 @@
 <script>
 	import { fly } from "svelte/transition";
     import PageResize from "./pageResize.svelte";
+  import { createEventDispatcher } from "svelte";
 
     export let view;
     export let viewIdx;
-    export let change_view;
     export let cur_zIndex;
     export let max_zIndex;
-    export let change_cur_zIndex;
-    export let closeView;
     export let menuOn;
     export let fullOn;
-    export let change_fullOn;
+    const dispatch = createEventDispatcher();
 
     let downOn = false; // 클릭이 돼있는지
     let initX = 0; // 아이콘 클릭 시 첫 x
@@ -32,7 +30,7 @@
 
     // change_viewPages 축약
     const c_vps = () => {
-        change_view(view);
+        dispatch('change_view', view);
     }
     const pageMousedown = (e) => {
         if(view.maxScreen) return;
@@ -40,7 +38,7 @@
         view.zIndex = cur_zIndex++;
         initX = e.clientX;
         initY = e.clientY;
-        change_cur_zIndex(cur_zIndex);
+        dispatch('change_cur_zIndex', cur_zIndex);
         c_vps();
     };
     const pageOut = (e) => {
@@ -115,7 +113,7 @@
             on:dblclick={() => {
                 view.maxScreen = !view.maxScreen;
                 view.zIndex = cur_zIndex++;
-                change_cur_zIndex(cur_zIndex);
+                dispatch('change_cur_zIndex', cur_zIndex);
                 c_vps();
             }}>
             <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.customColor : view.color}`} />
@@ -133,7 +131,7 @@
                     view.maxScreen = !view.maxScreen;
                 }
                 view.zIndex = cur_zIndex++;
-                change_cur_zIndex(cur_zIndex);
+                dispatch('change_cur_zIndex', cur_zIndex);
                 c_vps();
             }}>
                 {#if view.maxScreen}
@@ -145,7 +143,7 @@
             {/if}
             {#if view.maxScreen}
             <button on:click={() => {
-                change_fullOn(true);
+                dispatch('change_fullOn', true);
             }}>
                 <span class="material-symbols-outlined">open_with</span>
             </button>
@@ -153,7 +151,7 @@
             <button on:click={() => {
                 view.pageOn = false;
                 c_vps();
-                closeView(viewIdx);
+                dispatch('closeView', viewIdx);
             }}>×</button>
         </div>
     </div>
@@ -161,7 +159,7 @@
         {#if max_zIndex != view.zIndex || downOn || menuOn || resizing}
         <button class="page-cover" on:click={() => {
             view.zIndex = cur_zIndex++;
-            change_cur_zIndex(cur_zIndex);
+            dispatch('change_cur_zIndex', cur_zIndex);
             c_vps();
         }}></button>
         {/if}
@@ -171,13 +169,13 @@
         <!--  -->
     </div>
     {#if !view.maxScreen}
-    <PageResize parentId={"page-"+viewIdx} {view} {change_view} {change_resizing}/>
+    <PageResize parentId={"page-"+viewIdx} {view} on:change_resizing={change_resizing}/>
     {/if}
     {#if fullOn}
     <button in:fly={{
         y:-100,
     }} class="full-close" on:click={() => {
-        change_fullOn(false);
+        dispatch('change_fullOn', false);
     }}>X</button>
     {/if}
 </div>

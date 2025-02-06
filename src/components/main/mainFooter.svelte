@@ -171,10 +171,10 @@
 <div id="pages">
     {#each viewPages as view, viewIdx}
     <Page {view} {viewIdx} {cur_zIndex} {max_zIndex} {menuOn} 
-        {fullOn} {change_fullOn}
-        change_view={(v) => {
+        {fullOn} on:change_fullOn={change_fullOn}
+        on:change_view={(v) => {
             change_view(v, viewIdx);
-        }} {closeView} {change_cur_zIndex}/>
+        }} on:closeView={closeView} on:change_cur_zIndex={change_cur_zIndex}/>
     {#if viewPages.length - 1 === viewIdx}
     <div class="hide" bind:this={makeViewPages}></div>
     {/if}

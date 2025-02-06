@@ -171,7 +171,7 @@
         {#if menuSearchTxt.length > 0}
         <ul in:fade={{delay:200 ,duration:300}} out:fade={{duration:200}}>
         <MainMenuSubLi subMenus={searchList} sortOn={true} {subMenu_moveOn}
-        {change_subMenu_moveOn} />
+            on:change_subMenu_moveOn={change_subMenu_moveOn} />
         </ul>
         {:else if menuViewType === 1}
         <div in:fade={{delay:200 ,duration:300}} out:fade={{duration:200}}>
@@ -193,7 +193,7 @@
                 <li class="sub-menus" in:slide={{duration:500}} out:slide={{duration:500}}>
                     <ul>
                         <MainMenuSubLi subMenus={menuEntry[1]} sortOn={false} {subMenu_moveOn}
-                            {change_subMenu_moveOn} />
+                            on:change_subMenu_moveOn={change_subMenu_moveOn} />
                     </ul>
                 </li>
                 {/if}
@@ -206,7 +206,7 @@
         {:else if menuViewType === 2}
         <ul in:fade={{delay:200 ,duration:300}} out:fade={{duration:200}}>
         <MainMenuSubLi subMenus={menuSortList} sortOn={true} {subMenu_moveOn}
-        {change_subMenu_moveOn} />
+            on:change_subMenu_moveOn={change_subMenu_moveOn} />
         </ul>
         {/if}
         {#if quickMenu_moveOn}

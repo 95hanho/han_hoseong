@@ -7,7 +7,6 @@
     export let subMenus;
     export let sortOn;
     export let subMenu_moveOn;
-    export let change_subMenu_moveOn;
     const dispatch = createEventDispatcher();
 
     let downOn = false;
@@ -26,14 +25,14 @@
         let moveY = e.offsetY;
         if(downOn && Math.abs(initX - moveX) + Math.abs(initY - moveY) > 15) {
             $moveMenu = moving_menu;
-            change_subMenu_moveOn(true);
+            dispatch('change_subMenu_moveOn', true);
         }
     }
     const subMenu_mouseup = (e) => {
         moving_menu = null;
         $moveMenu = null;
         downOn = false;
-        change_subMenu_moveOn(false);
+        dispatch('change_subMenu_moveOn', false);
     }
     $:if(subMenu_moveOn) {
         document.addEventListener('mousemove', subMenu_moveOnFnc);

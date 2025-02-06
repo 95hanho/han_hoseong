@@ -1,11 +1,10 @@
 <!-- 페이지 사이즈 조절 -->
 <script>
-  import { onMount } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
     export let parentId; // 부모의 ID
     export let view;
-    export let change_view;
-    export let change_resizing;
+    const dispatch = createEventDispatcher();
 
     let rsDownOn = false;
     let resizeCase = 0;
@@ -23,7 +22,7 @@
 
     // change_viewPages 축약
     const c_vps = () => {
-        change_view(view);
+        dispatch('change_view', view);
     }
 
     const resizeMousedown = (e, caseNum) => {
@@ -35,7 +34,7 @@
         initPageY = e.offsetY;
         pWidth = Number(parentEle.style.width.replace('px', ''));
         pHeight = Number(parentEle.style.height.replace('px', ''));
-        change_resizing(true);
+        dispatch('change_resizing', true);
     }
 
     $:if(rsDownOn) {
@@ -130,7 +129,7 @@
         lastMoveY = 0;
         rsDownOn = false;
         resizeCase = 0;
-        change_resizing(false);
+        dispatch('change_resizing', true);
     }
 
     onMount(() => {

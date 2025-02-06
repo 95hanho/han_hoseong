@@ -8,7 +8,6 @@
     import { initCalcWidthHeight, folderUi } from '../../lib/ui.js';
     import { scale, fade } from 'svelte/transition';
     import IconScr from '../icons/iconScr.svelte';
-	import { getElement } from 'jspreadsheet-ce';
 
     let icons = []; // 아이콘
     let existIcons = []; // 존재하는 아이콘리스트

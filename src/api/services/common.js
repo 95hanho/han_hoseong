@@ -1,4 +1,4 @@
-import { get_normal } from "../apiFilter";
+import { get_normal, post_urlFormData } from "../apiFilter";
 import API_URL from "../endpoints";
 
 const commonService_doc = {
@@ -20,7 +20,9 @@ const commonService_doc = {
     }),
   set_menus: (obj) => {
     console.log(obj);
-
+    post_urlFormData(API_URL.MENU, obj).then((data) => {
+      console.log(data);
+    });
   },
   get_local_menus: () => {
     return JSON.parse(localStorage.getItem("menus")) || {};
