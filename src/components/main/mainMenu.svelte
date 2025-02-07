@@ -66,6 +66,7 @@
     // 오른쪽 즐겨찾기리스트
     let quickList = [];
     $: if(quickList && quickList.length > 0) {
+        commonService.set_quicks(quickList);
         commonService.setQuicks(quickList);
     }
     // 퀵 리스트 그룹 사라질 때 quickList에서 뺌

@@ -68,7 +68,7 @@ export const post_formData = async (url, params, headers) => {
 };
 
 // post urlFormData
-export const post_urlFormData = async (url, params, headers) => {
+export const post_urlFormData = async (url, params = {}, headers = {}) => {
 	const url_form_data = new URLSearchParams();
 	Object.entries(params).map((v) => {
 		if (v[1] instanceof Array) {
