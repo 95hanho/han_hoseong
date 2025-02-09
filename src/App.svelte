@@ -15,8 +15,8 @@
     });
 
     let menuOn = false;
-    const change_menuOn = (value) => {
-        menuOn = value;
+    const change_menuOn = (e) => {
+        menuOn = e.detail.value;
     }
 
     $: bg_style = Object.entries($bg_info).reduce((acc, cur) => {
@@ -27,7 +27,7 @@
         }
         return acc;
     }, '');
-    $: console.log(bg_style);
+    // $: console.log(bg_style);
 
     // 베너
     /* 

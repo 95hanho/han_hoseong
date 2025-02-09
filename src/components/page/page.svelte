@@ -19,8 +19,8 @@
     // let lastY = 0; // 아이콘 움직이는동안 y
 
     let resizing = false; // resize 중
-    const change_resizing = (v) => {
-        resizing = v;
+    const change_resizing = (e) => {
+        resizing = e.detail.value;
     }
 
     let mobileOn = window.innerWidth < 768;
@@ -30,7 +30,7 @@
 
     // change_viewPages 축약
     const c_vps = () => {
-        dispatch('change_view', view);
+        dispatch('change_view', {value:view});
     }
     const pageMousedown = (e) => {
         if(view.maxScreen) return;
@@ -38,7 +38,7 @@
         view.zIndex = cur_zIndex++;
         initX = e.clientX;
         initY = e.clientY;
-        dispatch('change_cur_zIndex', cur_zIndex);
+        dispatch('change_cur_zIndex', {value:cur_zIndex});
         c_vps();
     };
     const pageOut = (e) => {
@@ -113,7 +113,7 @@
             on:dblclick={() => {
                 view.maxScreen = !view.maxScreen;
                 view.zIndex = cur_zIndex++;
-                dispatch('change_cur_zIndex', cur_zIndex);
+                dispatch('change_cur_zIndex', {value:cur_zIndex});
                 c_vps();
             }}>
             <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.customColor : view.color}`} />
@@ -131,7 +131,7 @@
                     view.maxScreen = !view.maxScreen;
                 }
                 view.zIndex = cur_zIndex++;
-                dispatch('change_cur_zIndex', cur_zIndex);
+                dispatch('change_cur_zIndex', {value:cur_zIndex});
                 c_vps();
             }}>
                 {#if view.maxScreen}
@@ -143,7 +143,7 @@
             {/if}
             {#if view.maxScreen}
             <button on:click={() => {
-                dispatch('change_fullOn', true);
+                dispatch('change_fullOn', {value:true});
             }}>
                 <span class="material-symbols-outlined">open_with</span>
             </button>
@@ -151,7 +151,7 @@
             <button on:click={() => {
                 view.pageOn = false;
                 c_vps();
-                dispatch('closeView', viewIdx);
+                dispatch('closeView', {value:viewIdx});
             }}>×</button>
         </div>
     </div>
@@ -159,7 +159,7 @@
         {#if max_zIndex != view.zIndex || downOn || menuOn || resizing}
         <button class="page-cover" on:click={() => {
             view.zIndex = cur_zIndex++;
-            dispatch('change_cur_zIndex', cur_zIndex);
+            dispatch('change_cur_zIndex', {value:cur_zIndex});
             c_vps();
         }}></button>
         {/if}
@@ -175,7 +175,7 @@
     <button in:fly={{
         y:-100,
     }} class="full-close" on:click={() => {
-        dispatch('change_fullOn', false);
+        dispatch('change_fullOn', {value:false});
     }}>X</button>
     {/if}
 </div>

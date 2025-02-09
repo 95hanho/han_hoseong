@@ -49,7 +49,7 @@
             //     type: "Intra",
             //     frame: "https://eaintra.exc.co.kr/allbbs/list.asp",
             //     parent: "정보공유",
-            //     menuIdx: 1022
+            //     menu_id: 1022
             // }, {
             //     row:0,
             //     col:2,
@@ -57,7 +57,7 @@
             //     type: "Intra",
             //     frame: "https://eaintra.exc.co.kr/util/placeInfo/placeINFO.asp",
             //     parent: "일반관리",
-            //     menuIdx: 1014
+            //     menu_id: 1014
             // },
             // {
             //     row:1,
@@ -66,7 +66,7 @@
             //     type: "Intra",
             //     frame: "https://eaintra.exc.co.kr/meeting/project_room.asp",
             //     parent: "일반관리",
-            //     menuIdx: 1017
+            //     menu_id: 1017
             // },
         ]
     };
@@ -342,7 +342,7 @@
     // 아이콘 무브 추가
     // viewPage 추가하기
     $:if($moveIcon) {
-        if(existIcons.some((v) => v.menuIdx === $moveIcon.menuIdx)) {
+        if(existIcons.some((v) => v.menu_id === $moveIcon.menu_id)) {
             alert('이미 존재하는 아이콘입니다.\n삭제 후 진행해주세요.');
         } else {
             $moveIcon.idx = iconData.icons.length;

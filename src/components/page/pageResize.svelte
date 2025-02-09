@@ -22,7 +22,7 @@
 
     // change_viewPages 축약
     const c_vps = () => {
-        dispatch('change_view', view);
+        dispatch('change_view', {value:view});
     }
 
     const resizeMousedown = (e, caseNum) => {
@@ -34,7 +34,7 @@
         initPageY = e.offsetY;
         pWidth = Number(parentEle.style.width.replace('px', ''));
         pHeight = Number(parentEle.style.height.replace('px', ''));
-        dispatch('change_resizing', true);
+        dispatch('change_resizing', {value:true});
     }
 
     $:if(rsDownOn) {
@@ -129,7 +129,7 @@
         lastMoveY = 0;
         rsDownOn = false;
         resizeCase = 0;
-        dispatch('change_resizing', true);
+        dispatch('change_resizing', {value:true});
     }
 
     onMount(() => {

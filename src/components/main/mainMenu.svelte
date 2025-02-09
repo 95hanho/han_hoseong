@@ -75,30 +75,30 @@
         quickList = quickList.filter((v, i) => i !== findIdx);
     }
     
-    const change_quickList = (ql) => {
-        quickList = ql;
+    const change_quickList = (e) => {
+        quickList = e.detail.value;
         console.log(quickList);
     }
 
     let new_quick_move = false; // 새 퀵 위에 아이콘 무빙 중
     let subMenu_moveOn = false; // 서브메뉴 무브시작
-    const change_subMenu_moveOn = (v) => {
-        subMenu_moveOn = v;
+    const change_subMenu_moveOn = (e) => {
+        subMenu_moveOn = e.detail.value;
     }
     let quickMenu_moveOn = false; // 퀵메뉴 무브시작
-    const change_quickMenu_moveOn = (v) => {
-        quickMenu_moveOn = v;
+    const change_quickMenu_moveOn = (e) => {
+        quickMenu_moveOn = e.detail.value;
     }
 
     $:if($modal_result) {
-        let originIdx = $menuList[$modal_menu.parent].findIndex((v) => v.menuIdx === $modal_menu.menuIdx);        
+        let originIdx = $menuList[$modal_menu.parent].findIndex((v) => v.menu_id === $modal_menu.menu_id);        
         $menuList[$modal_menu.parent][originIdx] = $modal_menu;
         $menuList = $menuList;
         commonService.set_menus({
             ...$modal_menu,
         });
         $modal_result = "";
-        dispatch("change_menuOn", true);
+        dispatch("change_menuOn", {value:true});
         modal_menuModify.reset();
     }
 
@@ -107,20 +107,19 @@
         indexMaking();
     }
     const indexMaking = () => {
-        console.log('테스트용 메뉴고유번호 붙이기');
+        // console.log('테스트용 메뉴고유번호 붙이기');
         let count = 0;
         Object.entries($menuList).map((entry, i) => {
             entry[1].map((v, i) => {
                 count++;
                 v.parent = entry[0];
-                v.menuIdx = curMenuNum * 1000 + count;
+                v.menu_id = curMenuNum * 1000 + count;
             });
         });
     }
     /* 테스트용 메뉴고유번호 붙이기 */
     onMount(async () => {
         const menu_await = await commonService.get_menus();
-        console.log("menu_await", menu_await);
         const menu_version = commonService.get_menu_version();
         // 버전이 다르면 새로가져오기
         if(menu_await.version !== menu_version) {
@@ -134,8 +133,12 @@
             }
         }
         /*  */
-        quickList = commonService.getQuicks();
-        console.log(quickList);
+        commonService.get_quicks().then((data) => {
+            quickList = data.quickList;
+            console.log('가져온 quickList', quickList);
+        });
+        // quickList = commonService.getQuicks();
+        // console.log(quickList);
         /*  */
         curMenuNum = 1;
         $menuList = storeMenus.hanho;
@@ -216,7 +219,7 @@
                 let qIdx;
                 let qSubIdx;
                 qIdx = quickList.findIndex((v) => {
-                    qSubIdx = v.menus.findIndex((v) => v.menuIdx === $moveMenu.menuIdx);
+                    qSubIdx = v.menus.findIndex((v) => v.menu_id === $moveMenu.menu_id);
                     return qSubIdx !== -1;
                 });
                 quickList[qIdx].menus = quickList[qIdx].menus.filter((v, i) => i !== qSubIdx);
@@ -244,11 +247,11 @@
             on:mouseup={(e) => {
                 if(!$moveMenu) return;
                 new_quick_move = false;
-                if(quickList.some((v) => v.menus.some((v) => v.menuIdx === $moveMenu.menuIdx))) {
+                if(quickList.some((v) => v.menus.some((v) => v.menu_id === $moveMenu.menu_id))) {
                     let qIdx;
                     let qSubIdx;
                     qIdx = quickList.findIndex((v) => {
-                        qSubIdx = v.menus.findIndex((v) => v.menuIdx === $moveMenu.menuIdx);
+                        qSubIdx = v.menus.findIndex((v) => v.menu_id === $moveMenu.menu_id);
                         return qSubIdx !== -1;
                     });
                     quickList[qIdx].menus = quickList[qIdx].menus.filter((v, i) => i !== qSubIdx);
@@ -306,12 +309,12 @@
                     <button on:click={() => {
                         $inPage = {
                             frame: "https://eaintra.exc.co.kr/member/myINfo.asp",
-                            menuIdx:1002,
+                            menu_id:1002,
                             parent: "개인정보",
                             name: "개인정보수정",
                             type: "Intra"
                         }
-                        dispatch("change_menuOn", true);
+                        dispatch("change_menuOn", {value:true});
                     }}>
                         <span><i class="bi bi-person-circle fs-24px"></i></span>
                         <span>개인정보</span>
@@ -323,9 +326,9 @@
                             type: "Intra",
                             frame: "https://eaintra.exc.co.kr/message/frame_message_list.asp?m_no=&page=&searchType=&searchText=&mode=&starmode=&searchName=",
                             parent: "일반관리",
-                            menuIdx: 1010
+                            menu_id: 1010
                         }
-                        dispatch("change_menuOn", false);
+                        dispatch("change_menuOn", {value:false});
                     }}>
                         <span><i class="bi bi-envelope fs-24px"></i></span>
                         <span>메시지</span>
@@ -335,12 +338,12 @@
                         
                         $inPage = {
                             frame: "https://eaintra.exc.co.kr/intra_mainPAge.asp",
-                            menuIdx:1001,
+                            menu_id:1001,
                             parent: "메인",
                             name: "인트라메인",
                             type: "Intra"
                         }
-                        dispatch("change_menuOn", false);
+                        dispatch("change_menuOn", {value:false});
                     }}>
                         <span><i class="bi bi-house-door fs-24px"></i></span>
                         <span>메인페이지</span>
@@ -378,7 +381,7 @@
                 <div class="bottom-space">
                     <button on:click={() => {
                         modal_bgModify.open();
-                        dispatch("change_menuOn", false);
+                        dispatch("change_menuOn", {value:false});
                     }}>
                         <span><i class="bi bi-window fs-24px"></i></span>
                         <span>배경화면 설정</span>

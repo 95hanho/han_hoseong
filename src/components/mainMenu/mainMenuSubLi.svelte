@@ -25,14 +25,14 @@
         let moveY = e.offsetY;
         if(downOn && Math.abs(initX - moveX) + Math.abs(initY - moveY) > 15) {
             $moveMenu = moving_menu;
-            dispatch('change_subMenu_moveOn', true);
+            dispatch('change_subMenu_moveOn', {value:true});
         }
     }
     const subMenu_mouseup = (e) => {
         moving_menu = null;
         $moveMenu = null;
         downOn = false;
-        dispatch('change_subMenu_moveOn', false);
+        dispatch('change_subMenu_moveOn', {value:false});
     }
     $:if(subMenu_moveOn) {
         document.addEventListener('mousemove', subMenu_moveOnFnc);
@@ -51,10 +51,10 @@
             if(follower) follower.style.transform = `translate(${x}px, ${y}px)`;
         } else if(e.target.closest('#mainFooter')) {
             subMenu_mouseup();
-            dispatch("change_menuOn", false);
+            dispatch("change_menuOn", {value:false});
         } else if(e.target.closest('#iconsWrap')) {
             $moveIcon = $moveMenu;
-            dispatch("change_menuOn", false);
+            dispatch("change_menuOn", {value:false});
             subMenu_mouseup();
         } else {
             subMenu_mouseup();
@@ -78,7 +78,7 @@
                 $inPage = {
                     ...subMenu,
                 }
-                dispatch("change_menuOn", false);
+                dispatch("change_menuOn", {value:false});
                 subMenu_mouseup();
             } else window.open(subMenu.url);
         }}
@@ -88,7 +88,7 @@
         <button class="menu-modify" on:mousedown|stopPropagation 
             on:click|stopPropagation={() => {
                 modal_menuModify.open({...subMenu});
-                dispatch("change_menuOn", false);
+                dispatch("change_menuOn", {value:false});
             }}>
             <i class="bi bi-three-dots fs-24px"></i>
         </button>

@@ -27,8 +27,8 @@
   let popupOnNum = 0;
   /* 스케줄 관련 */
   let scheduleView_store = [];
-  const change_scheduleView_store = (v) => {
-      scheduleView_store = v;
+  const change_scheduleView_store = (e) => {
+      scheduleView_store = e.detail.value;
   };
 
   $: if($popup_command) {

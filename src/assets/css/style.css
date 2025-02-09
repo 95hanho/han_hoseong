@@ -58,7 +58,13 @@
   border: 1px solid #ddd;
   font-size: 20px;
 }
-.wrapper #login-wrap .login-form .login-input .login-txt > div input[type=checkbox] {
+.wrapper
+  #login-wrap
+  .login-form
+  .login-input
+  .login-txt
+  > div
+  input[type="checkbox"] {
   width: 20px;
   height: 20px;
 }
@@ -81,8 +87,8 @@
   position: relative;
   z-index: 2;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   overflow: hidden;
   /* 스크롤 */
 }
@@ -177,7 +183,13 @@
   top: -35px;
   left: 0;
 }
-.wrapper main section#iconsWrap > ul > li .icon-child .icon-child-rename::before {
+.wrapper
+  main
+  section#iconsWrap
+  > ul
+  > li
+  .icon-child
+  .icon-child-rename::before {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -353,8 +365,8 @@
   display: flex;
   align-items: center;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .wrapper #popupMain .popup-btns:hover {
   background-color: rgb(45, 55, 66);
@@ -456,14 +468,41 @@
   align-items: center;
   border: 1px solid #ddd;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box:nth-child(n+2) {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box:nth-child(n + 2) {
   margin-top: 3px;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box > button,
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box > label {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  > button,
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  > label {
   margin: 0 10px;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .round-checkbox {
   position: relative;
   display: inline-block;
   width: 20px;
@@ -472,10 +511,26 @@
   border: 2px solid #aaa; /* 체크박스 테두리 */
   border-radius: 50%; /* 둥근 모양 */
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox input[type=checkbox] {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .round-checkbox
+  input[type="checkbox"] {
   display: none;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox .marking {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .round-checkbox
+  .marking {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -486,41 +541,129 @@
   background-color: #fff; /* 체크 마크 색상 */
   display: none; /* 기본적으로 안 보이게 설정 */
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox.checked {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .round-checkbox.checked {
   background-color: #aaa; /* 체크된 배경 색상 */
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .round-checkbox.checked .marking {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .round-checkbox.checked
+  .marking {
   display: block; /* 체크된 상태일 때 보이게 설정 */
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .content {
   min-width: 0;
   flex-grow: 1;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h4,
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .content
+  h4,
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .content
+  h5 {
   margin: 0;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h4 {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .content
+  h4 {
   font-size: 15px;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .content
+  h5 {
   font-size: 12px;
   color: #777;
   display: flex;
   align-items: center;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 i {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .content
+  h5
+  i {
   margin-left: 5px;
   color: #f00;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box .content h5 span {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  .content
+  h5
+  span {
   color: #f00;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box > button > i {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box
+  > button
+  > i {
   opacity: 0;
   transition: all 0.5s;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div .boxs .schedule-box:hover > button > i {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div
+  .boxs
+  .schedule-box:hover
+  > button
+  > i {
   opacity: 1;
 }
 .wrapper #popupMain .app-popup.schedule-space .list > div.complete {
@@ -532,15 +675,31 @@
   border-radius: 5px 5px 0 0;
   padding: 10px 0;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div.complete > button > button {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div.complete
+  > button
+  > button {
   position: absolute;
   right: 5px;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div.complete .schedule-box {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div.complete
+  .schedule-box {
   background-color: #eee;
   opacity: 0.6;
 }
-.wrapper #popupMain .app-popup.schedule-space .list > div.complete .schedule-box:first-child {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .list
+  > div.complete
+  .schedule-box:first-child {
   border-radius: 0 0 5px 5px;
 }
 .wrapper #popupMain .app-popup.schedule-space .new-schedule {
@@ -557,7 +716,7 @@
 .wrapper #popupMain .app-popup.schedule-space .new-schedule > form > div {
   position: relative;
 }
-.wrapper #popupMain .app-popup.schedule-space .new-schedule input[type=text] {
+.wrapper #popupMain .app-popup.schedule-space .new-schedule input[type="text"] {
   font-size: 18px;
   min-width: 0;
   border: none;
@@ -567,7 +726,11 @@
   width: 235px;
   padding-right: 35px;
 }
-.wrapper #popupMain .app-popup.schedule-space .new-schedule input[type=text]:focus {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .new-schedule
+  input[type="text"]:focus {
   outline: none;
 }
 .wrapper #popupMain .app-popup.schedule-space .new-schedule .submit-btn {
@@ -577,7 +740,12 @@
   bottom: 0;
   height: 100%;
 }
-.wrapper #popupMain .app-popup.schedule-space .new-schedule .date-wrap #datepicker {
+.wrapper
+  #popupMain
+  .app-popup.schedule-space
+  .new-schedule
+  .date-wrap
+  #datepicker {
   height: 0;
   text-align: right;
   padding: 0;
@@ -846,7 +1014,11 @@
   color: #fff;
   border-radius: 0;
 }
-.wrapper aside#bannerMain .todayschedule .bottom-ment .goal_txt::-moz-placeholder {
+.wrapper
+  aside#bannerMain
+  .todayschedule
+  .bottom-ment
+  .goal_txt::-moz-placeholder {
   font-weight: 1000;
 }
 .wrapper aside#bannerMain .todayschedule .bottom-ment .goal_txt::placeholder {
@@ -898,7 +1070,13 @@
   height: 100%;
   text-align: center;
 }
-.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox {
+.wrapper
+  aside#bannerMain
+  .schedule
+  .schedule-list
+  li
+  .checkbox-wrap
+  .round-checkbox {
   position: relative;
   display: inline-block;
   width: 20px;
@@ -908,10 +1086,24 @@
   border-radius: 5px; /* 둥근 모양 */
   cursor: pointer;
 }
-.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox input[type=checkbox] {
+.wrapper
+  aside#bannerMain
+  .schedule
+  .schedule-list
+  li
+  .checkbox-wrap
+  .round-checkbox
+  input[type="checkbox"] {
   display: none;
 }
-.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox .marking {
+.wrapper
+  aside#bannerMain
+  .schedule
+  .schedule-list
+  li
+  .checkbox-wrap
+  .round-checkbox
+  .marking {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -922,10 +1114,23 @@
   background-color: #fff; /* 체크 마크 색상 */
   display: none; /* 기본적으로 안 보이게 설정 */
 }
-.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox.checked {
+.wrapper
+  aside#bannerMain
+  .schedule
+  .schedule-list
+  li
+  .checkbox-wrap
+  .round-checkbox.checked {
   background-color: #aaa; /* 체크된 배경 색상 */
 }
-.wrapper aside#bannerMain .schedule .schedule-list li .checkbox-wrap .round-checkbox.checked .marking {
+.wrapper
+  aside#bannerMain
+  .schedule
+  .schedule-list
+  li
+  .checkbox-wrap
+  .round-checkbox.checked
+  .marking {
   display: block; /* 체크된 상태일 때 보이게 설정 */
 }
 .wrapper aside#bannerMain .schedule .schedule-list li .work {
@@ -980,8 +1185,8 @@
   background-color: rgba(0, 0, 0, 0.7);
   height: 58px;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   display: flex;
 }
 .wrapper footer#mainFooter .menu-btn {
@@ -1017,7 +1222,13 @@
   display: inline-block;
   height: 100%;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box {
   position: relative;
   text-align: left;
   width: 150px;
@@ -1027,19 +1238,41 @@
   background-color: rgba(41, 41, 41, 0.3);
   color: #fff;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .page-title {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box
+  .page-title {
   padding: 0 5px;
   display: inline-block;
-  width: calc(100% - 28px);
+  width: calc(100% - 30px);
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .page-title span {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box
+  .page-title
+  span {
   overflow: hidden;
   max-width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .underline {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box
+  .underline {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1048,7 +1281,14 @@
   background-color: rgba(255, 255, 255, 0.5);
   transition: all 0.2s;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .close-page {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box
+  .close-page {
   position: absolute;
   right: 10px;
   visibility: hidden;
@@ -1057,26 +1297,64 @@
   font-size: 20px;
   transition: all 0.3s;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box.hover .close-page {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box.hover
+  .close-page {
   visibility: visible;
   opacity: 1;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box.on {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box.on {
   background-color: rgba(61, 61, 61, 0.5);
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box.on .underline {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box.on
+  .underline {
   border-top: 2px solid rgb(255, 242, 61);
   width: 100%;
   height: 2px;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box:hover {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box:hover {
   background-color: rgba(94, 94, 94, 0.5);
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box:hover .underline {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block
+  .page-box:hover
+  .underline {
   width: 100%;
   height: 3px;
 }
-.wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block:nth-child(n+2) {
+.wrapper
+  footer#mainFooter
+  .current-url
+  > div
+  .page-block-wrap
+  .page-block:nth-child(n + 2) {
   margin-left: 2px;
 }
 .wrapper footer#mainFooter .current-url > button {
@@ -1124,8 +1402,8 @@
   box-shadow: 3px 3px 8px #333;
   transition: all 0.03s;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -1355,13 +1633,34 @@
 .wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button:hover {
   background-color: rgb(80, 80, 80);
 }
-.wrapper #mainMenu .menuInfo .highlight > div .top-space > button span:nth-child(2),
-.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button span:nth-child(2) {
+.wrapper
+  #mainMenu
+  .menuInfo
+  .highlight
+  > div
+  .top-space
+  > button
+  span:nth-child(2),
+.wrapper
+  #mainMenu
+  .menuInfo
+  .highlight
+  > div
+  .bottom-space
+  > button
+  span:nth-child(2) {
   padding-left: 12px;
   font-size: 15px;
 }
 .wrapper #mainMenu .menuInfo .highlight > div .top-space > button .bris-icon,
-.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button .bris-icon {
+.wrapper
+  #mainMenu
+  .menuInfo
+  .highlight
+  > div
+  .bottom-space
+  > button
+  .bris-icon {
   border: 1px solid #fff;
   border-radius: 4px;
   font-size: 18px;
@@ -1371,8 +1670,22 @@
   text-align: center;
   line-height: 20px;
 }
-.wrapper #mainMenu .menuInfo .highlight > div .top-space > button .bris-icon.mobile,
-.wrapper #mainMenu .menuInfo .highlight > div .bottom-space > button .bris-icon.mobile {
+.wrapper
+  #mainMenu
+  .menuInfo
+  .highlight
+  > div
+  .top-space
+  > button
+  .bris-icon.mobile,
+.wrapper
+  #mainMenu
+  .menuInfo
+  .highlight
+  > div
+  .bottom-space
+  > button
+  .bris-icon.mobile {
   font-size: 11.5px;
 }
 .wrapper #mainMenu .menuInfo .highlight > div .top-space > button .noread,
@@ -1435,7 +1748,7 @@
   border-bottom: 1px solid #fff;
   border-radius: 3px 0 0 3px;
 }
-.wrapper #mainMenu .menuList .sort .sort-btn button:nth-child(n+2) {
+.wrapper #mainMenu .menuList .sort .sort-btn button:nth-child(n + 2) {
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   border-top: 1px solid #fff;
@@ -1580,14 +1893,14 @@
   display: flex;
   align-items: center;
 }
-.wrapper #mainMenu .menuQuick .quick-group .title input[type=text] {
+.wrapper #mainMenu .menuQuick .quick-group .title input[type="text"] {
   font-size: 15px;
   background-color: transparent;
   border: none;
   color: #fff;
   width: 100%;
 }
-.wrapper #mainMenu .menuQuick .quick-group .title input[type=text]:focus {
+.wrapper #mainMenu .menuQuick .quick-group .title input[type="text"]:focus {
   border: none;
   outline: none;
 }
@@ -1681,7 +1994,8 @@
   height: 0px;
 }
 
-.icon-act:hover, .icon-act:focus {
+.icon-act:hover,
+.icon-act:focus {
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.2);
   z-index: 3;

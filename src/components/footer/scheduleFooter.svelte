@@ -157,7 +157,8 @@
 		resetForm();
 	});
 	onDestroy(() => {
-		dispatch('change_scheduleView_store', [before_scheduleView, today_scheduleView, after_scheduleView, complete_scheduleView])
+		dispatch('change_scheduleView_store', 
+			{ value: [before_scheduleView, today_scheduleView, after_scheduleView, complete_scheduleView]})
 	})
 </script>
 

@@ -20,7 +20,7 @@
     // 메뉴 밖 마우스 나갈 시 메뉴 닫힘
     const outClickMenuOff = (e) => {
         if(!e.target.closest('#mainFooter') && !e.target.closest('#mainMenu')) {
-            dispatch("change_menuOn", false);
+            dispatch("change_menuOn", {value:false});
         }
     }
     
@@ -44,7 +44,7 @@
     // viewPage 추가하기
     $:if(Object.keys($inPage).length) {
         store_mainBtn = null;
-        let findIdx = viewPages.findIndex((v) => v.menuIdx === $inPage.menuIdx);
+        let findIdx = viewPages.findIndex((v) => v.menu_id === $inPage.menu_id);
         if(findIdx === -1) {
             viewPages.push(
                 {
@@ -63,8 +63,8 @@
         $inPage = {};
     }
     let fullOn = false;
-    const change_fullOn = (v) => {
-        fullOn = v;
+    const change_fullOn = (e) => {
+        fullOn = e.detail.value;
     }
 
     let store_mainBtn = null; // 오른쪽 밑 메인으로 버튼 누를 시 켜져있던 화면 잠시 기억
@@ -73,8 +73,8 @@
         viewPages[i] = v;
         viewPages = viewPages;
     }
-    const change_cur_zIndex = (v) => {
-        cur_zIndex = v;
+    const change_cur_zIndex = (e) => {
+        cur_zIndex = e.detail.value;
     }
     const closeView = (index) => {
         viewPages = viewPages.filter((v, i) => i !== index);
@@ -96,7 +96,7 @@
 <footer id="mainFooter" class:full={fullOn}>
     <!-- 왼쪽 -->
     <button class="menu-btn" on:click={() => {
-        dispatch("change_menuOn", !menuOn);
+        dispatch("change_menuOn", {value:!menuOn});
     }}>
         <i class="bi bi-menu-up"></i>
     </button>
@@ -172,8 +172,8 @@
     {#each viewPages as view, viewIdx}
     <Page {view} {viewIdx} {cur_zIndex} {max_zIndex} {menuOn} 
         {fullOn} on:change_fullOn={change_fullOn}
-        on:change_view={(v) => {
-            change_view(v, viewIdx);
+        on:change_view={(e) => {
+            change_view(e.detail.value, viewIdx);
         }} on:closeView={closeView} on:change_cur_zIndex={change_cur_zIndex}/>
     {#if viewPages.length - 1 === viewIdx}
     <div class="hide" bind:this={makeViewPages}></div>

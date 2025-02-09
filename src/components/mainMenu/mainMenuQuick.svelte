@@ -26,17 +26,18 @@
     const quick_mouseup = (e, quick) => {
         if($moveMenu && (subMenu_moveOn || quickMenu_moveOn)) {
             on_subMenu_move = -1;
-            if(quickList.some((v) => v.menus.some((v) => v.menuIdx === $moveMenu.menuIdx))) {
+            // 있다면
+            if(quickList.some((v) => v.menus.some((v) => v.menu_id === $moveMenu.menu_id))) {
                 let qIdx;
                 let qSubIdx;
                 qIdx = quickList.findIndex((v) => {
-                    qSubIdx = v.menus.findIndex((v) => v.menuIdx === $moveMenu.menuIdx);
+                    qSubIdx = v.menus.findIndex((v) => v.menu_id === $moveMenu.menu_id);
                     return qSubIdx !== -1;
                 });
                 quickList[qIdx].menus = quickList[qIdx].menus.filter((v, i) => i !== qSubIdx);
             }
             quick.menus.push($moveMenu);
-            dispatch("change_quickList", quickList);
+            dispatch("change_quickList", {value:quickList});
         }
     }
 
@@ -55,14 +56,14 @@
         let moveX = e.offsetX;
         let moveY = e.offsetY;
         if(downOn && Math.abs(initX - moveX) + Math.abs(initY - moveY) > 15) {
-            dispatch("change_quickMenu_moveOn", true);
+            dispatch("change_quickMenu_moveOn", {value:true});
         }
     }
     const quick2_mouseup = (e) => {
         $moveMenu = null;
         downOn = false;
         on_subMenu_move = -1;
-        dispatch("change_quickMenu_moveOn", false);
+        dispatch("change_quickMenu_moveOn", {value:false});
     }
     $:if(quickMenu_moveOn) {
         document.addEventListener('mousemove', quick2_moveOnFnc);
@@ -75,12 +76,14 @@
     const quick2_moveOnFnc = (e) => {
         if(e.target.closest('#mainMenu')) {
             const follower = document.getElementById('followerMenu');
-            const x = e.clientX;
-            const y = e.clientY;
-            follower.style.transform = `translate(${x}px, ${y}px)`;
+            if(follower) {
+                const x = e.clientX;
+                const y = e.clientY;
+                follower.style.transform = `translate(${x}px, ${y}px)`;
+            }
         } else if(e.target.closest('#mainFooter')){
             quick2_mouseup();
-            dispatch("change_menuOn", false);
+            dispatch("change_menuOn", {value:false});
         } else if(e.target.closest('#iconsWrap')) {
             $moveIcon = $moveMenu;
             quick2_mouseup();
@@ -100,7 +103,7 @@
     tabindex="0"
 >
     <div class="title"><input type="text" bind:value={quick.name} placeholder="그룹 이름 지정"
-        on:change={() => dispatch("change_quickList", quickList)}></div>
+        on:change={() => dispatch("change_quickList", {value:quickList})}></div>
     <div class="btns">
         {#each quick.menus as qSub, qSubIdx}
         <button 
@@ -111,11 +114,14 @@
             on:mousemove={(e) => quick2_mousemove(e)}
             on:mouseup={(e) => quick2_mouseup(e)}
             on:click={(e) => {
-                $inPage = {
-                    ...qSub
-                }
-                dispatch("change_menuOn", false);
-                quick2_mouseup();
+                if(qSub.frame_on) {
+                    $inPage = {
+                        ...qSub
+                    }
+                    dispatch("change_menuOn", {value:false});
+                    quick2_mouseup();
+                } else window.open(qSub.url);
+                
             }}
         >
             <div class="btns-icon">
