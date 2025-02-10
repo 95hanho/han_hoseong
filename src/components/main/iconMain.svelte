@@ -255,6 +255,10 @@
                     };
                     icons[i][j] = newFolderIcon;
                     iconData.icons.push(newFolderIcon);
+                    commonService.set_icon({
+                        ...newFolderIcon,
+                        type:'create_folder',
+                    });
                     breakOn = true;
                     break;
                 }
@@ -345,7 +349,7 @@
         change_icons();
     }
     const change_icons = () => {
-        if(!init) commonService.set_icons(iconData.icons);
+        // if(!init) commonService.set_icons(iconData.icons);
     }
     
     $: console.log(iconData.icons);

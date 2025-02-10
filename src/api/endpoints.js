@@ -3,7 +3,7 @@
 const API_URL = {
   MENU: "/api/menu",
   QUICK: "/api/menu/quick",
-  ICON: "/api/menu/icons",
+  ICON: "/api/menu/icon",
   SCHEDULE: "/api/popup/schedule",
   BACKGROUND: "/api/ui/background",
   // 테스트
