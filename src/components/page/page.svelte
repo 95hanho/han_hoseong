@@ -164,7 +164,7 @@
         }}></button>
         {/if}
         <!--  -->
-        <iframe src={view.url} title="12321" 
+        <iframe src={view.url} title={view.name} 
         frameborder="0"></iframe>
         <!--  -->
     </div>

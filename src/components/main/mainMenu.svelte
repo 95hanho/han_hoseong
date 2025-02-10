@@ -48,7 +48,6 @@
     $: match_search = menuSearchTxt.replace(/\s|\.|>|\(|\)|·/g, "").match(/^[0-9a-zA-Z가-힣]+/);
     $: match_txt = match_search 
         ? match_search[0] : "";
-    $: console.log(match_txt);
     $: if(match_search && match_txt) {
         searchList = Object.entries($menuList).reduce((acc, cur) =>  {
             let list = cur[1].filter((v) => {
@@ -61,13 +60,12 @@
         },[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }
 
-    let menuOpen = -1; // 오픈할 메뉴
+    let menuOpen = 0; // 오픈할 메뉴
 
     // 오른쪽 즐겨찾기리스트
     let quickList = [];
     $: if(quickList && quickList.length > 0) {
         commonService.set_quicks(quickList);
-        commonService.setQuicks(quickList);
     }
     // 퀵 리스트 그룹 사라질 때 quickList에서 뺌
     $: if(quickList.some((v) => v.menus.length === 0)) {
@@ -80,7 +78,6 @@
         console.log(quickList);
     }
 
-    let new_quick_move = false; // 새 퀵 위에 아이콘 무빙 중
     let subMenu_moveOn = false; // 서브메뉴 무브시작
     const change_subMenu_moveOn = (e) => {
         subMenu_moveOn = e.detail.value;
@@ -88,6 +85,7 @@
     let quickMenu_moveOn = false; // 퀵메뉴 무브시작
     const change_quickMenu_moveOn = (e) => {
         quickMenu_moveOn = e.detail.value;
+        console.log('quickMenu_moveOn', quickMenu_moveOn);
     }
 
     $:if($modal_result) {
@@ -102,25 +100,9 @@
         modal_menuModify.reset();
     }
 
-    /* 테스트용 메뉴고유번호 붙이기 */
-    $:if(curMenuNum) {
-        indexMaking();
-    }
-    const indexMaking = () => {
-        // console.log('테스트용 메뉴고유번호 붙이기');
-        let count = 0;
-        Object.entries($menuList).map((entry, i) => {
-            entry[1].map((v, i) => {
-                count++;
-                v.parent = entry[0];
-                v.menu_id = curMenuNum * 1000 + count;
-            });
-        });
-    }
-    /* 테스트용 메뉴고유번호 붙이기 */
     onMount(async () => {
         const menu_await = await commonService.get_menus();
-        const menu_version = commonService.get_menu_version();
+        const menu_version = commonService.get_menu_version() || undefined;
         // 버전이 다르면 새로가져오기
         if(menu_await.version !== menu_version) {
             commonService.set_local_menus(menu_await.menus);
@@ -135,9 +117,7 @@
         /*  */
         commonService.get_quicks().then((data) => {
             quickList = data.quickList;
-            console.log('가져온 quickList', quickList);
         });
-        // quickList = commonService.getQuicks();
         // console.log(quickList);
         /*  */
         curMenuNum = 1;
@@ -201,9 +181,6 @@
                     </ul>
                 </li>
                 {/if}
-                <!-- {#each menuEntry[1] as subMenu}
-                <li><button>{subMenu.title}</button></li>
-                {/each} -->
             </ul>
             {/each}
         </div>
@@ -232,64 +209,6 @@
         <MainMenuQuick {quickList} on:change_quickList={change_quickList} 
             {subMenu_moveOn}
             {quickMenu_moveOn} on:change_quickMenu_moveOn={change_quickMenu_moveOn} />
-        <!-- 퀵메뉴 맨밑 여유 빈칸 -->
-        <div class="quick-group" class:new-quick={!new_quick_move} 
-            class:move={$moveMenu && new_quick_move}
-            class:new={$moveMenu && new_quick_move}
-            role="button"
-            tabindex="0"
-            on:mousemove={(e) => {
-                if($moveMenu) new_quick_move = true;
-            }}
-            on:mouseleave={(e) => {
-                new_quick_move = false;
-            }}
-            on:mouseup={(e) => {
-                if(!$moveMenu) return;
-                new_quick_move = false;
-                if(quickList.some((v) => v.menus.some((v) => v.menu_id === $moveMenu.menu_id))) {
-                    let qIdx;
-                    let qSubIdx;
-                    qIdx = quickList.findIndex((v) => {
-                        qSubIdx = v.menus.findIndex((v) => v.menu_id === $moveMenu.menu_id);
-                        return qSubIdx !== -1;
-                    });
-                    quickList[qIdx].menus = quickList[qIdx].menus.filter((v, i) => i !== qSubIdx);
-                }
-                quickList.push({
-                    name:"",
-                    menus: [
-                        $moveMenu,
-                    ]
-                });
-                quickList = quickList;
-            }}
-        >
-            {#if $moveMenu}
-                {#if new_quick_move}
-                <div in:fade={{duration:1500}}>
-                    <div class="title"><input type="text" placeholder="그룹 이름 지정"></div>
-                    <div class="btns">
-                        <button>
-                            <div class="btns-icon">
-                                {#if !$moveMenu.icon}
-                                <img src={ico_quick_home} alt="">
-                                {:else}
-                                <i class={`bi ${$moveMenu.icon} fs-48px`}
-                                    style={`color:${$moveMenu.color === 'custom' ? $moveMenu.customColor : $moveMenu.color}`}
-                                >
-                                </i>
-                                {/if}
-                            </div>
-                            <h6>{$moveMenu.name}</h6>
-                        </button>
-                    </div>
-                </div>
-                {:else}
-                <i class="bi bi-plus-square fs-24px"></i>
-                {/if}
-            {/if}
-        </div>
     </div>
     <div class="menuInfo" class:open={hightlightOn}
         class:setting={settingOn}
@@ -320,7 +239,6 @@
                         <span>개인정보</span>
                     </button>
                     <button on:click={() => {
-                        
                         $inPage = {
                             name: "메시지",
                             type: "Intra",
@@ -335,7 +253,6 @@
                         <div class="noread">99+</div>
                     </button>
                     <button on:click={() => {
-                        
                         $inPage = {
                             frame: "https://eaintra.exc.co.kr/intra_mainPAge.asp",
                             menu_id:1001,

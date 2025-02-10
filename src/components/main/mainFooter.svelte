@@ -76,8 +76,8 @@
     const change_cur_zIndex = (e) => {
         cur_zIndex = e.detail.value;
     }
-    const closeView = (index) => {
-        viewPages = viewPages.filter((v, i) => i !== index);
+    const closeView = (e) => {
+        viewPages = viewPages.filter((v, i) => i !== e.detail.value);
     }
 
     let makeViewPages = null;

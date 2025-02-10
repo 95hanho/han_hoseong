@@ -50,24 +50,7 @@
             //     frame: "https://eaintra.exc.co.kr/allbbs/list.asp",
             //     parent: "정보공유",
             //     menu_id: 1022
-            // }, {
-            //     row:0,
-            //     col:2,
-            //     title: "좌석배치도",
-            //     type: "Intra",
-            //     frame: "https://eaintra.exc.co.kr/util/placeInfo/placeINFO.asp",
-            //     parent: "일반관리",
-            //     menu_id: 1014
-            // },
-            // {
-            //     row:1,
-            //     col:8,
-            //     title: "회의실 사용현황",
-            //     type: "Intra",
-            //     frame: "https://eaintra.exc.co.kr/meeting/project_room.asp",
-            //     parent: "일반관리",
-            //     menu_id: 1017
-            // },
+            // }
         ]
     };
     // 아이콘 mousedown
@@ -265,7 +248,7 @@
                         row:i,
                         col:j,
                         folder:true,
-                        title:'새폴더',
+                        name:'새폴더',
                         children: [
                         ],
                         folderOn:false,
@@ -357,10 +340,20 @@
         e.stopPropagation();
         console.log('test', e, b, c);
     }
-    $: if(iconData.icons.length > 0) commonService.setIcons(iconData.icons);
+    let init = true;
+    $: if(iconData.icons.length > 0) {
+        change_icons();
+    }
+    const change_icons = () => {
+        if(!init) commonService.set_icons(iconData.icons);
+    }
+    
     $: console.log(iconData.icons);
     onMount(() => {
         iconData.icons = commonService.getIcons();
+        setTimeout(() => {
+            init = false;
+        }, 50);
         icons_wrap_making();
         window.addEventListener('resize', icons_wrap_making);
     });

@@ -56,7 +56,7 @@
                 <div class="panel panel-inverse" data-sortable-id="form-stuff-1" data-init="true">
                     <!-- BEGIN panel-heading -->
                     <div class="panel-heading ui-sortable-handle">
-                    <h4 class="panel-title">{$modal_menu.type + ") " + $modal_menu.title}</h4>
+                    <h4 class="panel-title">{$modal_menu.parent + ") " + $modal_menu.name}</h4>
                     <div class="panel-heading-btn">
                         
                     </div>
