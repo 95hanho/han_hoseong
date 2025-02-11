@@ -248,7 +248,7 @@
                         row:i,
                         col:j,
                         folder:true,
-                        name:'새폴더',
+                        folder_name:'새폴더',
                         children: [
                         ],
                         folderOn:false,
@@ -353,8 +353,9 @@
     }
     
     $: console.log(iconData.icons);
-    onMount(() => {
-        iconData.icons = commonService.getIcons();
+    onMount(async () => {
+        // iconData.icons = commonService.getIcons();
+        iconData.icons = await commonService.get_icons();
         setTimeout(() => {
             init = false;
         }, 50);
@@ -429,7 +430,7 @@
                     </div>
                     {/if}
                     <div class="icon-name">
-                        <p>{icon.name}</p>
+                        <p>{icon.folder ? icon.folder_name : icon.name}</p>
                     </div>
                 {/if}
             </button>
@@ -500,7 +501,7 @@
         </div>
         {/if}
         <div class="icon-name">
-            <p>{movingIcon.name}</p>
+            <p>{movingIcon.folder ? movingIcon.folder_name : movingIcon.name}</p>
         </div>
     </div>
     {/if}
