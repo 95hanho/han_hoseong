@@ -46,10 +46,11 @@ const commonService_doc = {
 		console.log("아이콘 변경", obj);
 		localStorage.setItem("icons", JSON.stringify(obj));
 	},
-	set_icon: (obj) => {
+	set_icon: async (obj) => {
 		console.log("set_icon", obj);
-		post_urlFormData(API_URL.ICON, obj).then((data) => {
+		return await post_urlFormData(API_URL.ICON, obj).then((data) => {
 			console.log(data);
+			return data;
 		});
 	},
 	delete_icon: (obj) => {

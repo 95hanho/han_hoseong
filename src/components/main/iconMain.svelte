@@ -105,7 +105,7 @@
         }
     }
     // 아이콘 mouseup
-    const icon_mouseup = (e, row, col) => {
+    const icon_mouseup = async (e, row, col) => {
         if(row == undefined && col == undefined) {
             resetMove();
             return;
@@ -120,72 +120,110 @@
                 icons[row][col] = movingIcon;
                 icons[movingRow][movingCol].children = 
                     icons[movingRow][movingCol].children.filter((v, i) => i !== movingChildIdx);
-                iconData.icons.push(icons[row][col]);
-                let newIdx = iconData.icons.length - 1;
-                let folderIdx = icons[movingRow][movingCol].idx;
-                console.log(newIdx, iconData.icons[newIdx], folderIdx);
-                iconData.icons[newIdx].col = col;
-                iconData.icons[newIdx].row = row;
-                iconData.icons[folderIdx].children = 
-                    iconData.icons[folderIdx].children.filter((v, i) => i !== movingChildIdx);
+                await commonService.set_icon({
+                    ...movingIcon,
+                    row, col,
+                    folder_icon_id: 0, folder_child_order: 0,
+                    type: "update_icon",
+                });
             }
             // 아이콘 빈곳으로 위치 옮기기
             else if(downOn && iconMoveOn && !icons[row][col]) {
                 icons[row][col] = movingIcon;
                 icons[movingRow][movingCol] = null;
-                let newIdx = icons[row][col].idx;
-                iconData.icons[newIdx].col = col;
-                iconData.icons[newIdx].row = row;
+                await commonService.set_icon({
+                    ...movingIcon,
+                    row, col,
+                    type: "update_icon",
+                });
             }
             // 아이콘 폴더 안에 넣기
             else if(downOn && iconMoveOn && icons[row][col].folder && !icons[movingRow][movingCol].folder) {
                 if(icons[row][col].children.length < 6) {
                     icons[row][col].children.push(movingIcon);
                     icons[movingRow][movingCol] = null;
-                    let folderIdx = icons[row][col].idx;
-                    let oldIdx = movingIcon.idx;
-                    iconData.icons[folderIdx] = icons[row][col];
-                    iconData.icons = iconData.icons.filter((v, i) => i !== oldIdx);
+                    await commonService.set_icon({
+                        ...movingIcon,
+                        folder_icon_id: icons[row][col].icon_id,
+                        folder_child_order: icons[row][col].children.length,
+                        type: "update_icon",
+                    });
                 } else {
                     alert('디렉토리 안에 아이콘은 6개까지만 넣을 수 있습니다.');
                 }
             }
             // 아이콘 위치 서로 바꾸기
             else if(downOn && iconMoveOn && icons[row][col]) {
+                let moving_icon = icons[movingRow][movingCol];
+                let existing_icon = icons[row][col];
                 [icons[row][col], icons[movingRow][movingCol]]
                 = [icons[movingRow][movingCol], icons[row][col]];
-                let newIdx = icons[row][col].idx;
-                let oldIdx = icons[movingRow][movingCol].idx;
-                iconData.icons[newIdx].row = icons[row][col].row;
-                iconData.icons[newIdx].col = icons[row][col].col;
-                iconData.icons[oldIdx].row = icons[movingRow][movingCol].row;
-                iconData.icons[oldIdx].col = icons[movingRow][movingCol].col;
+                await commonService.set_icon({
+                    ...moving_icon,
+                    row:existing_icon.row,
+                    col:existing_icon.col,
+                    type: "update_icon",
+                });
+                await commonService.set_icon({
+                    ...existing_icon,
+                    row:moving_icon.row,
+                    col:moving_icon.col,
+                    type: "update_icon",
+                });
             }
             // win메뉴에서 아이콘 가져오기
             else if(fromMenuIcon && iconMoveOn && !icons[row][col]?.folder) {
-                icons[row][col] = movingIcon;
-                icons[row][col].row = row;
-                icons[row][col].col = col;
-                iconData.icons.push(icons[row][col]);
+                console.log('win메뉴에서 아이콘 가져오기');
+                const new_icon = {...movingIcon, row, col}
+                await commonService.set_icon({
+                    ...new_icon,
+                    type: "create_icon",
+                }).then((data) => {
+                    new_icon.icon_id = data.icon_id;
+                });
+                icons[row][col] = new_icon;
             }
             // win메뉴에서 아이콘을 폴더 안에 넣기
             else if(fromMenuIcon && iconMoveOn && icons[row][col]?.folder) {
+                console.log('win메뉴에서 아이콘을 폴더 안에 넣기');
                 icons[row][col].children.push(movingIcon);
-                let newIdx = icons[row][col].idx;
-                iconData.icons[newIdx] = icons[row][col];
+                const new_icon = {...movingIcon,
+                    folder_icon_id: icons[row][col].icon_id,
+                    folder_child_order: icons[row][col].children.length,
+                }
+                await commonService.set_icon({
+                    ...new_icon,
+                    type: "create_icon",
+                }).then((data) => {
+                    new_icon.icon_id = data.icon_id;
+                });
             }
         }
-        iconData = iconData;
-        icons_wrap_making();
+        // iconData = iconData;
+        // icons_wrap_making();
         resetMove();
     }
     // folder안의 아이콘 mouseup
-    const folderIcon_mouseup = (e, row, col, childIdx) => {
+    const folderIcon_mouseup = async (e, row, col, childIdx) => {
         e.stopPropagation();
         // folder 안에서 위치(순서) 바꾸기
         if(iconMoveOn && icons[row][col] === icons[movingRow][movingCol] && (movingChildIdx !== childIdx)) {
+            const moving_icon = icons[row][col].children[movingChildIdx];
+            const existing_icon = icons[row][col].children[childIdx];
+            const moving_order = childIdx + 1;
+            const existing_order = movingChildIdx + 1;
             [icons[row][col].children[movingChildIdx], icons[row][col].children[childIdx]]
             = [icons[row][col].children[childIdx], icons[row][col].children[movingChildIdx]]
+            await commonService.set_icon({
+                ...moving_icon,
+                folder_child_order: moving_order,
+                type: "update_icon",
+            });
+            await commonService.set_icon({
+                ...existing_icon,
+                folder_child_order: existing_order,
+                type: "update_icon",
+            });
         }
         resetMove();
     }
@@ -193,15 +231,20 @@
     const icon_delete = () => {
         if(iconMoveOn) {
             let delIdx = icons[movingRow][movingCol]?.idx;
+            let del_icon_id = icons[movingRow][movingCol]?.icon_id;
             if(delIdx != undefined) {
+                // 폴더 안에 있는거 삭제 시
                 if(childDownOn) {
                     icons[movingRow][movingCol].children
                         = icons[movingRow][movingCol].children.filter((v, i) => i !== movingChildIdx);
                     iconData.icons[delIdx].children = 
                         iconData.icons[delIdx].children.filter((v, i) => i != movingChildIdx);
-                } else if(downOn) {
+                } 
+                // 밖에 있는거 삭제 시
+                else if(downOn) {
                     icons[movingRow][movingCol] = null;
                     iconData.icons = iconData.icons.filter((v, i) => i != delIdx);
+                    commonService.delete_icon({icon_id:del_icon_id});
                 }
             }
             resetMove();
@@ -238,13 +281,12 @@
         follower.style.transform = `translate(${x}px, ${y}px)`;
     }
     // 아이콘 디렉토리 추가
-    const folderAdd = () => {
+    const folderAdd = async () => {
         let breakOn = false;
         for(let i = 0; i < icons.length; i++) {
             for(let j = 0; j < icons[i].length; j++) {
                 if(!icons[i][j]) {
                     let newFolderIcon = {
-                        idx:iconData.icons.length,
                         row:i,
                         col:j,
                         folder:true,
@@ -255,9 +297,11 @@
                     };
                     icons[i][j] = newFolderIcon;
                     iconData.icons.push(newFolderIcon);
-                    commonService.set_icon({
+                    await commonService.set_icon({
                         ...newFolderIcon,
                         type:'create_folder',
+                    }).then((data) => {
+                        newFolderIcon.icon_id = data.icon_id;
                     });
                     breakOn = true;
                     break;
@@ -311,7 +355,6 @@
             }
             existIcons = [];
             iconData.icons.map((v, i) => {
-                v.idx = i;
                 icons[v.row][v.col] = v;
                 if(!v.folder) existIcons.push(v);
             });
@@ -346,13 +389,15 @@
     }
     let init = true;
     $: if(iconData.icons.length > 0) {
+        // iconData.icons가 바뀔 때 저장해 줬었음.
         change_icons();
     }
     const change_icons = () => {
         // if(!init) commonService.set_icons(iconData.icons);
     }
     
-    $: console.log(iconData.icons);
+    $: console.log("iconData.icons", iconData.icons);
+    $: console.log("icons", icons);
     onMount(async () => {
         // iconData.icons = commonService.getIcons();
         iconData.icons = await commonService.get_icons();
