@@ -11,7 +11,7 @@
 	import { modal_confirm, modal_confirm_result } from '../../store/modalSlice.js';
 
     let icons = []; // 아이콘
-    let existIcons = []; // 존재하는 아이콘리스트
+    //
     let initX = 0; // 아이콘 클릭 시 첫 x
     let initY = 0; // 아이콘 클릭 시 첫 y
     let downRow = -1; // 마우스다운 시의 아이콘 행
@@ -29,7 +29,6 @@
 
     let openIndexs = [];
     let openFolderEle = null; // 폴더 오픈될 때 Ele
-    let folderRenameIndex = null; // 폴더 이름변경 버튼 나타내기 setTimeout
     let folderPositionNum = 0; // 폴더가 열릴 때 공간이 오른쪽이나 밑으로 넘치는지
     // => 1 : 안넘침, 2: width넘침, 3: height넘침, 4: width,height넘침
 
@@ -46,13 +45,24 @@
     let iconData = {
         icons : [
             // {
-            //     row:0,
-            //     col:1,
-            //     title: "자유게시판",
-            //     type: "Intra",
-            //     frame: "https://eaintra.exc.co.kr/allbbs/list.asp",
-            //     parent: "정보공유",
-            //     menu_id: 1022
+            //     children: [],
+            //     col: 4,
+            //     row: 1,
+            //     color: "#00f",
+            //     folder: false,
+            //     folder_child_order: 0,
+            //     folder_icon_id: 0,
+            //     folder_name: "",
+            //     frame_on: false,
+            //     icon: "bi-person-bounding-box",
+            //     icon_id: 24,
+            //     menu_id: 1,
+            //     name: "요약정리 웹",
+            //     parent: "자기소개서",
+            //     parent_menu_id: 0,
+            //     quick_id: 0,
+            //     quick_menu_order: 0,
+            //     url: "https://95hanho.github.io/#",
             // }
         ]
     };
@@ -348,7 +358,8 @@
     let icons_wrap_making_index = null;
     const icons_wrap_making = () => {
         clearTimeout(icons_wrap_making_index);
-        icons_wrap_making_index = setTimeout(() => {
+        icons_wrap_making_index = setTimeout(async () => {
+            iconData.icons = await commonService.get_icons();
             maxIconsLengs = initCalcWidthHeight();
             overRow = false;
             overCol = false;
@@ -370,10 +381,8 @@
             for(let i = 0; i < maxIconsLengs.rowLeng; i++) {
                 icons.push(new Array(maxIconsLengs.colLeng).fill(null));
             }
-            existIcons = [];
             iconData.icons.map((v, i) => {
                 icons[v.row][v.col] = v;
-                if(!v.folder) existIcons.push(v);
             });
             // folderUi.maxScrollCalc(overCol, overRow);
             document.getElementById('wrapper').removeEventListener('scroll', folderUi.iconSideScrShowHide);
@@ -389,14 +398,11 @@
     // 아이콘 무브 추가
     // viewPage 추가하기
     $:if($moveIcon) {
-        if(existIcons.some((v) => v.menu_id === $moveIcon.menu_id)) {
-            alert('이미 존재하는 아이콘입니다.\n삭제 후 진행해주세요.');
-        } else {
-            $moveIcon.idx = iconData.icons.length;
-            movingIcon = $moveIcon;
-            fromMenuIcon = true;
-            iconMoveOn = true;
-        }
+        $moveIcon.idx = iconData.icons.length;
+        movingIcon = $moveIcon;
+        fromMenuIcon = true;
+        iconMoveOn = true;
+        //
         $moveIcon = null;
     }
     // test
@@ -413,11 +419,10 @@
         // if(!init) commonService.set_icons(iconData.icons);
     }
     
-    $: console.log("iconData.icons", iconData.icons);
-    // $: console.log("icons", icons);
+    // $: console.log("iconData.icons", iconData.icons);
+    $: console.log("icons", icons);
     onMount(async () => {
         // iconData.icons = commonService.getIcons();
-        iconData.icons = await commonService.get_icons();
         setTimeout(() => {
             init = false;
         }, 50);

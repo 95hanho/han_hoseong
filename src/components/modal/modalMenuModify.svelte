@@ -39,8 +39,6 @@
         $modal_result = "menuModify";
     }, 300);
   }
-
-
 </script>
 
 <div class="modal" bind:this={modalEle}>
@@ -48,7 +46,7 @@
         class="modal-background"
         on:click={() => close()}
     ></button>
-    <div class="modal-board">
+    <div class="modal-board big">
         <div class="modal-content">
         <div class="modal-title">메뉴설정</div>
             <div class="modal-con">

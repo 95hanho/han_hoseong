@@ -7,8 +7,9 @@
   import bg_ex3 from '../../assets/img/bg/cover-9.jpg';
   import bg_ex4 from '../../assets/img/bg/cover.jpg';
   import bg_ex5 from '../../assets/img/bg/post-5.jpg';
+  import bg_ex6 from '../../assets/img/bg/window_xp.jpg';
 	import { slide } from 'svelte/transition';
-
+ 
 /* 모달 기본설정 */
   let modalEle = null;
   let closeBtn = null;
@@ -40,14 +41,14 @@
   let customColor = "";
 
   let bg_imageList = [];
-  bg_imageList.push(bg_ex1, bg_ex2, bg_ex3, bg_ex4, bg_ex5);
+  bg_imageList.push(bg_ex1, bg_ex2, bg_ex3, bg_ex4, bg_ex5, bg_ex6);
 
   $: if($modal_bgModify) {
       modalUI.open(modalEle);
     //   closeBtn.focus();
       setting_bg = $bg_info;
       console.log(setting_bg);
-      reset();
+      reset();bg_ex6
       document.addEventListener('keydown', escClose);
   } else {
       modalUI.close(modalEle);
@@ -85,12 +86,12 @@
 
 </script>
 
-<div class="modal" bind:this={modalEle}>
+<div id="modalBgModify" class="modal" bind:this={modalEle}>
     <button
         class="modal-background"
         on:click={() => close()}
     ></button>
-    <div class="modal-board">
+    <div class="modal-board big">
         <div class="modal-content">
         <div class="modal-title">배경화면 설정</div>
             <div id="modalBgContent" class="modal-con">
@@ -260,3 +261,6 @@
         </div>
     </div>
 </div>
+
+<style>
+</style>

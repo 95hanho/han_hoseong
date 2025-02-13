@@ -1788,6 +1788,9 @@
   max-width: 500px;
   z-index: 901;
 }
+.modal .modal-board.big {
+  max-width: 800px;
+}
 .modal .modal-board .modal-content {
   height: 100%;
   margin: 0 15px;

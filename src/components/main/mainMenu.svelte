@@ -225,7 +225,7 @@
                     </button>
                 </div>
                 <div class="bottom-space">
-                    <button on:click={() => {
+                    <!-- <button on:click={() => {
                         $inPage = {
                             frame: "https://eaintra.exc.co.kr/member/myINfo.asp",
                             menu_id:1002,
@@ -253,7 +253,7 @@
                         <div class="noread">99+</div>
                     </button>
                     <button on:click={() => {
-                        $inPage = {
+                        $inPage = { 
                             frame: "https://eaintra.exc.co.kr/intra_mainPAge.asp",
                             menu_id:1001,
                             parent: "메인",
@@ -276,7 +276,7 @@
                     }}>
                         <span class="bris-icon mobile">M-B</span>
                         <span>M-브리스 바로가기</span>
-                    </button>
+                    </button> -->
                     <button on:click={() => {
                         hightlightOn = true;
                         settingOn = true;
