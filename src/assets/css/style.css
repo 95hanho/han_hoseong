@@ -1035,7 +1035,7 @@
 .wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .page-title {
   padding: 0 5px;
   display: inline-block;
-  width: calc(100% - 28px);
+  width: calc(100% - 30px);
 }
 .wrapper footer#mainFooter .current-url > div .page-block-wrap .page-block .page-box .page-title span {
   overflow: hidden;

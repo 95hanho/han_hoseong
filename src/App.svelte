@@ -54,7 +54,7 @@
 
     onMount(() => {
         // menuUi.menuOnOff();
-        $bg_info = commonService.getBgInfo();
+        $bg_info = commonService.get_bgInfo();
     });
 </script>
 
