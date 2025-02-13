@@ -414,7 +414,7 @@
     }
     
     $: console.log("iconData.icons", iconData.icons);
-    $: console.log("icons", icons);
+    // $: console.log("icons", icons);
     onMount(async () => {
         // iconData.icons = commonService.getIcons();
         iconData.icons = await commonService.get_icons();
@@ -511,7 +511,12 @@
                     class:over-titleWidth={folderPositionNum == 6}
                 >
                     <div class="icon-child-rename">
-                        <input type="text" bind:value={icon.folder_name}>
+                        <input type="text" bind:value={icon.folder_name} on:change={(e) => {
+                            commonService.set_icon({
+                                ...icon,
+                                type:"update_icon",
+                            });
+                        }}>
                     </div>
                     <ul>
                         {#each icon.children as childIcon, childIdx}

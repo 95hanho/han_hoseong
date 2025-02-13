@@ -200,6 +200,10 @@
   color: #fff;
   font-weight: bold;
   text-shadow: 1.5px 1.5px 1px #111;
+  border-radius: 5px 5px 1px 1px;
+}
+.wrapper main section#iconsWrap > ul > li .icon-child .icon-child-rename input:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 .wrapper main section#iconsWrap > ul > li .icon-child ul {
   margin: 0;
