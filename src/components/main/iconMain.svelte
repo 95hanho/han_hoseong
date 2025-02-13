@@ -8,6 +8,7 @@
     import { initCalcWidthHeight, folderUi } from '../../lib/ui.js';
     import { scale, fade } from 'svelte/transition';
     import IconScr from '../icons/iconScr.svelte';
+	import { modal_confirm, modal_confirm_result } from '../../store/modalSlice.js';
 
     let icons = []; // 아이콘
     let existIcons = []; // 존재하는 아이콘리스트
@@ -37,6 +38,8 @@
     let maxIconsLengs = {};
     let completeIcons = null; // 아이콘 완성
     let fromMenuIcon = false; // 메뉴에서 아이콘이 왔는지
+
+    let folder_opening = false; // 폴더가 열린 상태인지
 
 
     /* 테스트 아이콘 데이터 */
@@ -228,28 +231,41 @@
         resetMove();
     }
     // 아이콘 삭제
+    let folder_delete_store = {};
     const icon_delete = () => {
-        if(iconMoveOn) {
-            let delIdx = icons[movingRow][movingCol]?.idx;
-            let del_icon_id = icons[movingRow][movingCol]?.icon_id;
-            if(delIdx != undefined) {
-                // 폴더 안에 있는거 삭제 시
-                if(childDownOn) {
-                    icons[movingRow][movingCol].children
-                        = icons[movingRow][movingCol].children.filter((v, i) => i !== movingChildIdx);
-                    iconData.icons[delIdx].children = 
-                        iconData.icons[delIdx].children.filter((v, i) => i != movingChildIdx);
-                } 
-                // 밖에 있는거 삭제 시
-                else if(downOn) {
-                    icons[movingRow][movingCol] = null;
-                    iconData.icons = iconData.icons.filter((v, i) => i != delIdx);
-                    commonService.delete_icon({icon_id:del_icon_id});
-                }
-            }
-            resetMove();
-            icons_wrap_making();
+        const moving_icon = icons[movingRow][movingCol];
+        if(moving_icon.folder && moving_icon.children.length > 0) {
+            folder_delete_store.row = movingRow;
+            folder_delete_store.col = movingCol;
+            folder_delete_store.icon_id = icons[movingRow][movingCol]?.icon_id;
+            modal_confirm.open(`
+                폴더 안의 아이콘도 같이 삭제됩니다.<br />
+                삭제하시겠습니까??
+                `, "folder_n_child_delete");
+            return;
         }
+        if(iconMoveOn) {
+            let del_icon_id = icons[movingRow][movingCol]?.icon_id;
+            // 폴더 안에 있는거 삭제 시
+            if(childDownOn) {
+                icons[movingRow][movingCol].children
+                    = icons[movingRow][movingCol].children.filter((v, i) => i !== movingChildIdx);
+            } 
+            // 밖에 있는거 삭제 시
+            else if(downOn) {
+                icons[movingRow][movingCol] = null;
+            }
+            commonService.delete_icon({icon_id:del_icon_id});
+            resetMove();
+        }
+    }
+    $:if($modal_confirm_result == "folder_n_child_delete") {
+        icons[folder_delete_store.row][folder_delete_store.col].children.map((v) => {
+            commonService.delete_icon({icon_id:v.icon_id});
+        });
+        commonService.delete_icon({icon_id:folder_delete_store.icon_id});
+        icons[folder_delete_store.row][folder_delete_store.col] = null;
+        $modal_confirm_result = "";
     }
     // 무브 리셋
     const resetMove = () => {
@@ -320,6 +336,7 @@
     const closeFolder = (e) => {
         if(folderUi.folderOutClick(e.target)) {
             icons[openIndexs[0]][openIndexs[1]].folderOn = false;
+            folder_opening = false;
             document.removeEventListener('mousedown', closeFolder);
         }
     }
@@ -411,7 +428,8 @@
 
 <section id="iconsWrap" style={`width:${overCol ? maxIconsLengs.colLeng * 120 + "px" : "100%"};
     overflow-x:${overCol ? 'scroll' : 'hidden'};
-    height:${overRow ? maxIconsLengs.rowLeng * 120 + "px" : "calc(100% - 58px)"}`}>
+    height:${overRow ? maxIconsLengs.rowLeng * 120 + "px" : "calc(100% - 58px)"};
+    z-index:${folder_opening ? "3" : "2"}`}>
     <div class="lefttop-btn">
         <button class="folder-add" class:iconMoveOn={iconMoveOn}
             on:click={folderAdd} on:mouseup={icon_delete}>
@@ -441,6 +459,7 @@
                     if(icon?.folder) {
                         folderPositionNum = folderUi.folderPosition(e.target.closest('button'));
                         icon.folderOn = true;
+                        folder_opening = true;
                         openIndexs = [row, col];
                     } else {
                         $inPage = {
@@ -492,7 +511,7 @@
                     class:over-titleWidth={folderPositionNum == 6}
                 >
                     <div class="icon-child-rename">
-                        <input type="text" bind:value={icon.name}>
+                        <input type="text" bind:value={icon.folder_name}>
                     </div>
                     <ul>
                         {#each icon.children as childIcon, childIdx}
