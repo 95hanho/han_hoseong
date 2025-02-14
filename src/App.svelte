@@ -52,9 +52,10 @@
     //     banners = v;
     // }
 
-    onMount(() => {
+    onMount(async () => {
         // menuUi.menuOnOff();
-        $bg_info = commonService.getBgInfo();
+        $bg_info = commonService.get_local_bgInfo();
+        $bg_info = await commonService.get_bgInfo();
     });
 </script>
 

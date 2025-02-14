@@ -1,5 +1,6 @@
 import { delete_normal, get_normal, post_json, post_urlFormData } from "../apiFilter";
 import API_URL from "../endpoints";
+import bg_example from "../../assets/img/bg/coming-soon.jpg";
 
 const commonService_doc = {
 	get_menu_version: () => localStorage.getItem("menu_version") || 0,
@@ -65,9 +66,10 @@ const commonService_doc = {
 	setSchedules: (obj) => {
 		localStorage.setItem("schedule", JSON.stringify(obj));
 	},
-	getBgInfo: () => {
+	get_local_bgInfo: () => {
 		return (
 			JSON.parse(localStorage.getItem("bg-info")) || {
+				["background-image"]: bg_example,
 				["background-size"]: "cover" /* 배경 이미지를 화면에 맞게 조절 */,
 				["background-repeat"]: "no-repeat" /* 배경 이미지 반복하지 않음 */,
 				["background-position"]: "center" /* 배경 이미지를 가운데 정렬 */,
@@ -75,8 +77,32 @@ const commonService_doc = {
 			}
 		);
 	},
-	setBgInfo: (obj) => {
+	get_bgInfo: async () =>
+		await get_normal(API_URL.BACKGROUND).then((data) => {
+			const obj = { ...data.background };
+			const result = {
+				["background-size"]: obj.size,
+				["background-repeat"]: obj.repeat,
+				["background-position"]: obj.position,
+				["background-color"]: obj.color,
+				["background-image"]: obj.image,
+			};
+			commonService_doc.set_local_bgInfo(result);
+			return result;
+		}),
+	set_local_bgInfo: (obj) => {
 		localStorage.setItem("bg-info", JSON.stringify(obj));
+	},
+	set_bgInfo: (obj) => {
+		post_urlFormData(API_URL.BACKGROUND, {
+			image: obj["background-image"],
+			size: obj["background-size"],
+			repeat: obj["background-repeat"],
+			position: obj["background-position"],
+			color: obj["background-color"],
+		}).then((data) => {
+			console.log(data);
+		});
 	},
 };
 

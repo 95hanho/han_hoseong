@@ -81,7 +81,7 @@
       ["background-position"]: setting_bg["background-position"] === "center" ? "center" : `${positionX}% ${positionY}%`,
       ["background-color"]: setting_bg["background-color"] !== 'custom' ? setting_bg["background-color"] : customColor,
     }
-    commonService.setBgInfo($bg_info);
+    commonService.set_bgInfo($bg_info);
   }
 
 </script>

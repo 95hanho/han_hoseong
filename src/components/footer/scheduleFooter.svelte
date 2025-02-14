@@ -274,7 +274,7 @@ in:fade={{duration: 500}} out:fade={{duration: 200}}>
 		</div>
 		<div class="complete">
 			<button on:click={() => complete_scheduleView = !complete_scheduleView}>
-				{complete_allOn ? "전체 완료" : "오늘 완료"}({complete_scheduleList.length})
+				{complete_allOn ? "전체 완료 목록" : "오늘 완료 목록"}({complete_scheduleList.length})
 				{#if complete_scheduleView}
 				<i class="bi bi-caret-down-fill"></i>
 				{:else}
@@ -334,7 +334,7 @@ in:fade={{duration: 500}} out:fade={{duration: 200}}>
 				</label>
 			</div>
 			<div>
-				<label for="datepicker" class="date-view">{schedule_date || ""}</label>
+				<label for="" class="date-view">{schedule_date || ""}</label>
 				<div class="date-wrap" >
 					<input type="text" class="form-control" id="datepicker" 
 						bind:value={schedule_date}>

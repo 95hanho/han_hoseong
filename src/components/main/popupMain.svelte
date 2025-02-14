@@ -5,6 +5,8 @@
 	import BannerFooter from "../footer/bannerFooter.svelte";
 	import ScheduleFooter from "../footer/scheduleFooter.svelte";
 
+  let popupOnNum = 0; // 오픈할 팝업 숫자
+  let popupOn_maintain = false;
   // 팝업창 열기
   const footerPopupOn = (number) => {
     if(popupOnNum === number) {
@@ -24,7 +26,6 @@
       }
   }
 
-  let popupOnNum = 0;
   /* 스케줄 관련 */
   let scheduleView_store = [];
   const change_scheduleView_store = (e) => {
@@ -38,7 +39,7 @@
 
 </script>
 
-<div id="popupMain">
+<div id="popupMain" style="opacity: 1;">
   <div class="popup-btns">
     <div class="module">
       <button on:click={() => footerPopupOn(1)}>
