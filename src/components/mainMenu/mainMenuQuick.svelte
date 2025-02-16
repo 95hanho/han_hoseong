@@ -142,7 +142,7 @@
                 {#if !qSub.icon}
                 <img src={ico_quick_home} alt="">
                 {:else}
-                <i class={`bi ${qSub.icon} fs-48px`} style={`color:${qSub.color === 'custom' ? qSub.customColor : qSub.color}`}></i>
+                <i class={`bi ${qSub.icon} fs-48px`} style={`color:${qSub.color === 'custom' ? qSub.custom_color : qSub.color}`}></i>
                 {/if}
             </div>
             <h6>{qSub.name}</h6>
@@ -199,7 +199,7 @@ on:mouseup={(e) => {
                     <img src={ico_quick_home} alt="">
                     {:else}
                     <i class={`bi ${$moveMenu.icon} fs-48px`}
-                        style={`color:${$moveMenu.color === 'custom' ? $moveMenu.customColor : $moveMenu.color}`}
+                        style={`color:${$moveMenu.color === 'custom' ? $moveMenu.custom_color : $moveMenu.color}`}
                     >
                     </i>
                     {/if}

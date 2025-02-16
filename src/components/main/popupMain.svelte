@@ -39,8 +39,8 @@
 
 </script>
 
-<div id="popupMain" style="opacity: 1;">
-  <div class="popup-btns">
+<div id="popupMain">
+  <div class="popup-btns" style="opacity: 0.2;">
     <div class="module">
       <button on:click={() => footerPopupOn(1)}>
           <i class="bi bi-calendar2-check-fill fs-30px"></i>

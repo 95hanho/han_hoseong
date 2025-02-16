@@ -1,1986 +1,1996 @@
 body {
-	// background-image: url(../img/bg/coming-soon.jpg);
-	// background-size: cover; /* 배경 이미지를 화면에 맞게 조절 */
-	// background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
-	// background-position: center; /* 배경 이미지를 가운데 정렬 */
-	// background-color: #eee;
+  // background-image: url(../img/bg/coming-soon.jpg);
+  // background-size: cover; /* 배경 이미지를 화면에 맞게 조절 */
+  // background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
+  // background-position: center; /* 배경 이미지를 가운데 정렬 */
+  // background-color: #eee;
 }
 * {
-	font-family: "Noto Sans KR";
+  font-family: "Noto Sans KR";
 }
 #app {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .wrapper {
-	// font-family: "Noto Sans KR";
-	width: 100%;
-	height: 100%;
-	position: relative;
-	color: #fff;
-	min-width: 375px;
-	overflow: auto;
-	#login-wrap {
-		width: 100%;
-		height: 100%;
-		background-color: #f7f4f4;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		color: #333;
-		h1 {
-			position: relative;
-			padding: 10px 0 10px 10px;
-			font-weight: bold;
-			span {
-				position: absolute;
-				font-size: 16px;
-				// background-color: #eee;
-				// border-radius: 5px;
-				color: #f00;
-				margin-left: 10px;
-				top: -7px;
-				left: 5px;
-			}
-		}
-		.login-form {
-			text-align: center;
-			padding: 20px 0;
-			.login-input {
-				display: flex;
-				justify-content: center;
-				text-align: left;
-				.login-txt {
-					> div {
-						padding-bottom: 5px;
-						input {
-							padding: 5px 10px;
-							border-radius: 5px;
-							border: 1px solid #ddd;
-							font-size: 20px;
-						}
-						input[type="checkbox"] {
-							width: 20px;
-							height: 20px;
-						}
-					}
-				}
-				.login-submit {
-					margin-left: 5px;
-					button {
-						padding: 0 15px;
-						align-self: center;
-						height: 90%;
-						font-size: 20px;
-					}
-				}
-			}
-		}
-	}
-	main {
-		width: 100%;
-		height: 100%;
-		position: relative;
-		section#iconsWrap {
-			display: block;
-			position: relative;
-			z-index: 2;
-			user-select: none;
-			overflow: hidden;
-			position: relative;
-			.lefttop-btn {
-				.folder-add {
-					position: absolute;
-					top: 0;
-					left: 10px;
-					background-color: rgba(37, 45, 54, 0.8);
-					z-index: 4;
-					color: #fff;
-					padding: 2px 20px;
-					border-radius: 0 0 10px 10px;
-					box-shadow: 4px 4px 13px #333;
-					&:hover {
-						background-color: rgba(45, 55, 66, 1);
-					}
-					&.iconMoveOn {
-						background-color: rgba(45, 55, 66, 1);
-						&:hover {
-							font-weight: bold;
-							color: #f00;
-							background-color: #fff;
-						}
-					}
-					span {
-						margin-left: 10px;
-					}
-				}
-			}
-			/* 스크롤 */
-			&::-webkit-scrollbar {
-				height: 0px;
-			}
-			> ul {
-				margin: 0;
-				padding: 0;
-				display: flex;
-				flex-wrap: wrap;
-				> li {
-					position: relative;
-					width: 120px;
-					height: 120px;
-					button.icon-btn {
-						width: 100%;
-						min-height: 100%;
-						position: relative;
-						padding: 2px;
-						border: 1px solid rgba(255, 255, 255, 0);
-						cursor: auto;
-						&.folder-add {
-							color: #fff;
-							cursor: pointer;
-							&:hover {
-								color: #ff0;
-								background-color: rgba(255, 255, 255, 0.2);
-								z-index: 3;
-							}
-							&:active {
-								color: #f00;
-							}
-						}
-						&.moving:hover {
-							background-color: rgba(255, 255, 255, 0.4);
-							box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-						}
-					}
-					// 디렉토리 이름 바꾸기
-					button.folder-rename {
-						display: inline-block;
-						position: absolute;
-						top: 0;
-						right: 0;
-						z-index: 3;
-						cursor: pointer;
-						width: 30px;
-						height: 30px;
-						color: #333;
-						&:hover {
-							color: #f00;
-						}
-					}
-					// 아이콘 여러 개 담긴 폴더
-					.icon-child {
-						position: absolute;
-						background-color: rgba(0, 0, 0, 0.8);
-						border: 1px solid #000;
-						border-radius: 7px;
-						z-index: 5;
-						padding: 5px;
-						// 아이콘 이름 바꾸기
-						.icon-child-rename {
-							position: absolute;
-							width: 100%;
-							top: -35px;
-							left: 0;
-							&::before {
-								position: absolute;
-								bottom: 0;
-								left: 0;
-								top: 0;
-								right: 0;
-								z-index: -1;
-								opacity: 0.12;
-								background: #000;
-								border-radius: 40%;
-								content: "";
-								filter: blur(25px);
-							}
-							input {
-								width: 100%;
-								font-size: 20px;
-								text-align: center;
-								border: none;
-								background-color: transparent;
-								color: #fff;
-								font-weight: bold;
-								text-shadow: 1.5px 1.5px 1px #111;
-								border-radius: 5px 5px 1px 1px;
-								&:hover {
-									background-color: rgba(255, 255, 255, 0.3);
-								}
-							}
-						}
-						ul {
-							margin: 0;
-							padding: 0;
-							display: flex;
-							flex-wrap: wrap;
-							width: 240px;
-							min-height: 240px;
-							li {
-								width: 120px;
-								height: 120px;
-								> button {
-									width: 100%;
-									height: 100%;
-								}
-							}
-						}
-						&.three {
-							ul {
-								width: 360px;
-							}
-						}
-						&.no-over {
-							top: 0;
-							left: 0;
-						}
-						&.over-width {
-							top: 0;
-							right: 0;
-						}
-						&.over-height {
-							bottom: 0;
-							left: 0;
-						}
-						&.over-all {
-							bottom: 0;
-							right: 0;
-						}
-						&.over-title {
-							top: 35px;
-						}
-						&.over-titleWidth {
-							top: 35px;
-							right: 0;
-						}
-					}
-				}
-			}
-			.icon-img {
-				height: 65px;
-				display: flex;
-				justify-content: center;
-				align-items: end;
-				img {
-					width: 64px;
-					height: 64px;
-				}
-			}
-			.dir-icon {
-				height: 65px;
-				display: flex;
-				justify-content: center;
-				align-items: end;
-				color: #fff;
-				i {
-					display: flex;
-				}
-			}
-			.icon-name {
-				min-height: 31.3px;
-				font-size: 13px;
-				overflow: hidden;
-				width: 100%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				p {
-					word-break: keep-all;
-					display: -webkit-box;
-					-webkit-line-clamp: 2; /* 두 줄까지 표시 */
-					-webkit-box-orient: vertical;
-					text-overflow: ellipsis; /* 생략 부호 설정 */
-					text-shadow: 1.5px 1.5px 1px #111;
-					color: #fff;
-				}
-			}
-		}
-		section#iconsScr {
-			> div.side {
-				position: fixed;
-				display: flex;
-				width: 50px;
-				height: 100%;
-				top: 0;
-				z-index: 2;
-				align-items: center;
-				justify-content: center;
-				font-size: 24px;
-				> button {
-					width: 100%;
-					color: #fff;
-					height: calc(100% - 100px);
-				}
-				&.left {
-					visibility: hidden;
-				}
-				&.right {
-					right: 0;
-				}
-				&:hover {
-					background-color: rgba(255, 255, 255, 0.2);
-					i {
-						color: yellow;
-						font-size: 32px;
-					}
-				}
-			}
-			> div.tbo {
-				position: fixed;
-				display: flex;
-				width: 100%;
-				height: 50px;
-				top: 0;
-				z-index: 2;
-				align-items: center;
-				justify-content: center;
-				font-size: 24px;
-				> button {
-					width: calc(100% - 100px);
-					height: 100%;
-					color: #fff;
-				}
-				&.top {
-					visibility: hidden;
-				}
-				&.bottom {
-					top: auto;
-					bottom: 60px;
-				}
-				&:hover {
-					background-color: rgba(255, 255, 255, 0.2);
-					i {
-						color: yellow;
-						font-size: 32px;
-					}
-				}
-			}
-		}
-	}
-	#popupMain {
-		.popup-btns {
-			position: fixed;
-			background-color: #fff;
-			top: 0;
-			right: 10px;
-			border-radius: 0 0 10px 10px;
-			box-shadow: 4px 4px 13px #333;
-			padding: 0px 10px 0 15px;
-			background-color: rgba(37, 45, 54, 0.8);
-			z-index: 4;
-			color: #ddd;
-			display: flex;
-			align-items: center;
-			user-select: none;
-			&:hover {
-				background-color: rgba(45, 55, 66);
-			}
-			.module {
-				padding-right: 15px;
-				button {
-					color: #fff;
-					font-size: 20px;
-					position: relative;
-					> span {
-						position: absolute;
-						font-size: 13px;
-						color: #fff;
-						background-color: #f00;
-						width: 24px;
-						height: 24px;
-						border-radius: 50px;
-						bottom: 0;
-						right: -11px;
-						font-weight: 800;
-						line-height: 24px;
-					}
-					&:hover {
-						color: #ccc;
-					}
-				}
-			}
-		}
-		.app-popup {
-			position: fixed;
-			width: 300px;
-			background-color: rgb(255, 255, 255, 0.9);
-			border-radius: 10px;
-			box-shadow: 4px 4px 13px #333;
-			top: 65px;
-			z-index: 99999;
-			// todo 리스트
-			&.schedule-space {
-				right: 70.5px;
-				&:after {
-					right: 61px;
-				}
-				.title {
-					width: 100%;
-					height: 50px;
-					border-bottom: 1px solid lightgray;
-					span {
-						width: calc(100% - 55px);
-						height: 100%;
-						display: inline-block;
-						color: #000;
-						padding: 10px 15px;
-						font-size: 18px;
-					}
-					button {
-						display: inline-block;
-						width: 50px;
-						height: 100%;
-						font-size: 24px;
-						line-height: 0px;
-					}
-				}
-				.list {
-					padding-bottom: 10px;
-					max-height: calc(100vh - 240px);
-					overflow: auto;
-					/* 스크롤 */
-					&::-webkit-scrollbar {
-						width: 3px;
-					}
-					&::-webkit-scrollbar-thumb {
-						background-color: #000;
-					}
-					> div {
-						padding: 0 10px 5px 10px;
-						> button {
-							width: 100%;
-							text-align: left;
-							display: flex;
-							align-items: center;
-							i {
-								color: #888;
-							}
-						}
-						.boxs {
-							max-height: 150px;
-							overflow: auto;
-							.schedule-box {
-								background: #fff;
-								width: 100%;
-								min-height: 40px;
-								border-radius: 5px;
-								color: #000;
-								display: flex;
-								align-items: center;
-								border: 1px solid #ddd;
-								&:nth-child(n + 2) {
-									margin-top: 3px;
-								}
-								> button,
-								> label {
-									margin: 0 10px;
-								}
-								.round-checkbox {
-									position: relative;
-									display: inline-block;
-									width: 20px;
-									height: 20px;
-									background-color: #fff; /* 체크박스 배경 색상 */
-									border: 2px solid #aaa; /* 체크박스 테두리 */
-									border-radius: 50%; /* 둥근 모양 */
-									input[type="checkbox"] {
-										display: none;
-									}
-									.marking {
-										position: absolute;
-										top: 50%;
-										left: 50%;
-										transform: translate(-50%, -50%);
-										width: 10px;
-										height: 10px;
-										border-radius: 50%;
-										background-color: #fff; /* 체크 마크 색상 */
-										display: none; /* 기본적으로 안 보이게 설정 */
-									}
-									&.checked {
-										background-color: #aaa; /* 체크된 배경 색상 */
-										.marking {
-											display: block; /* 체크된 상태일 때 보이게 설정 */
-										}
-									}
-								}
-								.content {
-									min-width: 0;
-									flex-grow: 1;
-									h4,
-									h5 {
-										margin: 0;
-									}
-									h4 {
-										font-size: 15px;
-									}
-									h5 {
-										font-size: 12px;
-										color: #777;
-										display: flex;
-										align-items: center;
-										i {
-											margin-left: 5px;
-											color: #f00;
-										}
-										span {
-											color: #f00;
-										}
-									}
-								}
-								> button > i {
-									opacity: 0;
-									transition: all 0.5s;
-								}
-								&:hover {
-									> button > i {
-										opacity: 1;
-									}
-								}
-							}
-						}
-					}
-					> div.complete {
-						margin-top: 5px;
-						> button {
-							position: relative;
-							background-color: #ccc;
-							border-radius: 5px 5px 0 0;
-							padding: 10px 0;
-							> button {
-								position: absolute;
-								right: 5px;
-							}
-						}
-						.schedule-box {
-							background-color: #eee;
-							opacity: 0.6;
-							&:first-child {
-								border-radius: 0 0 5px 5px;
-							}
-						}
-					}
-				}
-				.new-schedule {
-					padding: 0 10px 10px 10px;
-					display: flex;
-					align-items: center;
-					border-top: 1px solid lightgray;
-					h5 {
-						margin: 0;
-						padding: 10px 0 0 0;
-						color: #f00;
-					}
-					> form > div {
-						position: relative;
-					}
-					input[type="text"] {
-						font-size: 18px;
-						min-width: 0;
-						border: none;
-						border-bottom: 3px solid #fff;
-						background-color: transparent;
-						color: #555;
-						width: 235px;
-						padding-right: 35px;
-						&:focus {
-							outline: none;
-						}
-					}
-					.submit-btn {
-						position: absolute;
-						right: 52px;
-						padding: 0;
-						bottom: 0;
-						height: 100%;
-					}
-					.date-wrap {
-						#datepicker {
-							height: 0;
-							text-align: right;
-							padding: 0;
-							border: none;
-							font-size: 15px;
-							font-weight: bold;
-						}
-					}
-					label {
-						display: inline-block;
-						padding: 0 5px;
-						vertical-align: bottom;
-						i {
-							color: #333;
-						}
-					}
-					label.date-view {
-						display: block;
-						color: #000;
-						text-align: right;
-					}
-				}
-			}
-			// 배너 조작
-			&.banner-space {
-				right: 50.3px;
-				&:after {
-					right: 35px;
-				}
-				.title {
-					width: 100%;
-					height: 50px;
-					border-bottom: 1px solid lightgray;
-					span {
-						width: calc(100% - 55px);
-						height: 100%;
-						display: inline-block;
-						color: #000;
-						padding: 10px 15px;
-						font-size: 18px;
-					}
-					button {
-						display: inline-block;
-						width: 50px;
-						height: 100%;
-						font-size: 24px;
-						line-height: 0px;
-					}
-				}
-				.list {
-					> button {
-						width: 100%;
-						height: 60px;
-						padding: 10px 15px;
-						display: flex;
-						align-items: center;
-						> i {
-							font-size: 24px;
-						}
-						.etc-control {
-							height: 100%;
-							min-width: 0;
-							flex-grow: 1;
-							text-align: left;
-							padding: 0 10px 0 10px;
-							h3,
-							h4 {
-								margin: 0;
-								padding: 0;
-								height: 50%;
-							}
-							h3 {
-								font-size: 16px;
-							}
-							h4 {
-								color: #aaa;
-								font-size: 14px;
-							}
-						}
-					}
-					> hr {
-						margin: 0 10px;
-					}
-				}
-				.all-control {
-					display: block;
-					width: 100%;
-					text-align: center;
-					padding: 10px 0;
-					span {
-						display: inline-block;
-						width: 250px;
-						height: 30px;
-						background-color: rgb(85, 107, 207);
-						color: #fff;
-						border-radius: 15px;
-						line-height: 28px;
-					}
-					&:hover {
-						span {
-							background-color: rgb(85, 141, 206);
-						}
-					}
-					&.disabled {
-						cursor: not-allowed;
-						span {
-							background-color: #999;
-						}
-					}
-				}
-			}
-			// 알람
-			&.alert-space {
-				right: 18.8px;
-				&:after {
-					right: 18px;
-				}
-				.title {
-					width: 100%;
-					height: 50px;
-					border-bottom: 1px solid lightgray;
-					span {
-						width: calc(100% - 55px);
-						height: 100%;
-						display: inline-block;
-						color: #000;
-						padding: 10px 15px;
-						font-size: 18px;
-					}
-					button {
-						display: inline-block;
-						width: 50px;
-						height: 100%;
-						font-size: 24px;
-						line-height: 0px;
-					}
-				}
-				.list {
-					max-height: calc(100vh - 180px);
-					overflow: auto;
-					/* 스크롤 */
-					&::-webkit-scrollbar {
-						width: 3px;
-					}
-					&::-webkit-scrollbar-thumb {
-						background-color: #000;
-					}
-					> button {
-						width: 100%;
-						padding: 5px 15px;
-						display: flex;
-						align-items: center;
-						min-height: 50px;
-						border-bottom: 1px solid lightgray;
-						i {
-							font-size: 30px;
-						}
-						.content {
-							min-width: 0;
-							flex-grow: 1;
-							text-align: left;
-							padding: 0 0 0 10px;
-							h2,
-							h3,
-							h4,
-							h5 {
-								margin: 0;
-								padding: 0;
-							}
-							h2 {
-								font-size: 17px;
-								font-weight: bolder;
-							}
-							h3 {
-								font-size: 15px;
-								font-weight: bolder;
-								text-overflow: ellipsis;
-								white-space: nowrap;
-								overflow: hidden;
-							}
-							h4 {
-								font-size: 13px;
-								overflow: hidden;
-								word-break: break-word;
-								display: -webkit-box;
-								-webkit-line-clamp: 2;
-								-webkit-box-orient: vertical;
-								text-overflow: ellipsis;
-							}
-							h5 {
-								text-align: right;
-								font-size: 12px;
-								color: #555;
-							}
-						}
-						&:hover {
-							background-color: rgba(240, 240, 240, 1);
-							box-shadow: 0 0 5px;
-						}
-						// 이미지 없는 알람
-						&.noImg {
-							.content {
-								padding: 0;
-							}
-						}
-						// 고정 & 긴급
-						&.pin {
-							background-color: #ffcbcb;
-							box-shadow: 0 0 5px;
-						}
-					}
-				}
-			}
-			&:after {
-				height: 20.4px;
-				width: 19.8px;
-				position: absolute;
-				display: block;
-				opacity: 1;
-				z-index: 3;
-				border: 13.3px solid transparent;
-				content: "";
-				overflow: visible;
-				--nipple-color: var(--color-bg);
-				--nipple-color: rgba(255, 255, 255, 0.9);
-				border-bottom-color: var(--nipple-color);
-				top: -23.6px;
-			}
-		}
-	}
-	// 배너들
-	aside#bannerMain {
-		position: absolute;
-		top: 0;
-		width: 100%;
-		z-index: 2;
-		&.moving {
-			z-index: 0;
-			opacity: 0.5;
-		}
-		// 오늘할일 베너
-		.todayschedule {
-			width: 300px;
-			text-align: center;
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background-color: rgba(0, 0, 0, 0.1);
-			border-radius: 5px 5px 0 0;
-			.bottom-ment {
-				position: relative;
-				width: 100%;
-				h4 {
-					padding: 10px 0 5px;
-				}
-				.goal_txt {
-					font-size: 30px;
-					border: none;
-					position: relative;
-					background-color: transparent;
-					border-bottom: 3px solid #fff;
-					text-align: center;
-					font-weight: bolder;
-					color: #fff;
-					caret-color: #fff;
-					width: 100%;
-					max-width: calc(100vw - 30px);
-					padding: 0 50px;
-					&:hover {
-						outline: none;
-						background-color: rgba(255, 255, 255, 0.5);
-						color: #222;
-						border-radius: 5px 5px 0 0;
-					}
-					&:focus {
-						outline: none;
-						background-color: transparent;
-						color: #fff;
-						border-radius: 0;
-					}
-					&::placeholder {
-						font-weight: 1000;
-					}
-				}
-				button {
-					position: absolute;
-					bottom: 4.6px;
-					right: 10px;
-					color: #fff;
-					// &.focus {
-					// color: #000;
-					// }
-					&:hover {
-						color: #999;
-					}
-				}
-			}
-		}
-		// 할일 체크베너
-		.schedule {
-			width: 300px;
-			position: fixed;
-			background-color: rgba(0, 0, 0, 0.2);
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			border-radius: 5px 5px 0 0;
-			overflow: hidden;
-			h3 {
-				text-align: center;
-				padding: 10px 0 5px;
-				margin: 0;
-			}
-			h6 {
-				text-align: right;
-				padding: 0;
-				margin: 0;
-				button {
-					color: #fff;
-				}
-			}
-			.schedule-list {
-				ul,
-				li {
-					margin: 0;
-					padding: 0;
-				}
-				li {
-					padding: 7px 0;
-					border-radius: 5px;
-					.checkbox-wrap {
-						width: 40px;
-						height: 100%;
-						text-align: center;
-						.round-checkbox {
-							position: relative;
-							display: inline-block;
-							width: 20px;
-							height: 20px;
-							background-color: #fff; /* 체크박스 배경 색상 */
-							border: 2px solid #aaa; /* 체크박스 테두리 */
-							border-radius: 5px; /* 둥근 모양 */
-							cursor: pointer;
-							input[type="checkbox"] {
-								display: none;
-							}
-							.marking {
-								position: absolute;
-								top: 50%;
-								left: 50%;
-								transform: translate(-50%, -50%);
-								width: 10px;
-								height: 10px;
-								border-radius: 50%;
-								background-color: #fff; /* 체크 마크 색상 */
-								display: none; /* 기본적으로 안 보이게 설정 */
-							}
-							&.checked {
-								background-color: #aaa; /* 체크된 배경 색상 */
-								.marking {
-									display: block; /* 체크된 상태일 때 보이게 설정 */
-								}
-							}
-						}
-					}
-					.work {
-						position: relative;
-						width: calc(100% - 45px);
-						.title {
-							width: calc(100% - 60px);
-							display: inline-block;
-							overflow: hidden;
-							white-space: nowrap;
-							text-overflow: ellipsis;
-						}
-						.clock {
-							width: 45px;
-							padding: 0 15px 0 5px;
-							display: inline-block;
-							font-size: 15px;
-							color: rgb(233, 233, 123);
-						}
-					}
-					&:hover {
-						background-color: rgba(255, 255, 255, 0.8);
-						color: #333;
-						font-weight: bold;
-						.clock {
-							color: #f00;
-						}
-					}
-					> label {
-					}
-				}
-			}
-		}
-		// 날씨베너
-		.weather {
-			position: fixed;
-			margin-right: 5px;
-			top: 80px;
-			right: 0;
-			h3 {
-				margin: 0;
-				text-align: right;
-				font-size: 17px;
-			}
-			> div {
-				text-align: right;
-				img {
-					width: 150px;
-					height: 60px;
-				}
-			}
-		}
-	}
-	// 메뉴바
-	footer#mainFooter {
-		position: fixed;
-		z-index: 99999;
-		bottom: 0;
-		width: 100%;
-		// background-color: rgb(33, 54, 64);
-		background-color: rgba(0, 0, 0, 0.7);
-		height: 58px;
-		user-select: none;
-		display: flex;
-		// 왼쪽 메뉴리스트버튼
-		.menu-btn {
-			display: block;
-			border-radius: 0 10px 10px 0;
-			border-radius: 0 5px 5px 0;
-			width: 50px;
-			height: 100%;
-			text-align: center;
-			background-color: #9ab3d9;
-			color: #555;
-			font-size: 25px;
-		}
-		// 현재 실행된
-		.current-url {
-			position: relative;
-			width: calc(100% - 65px);
-			height: 100%;
-			display: block;
-			overflow: hidden;
-			> div {
-				height: 100%;
-				overflow-x: scroll;
-				&::-webkit-scrollbar {
-					height: 0px;
-				}
-				.page-block-wrap {
-					display: inline-flex;
-					height: 100%;
-					.page-block {
-						display: inline-block;
-						height: 100%;
-						.page-box {
-							position: relative;
-							text-align: left;
-							width: 150px;
-							height: 100%;
-							padding: 0 5px;
-							overflow: hidden;
-							background-color: rgba(41, 41, 41, 0.3);
-							color: #fff;
-							.page-title {
-								padding: 0 5px;
-								display: inline-block;
-								width: calc(100% - 30px);
-								span {
-									overflow: hidden;
-									max-width: 100%;
-									white-space: nowrap;
-									text-overflow: ellipsis;
-									display: inline-block;
-								}
-							}
-							.underline {
-								position: absolute;
-								bottom: 0;
-								left: 0;
-								width: 97%;
-								height: 1px;
-								background-color: rgba(255, 255, 255, 0.5);
-								transition: all 0.2s;
-							}
-							.close-page {
-								position: absolute;
-								right: 10px;
-								visibility: hidden;
-								opacity: 0;
-								color: #f00;
-								font-size: 20px;
-								transition: all 0.3s;
-							}
-							&.hover {
-								.close-page {
-									visibility: visible;
-									opacity: 1;
-								}
-							}
-							&.on {
-								background-color: rgba(61, 61, 61, 0.5);
-								.underline {
-									border-top: 2px solid rgb(255, 242, 61);
-									width: 100%;
-									height: 2px;
-								}
-							}
-							&:hover {
-								background-color: rgba(94, 94, 94, 0.5);
-								.underline {
-									width: 100%;
-									height: 3px;
-								}
-							}
-						}
-						&:nth-child(n + 2) {
-							margin-left: 2px;
-						}
-					}
-				}
-			}
-			> button {
-				display: none;
-				position: absolute;
-				height: 100%;
-				top: 0;
-				color: #fff;
-				font-size: 30px;
-				padding: 0 2px;
-				background-color: rgba(255, 255, 255, 0.1);
-				&.left {
-					left: 0;
-				}
-				&.right {
-					right: 0;
-				}
-				&:hover {
-					background-color: rgba(255, 255, 255, 0.3);
-					color: #fff;
-				}
-				&:active {
-					color: #ff0;
-				}
-			}
-		}
-		// 오른쪽 알람 팝업버튼
-		.right-wrap {
-			text-align: center;
-			display: block;
-			height: 100%;
-			align-items: center;
-			.main-btn {
-				font-size: 0;
-				border-left: 1px solid #fff;
-				width: 17px;
-				height: 100%;
-				&:hover {
-					background-color: rgba(255, 255, 255, 0.4);
-				}
-			}
-		}
-	}
-	// 페이지
-	.page-wrap {
-		position: fixed;
-		visibility: hidden;
-		border: 1px solid rgb(25, 79, 107);
-		// z-index: 4;
-		box-shadow: 3px 3px 8px #333;
-		transition: all 0.03s;
-		user-select: none;
-		border-radius: 5px;
-		overflow: hidden;
-		.page-top {
-			position: relative;
-			width: 100%;
-			height: 35px;
-			background-color: rgb(211, 227, 253);
-			border-bottom: 1px solid rgb(151, 151, 151);
-			display: flex;
-			align-items: center;
-			.move-btn {
-				text-align: left;
-				padding: 0 10px;
-				flex-grow: 1;
-				min-width: 0;
-				font-weight: 600;
-				font-size: 17px;
-				content: "";
-				height: 100%;
-				cursor: auto;
-			}
-			.right-wrap {
-				height: 100%;
-				> button {
-					width: 50px;
-					height: 100%;
-					font-size: 20px;
-					display: inline-flex;
-					align-items: center;
-					justify-content: center;
-					&:hover {
-						background-color: rgba(0, 0, 0, 0.1);
-					}
-				}
-			}
-		}
-		.page-screen {
-			position: relative;
-			width: 100%;
-			height: calc(100% - 35px);
-			background-color: #fff;
-			.page-cover {
-				display: block;
-				position: absolute;
-				background-color: rgba(0, 0, 0, 0.1);
-				width: 100%;
-				height: 100%;
-			}
-			iframe {
-				width: 100%;
-				height: 100%;
-			}
-		}
-		.page-resize-top {
-			position: absolute;
-			top: 0px;
-			width: 100%;
-			height: 8px;
-			cursor: n-resize;
-		}
-		.page-resize-right {
-			position: absolute;
-			top: 0;
-			right: 0px;
-			width: 8px;
-			height: 100%;
-			cursor: e-resize;
-		}
-		.page-resize-bottom {
-			position: absolute;
-			bottom: 0px;
-			width: 100%;
-			height: 8px;
-			cursor: n-resize;
-		}
-		.page-resize-left {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 8px;
-			height: 100%;
-			cursor: e-resize;
-		}
-		.page-resize-topLeft {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 10px;
-			height: 10px;
-			cursor: nw-resize;
-		}
-		.page-resize-topRight {
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 10px;
-			height: 10px;
-			cursor: ne-resize;
-		}
-		.page-resize-bottomLeft {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 10px;
-			height: 10px;
-			cursor: sw-resize;
-		}
-		.page-resize-bottomRight {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			width: 10px;
-			height: 10px;
-			cursor: se-resize;
-		}
-		&.off {
-			width: 20vw;
-			height: 20vw;
-			bottom: 58px;
-			left: 0;
-		}
-		&.on {
-			/* TEST */
-			visibility: visible;
-			width: 960px;
-			height: 700px;
-			top: 0;
-			left: 0;
-			//   left: 50px;
-			//   top: 50px;
-			// bottom: 58px;
-			transition: all 0.1s;
-		}
-		&.max-screen {
-			width: 100vw;
-			height: calc(100% - 58px);
-			top: 0;
-			left: 0;
-		}
-		&.moving {
-			transition: all 0s;
-			.page-top {
-				background-color: rgb(150, 163, 184);
-			}
-			.page-cover {
-				opacity: 0;
-			}
-			.page-screen {
-				opacity: 0.5;
-			}
-		}
-		.full-close {
-			position: absolute;
-			top: 50px;
-			right: 20px;
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			color: #000;
-			font-size: 25px;
-			line-height: 0px;
-			&:hover {
-				border: 1px solid black;
-				// background-color: #000;
-				// color: #000;
-			}
-		}
-	}
-	// 페이지 풀스크린 일 때
-	#mainFooter.full {
-		bottom: -65px;
-	}
-	#pages .full {
-		top: -35px;
-		height: calc(100% + 35px);
-	}
-	// 인트라 메인메뉴리스트
-	#mainMenu {
-		position: fixed;
-		z-index: 99998;
-		width: 100%;
-		height: calc(100vh - 58px);
-		background-color: rgb(37, 37, 37, 0.95);
-		// background-color: #5c708f;
-		bottom: calc(-100% - 640px);
-		// bottom: 58px; // 개발중 메뉴열기
-		display: flex;
-		flex-wrap: wrap;
-		font-size: 12px;
-		transition: all 0.1s;
-		&.on {
-			bottom: 58px;
-		}
-		.menuInfo {
-			width: 48px;
-			height: 100%;
-			position: absolute;
-			overflow: hidden;
-			transition: all 0.2s;
-			&.open {
-				background-color: rgb(50, 48, 54, 0.99);
-				width: 255px;
-			}
-			&.setting {
-				.highlight {
-					left: -255px;
-				}
-			}
-			.highlight {
-				position: relative;
-				width: 510px;
-				height: 100%;
-				display: flex;
-				transition: all 0.2s;
-				> div {
-					position: relative;
-					width: 255px;
-					.bottom-space {
-						position: absolute;
-						bottom: 0;
-						width: 100%;
-					}
-					.top-space > button,
-					.bottom-space > button {
-						display: block;
-						position: relative;
-						width: 100%;
-						padding: 6px 12px;
-						text-align: left;
-						color: #fff;
-						height: 48px;
-						&:hover {
-							background-color: rgb(80, 80, 80);
-						}
-						span:nth-child(2) {
-							padding-left: 12px;
-							font-size: 15px;
-						}
-						.bris-icon {
-							border: 1px solid #fff;
-							border-radius: 4px;
-							font-size: 18px;
-							display: inline-block;
-							width: 24px;
-							height: 24px;
-							text-align: center;
-							line-height: 20px;
-							&.mobile {
-								font-size: 11.5px;
-							}
-						}
-						.noread {
-							position: absolute;
-							width: 22px;
-							height: 22px;
-							background-color: #f00;
-							border-radius: 100%;
-							top: 22.3px;
-							left: 26.4px;
-							text-align: center;
-							line-height: 20px;
-						}
-					}
-				}
-			}
-			.right-open {
-				position: relative;
-				width: 48px;
-				height: 100%;
-			}
-		}
-		.menuList {
-			// width: calc(40% - 24px);
-			width: calc(100% - 24px);
-			// height: 100%;
-			height: calc(50% - 19px);
-			overflow: auto;
-			padding: 10px;
-			margin-left: 48px;
-			border-bottom: 3px solid #fff;
-			background-color: #4e4e4e;
-			.sort {
-				display: flex;
-				padding-bottom: 5px;
-				border-bottom: 1px solid #888;
-				margin-bottom: 5px;
-				> div {
-					width: 50%;
-				}
-				.cur-menu {
-					button {
-						font-size: 24px;
-						color: #fff;
-						font-weight: bold;
-						&:hover {
-							color: #ff0;
-						}
-					}
-				}
-				.sort-btn {
-					display: flex;
-					justify-content: center;
-					button {
-						color: #fff;
-						display: inline-block;
-						padding: 0 10px;
-						height: 20px;
-						&:nth-child(1) {
-							border-left: 1px solid #fff;
-							border-top: 1px solid #fff;
-							border-bottom: 1px solid #fff;
-							border-radius: 3px 0 0 3px;
-						}
-						&:nth-child(n + 2) {
-							border-left: 1px solid #fff;
-							border-right: 1px solid #fff;
-							border-top: 1px solid #fff;
-							border-bottom: 1px solid #fff;
-						}
-						&:last-child {
-							border-radius: 0 3px 3px 0;
-						}
-						&.on {
-							background-color: rgb(129, 127, 118);
-						}
-						&:hover {
-							background-color: rgb(101, 99, 92);
-						}
-					}
-				}
-			}
-			.menu-search {
-				position: relative;
-				input {
-					border: none;
-					background-color: transparent;
-					padding-left: 35px;
-					padding-right: 25px;
-					color: #fff;
-					&:focus {
-						box-shadow: none;
-					}
-				}
-				.search-icon {
-					position: absolute;
-					top: 0;
-					left: 5px;
-					height: 100%;
-				}
-				.search-reset {
-					position: absolute;
-					right: 5px;
-					top: 0;
-					height: 100%;
-				}
-			}
-			ul {
-				margin: 0;
-				padding: 0;
-				li {
-					width: 100%;
-					> button {
-						position: relative;
-						width: 100%;
-						height: 35px;
-						// padding: 0 0 0 30px;
-						color: #fff;
-						display: block;
-						text-align: left;
-						> i {
-							width: 30px;
-							display: inline-block;
-							text-align: center;
-						}
-						&.sortOn {
-							padding: 0 0 0 10px;
-						}
-						&.sort-title {
-							font-size: 20px;
-							padding-left: 10px;
-							white-space: nowrap;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							&.on {
-								background-color: rgb(155, 152, 141);
-							}
-						}
-						&:hover {
-							background-color: rgb(101, 99, 92);
-						}
-						.menu-modify {
-							position: absolute;
-							top: 0;
-							right: 0;
-							color: #fff;
-							height: 100%;
-							padding: 0 2px;
-							&:hover {
-								color: #ff0;
-							}
-						}
-					}
-				}
-			}
-			> ul {
-				margin-top: 3px;
-			}
-			&.trash {
-				position: relative;
-				overflow: visible;
-			}
-			.quick-trashcan {
-				position: absolute;
-				width: calc(100% + 48px);
-				height: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background: rgba(255, 255, 255, 0.8);
-				top: 0;
-				left: -48px;
-				&:hover {
-					color: #f00;
-				}
-			}
-			/* 스크롤 */
-			&::-webkit-scrollbar {
-				width: 5px;
-				height: 1px;
-			}
-			&::-webkit-scrollbar-thumb {
-				background-color: #fff;
-			}
-			&::-webkit-scrollbar-track {
-				background-color: rgb(37, 37, 37);
-				border-left: 1px solid rgb(37, 37, 37);
-			}
-		}
-		.menuQuick {
-			// width: calc(60% - 24px);
-			width: calc(100% - 24px);
-			position: relative;
-			height: calc(50% + 21px);
-			padding: 10px 8px 10px 8px;
-			overflow: auto;
-			margin-left: 48px;
-			.quick-group {
-				width: 100%;
-				color: #fff;
-				&.move {
-					border: 1px solid #fff;
-					background-color: rgba(255, 255, 255, 0.5);
-				}
-				&.new {
-					opacity: 0.8;
-				}
-				.title {
-					width: 100%;
-					height: 35px;
-					display: flex;
-					align-items: center;
-					input[type="text"] {
-						font-size: 15px;
-						background-color: transparent;
-						border: none;
-						color: #fff;
-						width: 100%;
-						&:focus {
-							border: none;
-							outline: none;
-						}
-					}
-				}
-				.btns {
-					width: 100%;
-					button {
-						color: #fff;
-						margin: 2px;
-						padding: 4px;
-						width: calc(33% - 4px);
-						text-align: left;
-						aspect-ratio: 1 / 1;
-						background-color: rgb(0, 0, 0);
-						position: relative;
-						&:hover {
-							background-color: rgb(77, 77, 77);
-							border: 1px solid rgb(158, 158, 158);
-						}
-						.btns-icon {
-							padding-bottom: 20px;
-							text-align: center;
-							i {
-							}
-						}
-						h6 {
-							margin: 0;
-							position: absolute;
-							width: 100%;
-							left: 0;
-							bottom: 0;
-							font-size: 12px;
-							padding-bottom: 5px;
-							word-break: keep-all;
-							padding: 1px 2px;
-						}
-					}
-				}
-			}
-			.new-quick {
-				min-height: 100px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-			/* 스크롤 */
-			&::-webkit-scrollbar {
-				width: 5px;
-				height: 1px;
-			}
-			&::-webkit-scrollbar-thumb {
-				background-color: #000;
-			}
-			&::-webkit-scrollbar-track {
-				background-color: rgb(37, 37, 37);
-				border-left: 1px solid rgb(37, 37, 37);
-			}
-		}
-	}
-	// 메뉴 옮길 때 잔상
-	.pointer-space {
-		position: fixed;
-		// border-radius: 50%;
-		pointer-events: none; /* 이 부분이 중요합니다. */
-		padding: 2px;
-		text-align: center;
-		&.icon {
-			top: -60px;
-			left: -60px;
-			width: 120px;
-			height: 120px;
-			z-index: 5;
-			opacity: 0.7;
-		}
-		&.menu {
-			top: -49.805px;
-			left: -49.805px;
-			width: 99.61px;
-			height: 99.61px;
-			padding: 4px;
-			z-index: 99999;
-			opacity: 1;
-			background-color: rgb(0, 0, 0, 0.6);
-			color: #fff;
-			h6 {
-				margin: 0;
-				position: absolute;
-				width: 100%;
-				left: 0;
-				bottom: 0;
-				font-size: 12px;
-				padding-bottom: 5px;
-				word-break: keep-all;
-				text-align: left;
-				padding: 1px 2px;
-			}
-		}
-	}
-	/* 스크롤 */
-	&::-webkit-scrollbar {
-		height: 0px;
-	}
+  // font-family: "Noto Sans KR";
+  width: 100%;
+  height: 100%;
+  position: relative;
+  color: #fff;
+  min-width: 375px;
+  overflow: auto;
+  #login-wrap {
+    width: 100%;
+    height: 100%;
+    background-color: #f7f4f4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    h1 {
+      position: relative;
+      padding: 10px 0 10px 10px;
+      font-weight: bold;
+      span {
+        position: absolute;
+        font-size: 16px;
+        // background-color: #eee;
+        // border-radius: 5px;
+        color: #f00;
+        margin-left: 10px;
+        top: -7px;
+        left: 5px;
+      }
+    }
+    .login-form {
+      text-align: center;
+      padding: 20px 0;
+      .login-input {
+        display: flex;
+        justify-content: center;
+        text-align: left;
+        .login-txt {
+          > div {
+            padding-bottom: 5px;
+            input {
+              padding: 5px 10px;
+              border-radius: 5px;
+              border: 1px solid #ddd;
+              font-size: 20px;
+            }
+            input[type="checkbox"] {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+        .login-submit {
+          margin-left: 5px;
+          button {
+            padding: 0 15px;
+            align-self: center;
+            height: 90%;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+  main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    section#iconsWrap {
+      display: block;
+      position: relative;
+      z-index: 2;
+      user-select: none;
+      overflow: hidden;
+      position: relative;
+      .lefttop-btn {
+        .folder-add {
+          position: absolute;
+          top: 0;
+          left: 10px;
+          background-color: rgba(37, 45, 54, 0.8);
+          z-index: 4;
+          color: #fff;
+          padding: 2px 20px;
+          border-radius: 0 0 10px 10px;
+          box-shadow: 4px 4px 13px #333;
+          &:hover {
+            background-color: rgba(45, 55, 66, 1);
+          }
+          &.iconMoveOn {
+            background-color: rgba(45, 55, 66, 1);
+            &:hover {
+              font-weight: bold;
+              color: #f00;
+              background-color: #fff;
+            }
+          }
+          span {
+            margin-left: 10px;
+          }
+        }
+      }
+      /* 스크롤 */
+      &::-webkit-scrollbar {
+        height: 0px;
+      }
+      > ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        > li {
+          position: relative;
+          width: 120px;
+          height: 120px;
+          button.icon-btn {
+            width: 100%;
+            min-height: 100%;
+            position: relative;
+            padding: 2px;
+            border: 1px solid rgba(255, 255, 255, 0);
+            cursor: auto;
+            &.folder-add {
+              color: #fff;
+              cursor: pointer;
+              &:hover {
+                color: #ff0;
+                background-color: rgba(255, 255, 255, 0.2);
+                z-index: 3;
+              }
+              &:active {
+                color: #f00;
+              }
+            }
+            &.moving:hover {
+              background-color: rgba(255, 255, 255, 0.4);
+              box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            }
+          }
+          // 디렉토리 이름 바꾸기
+          button.folder-rename {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            color: #333;
+            &:hover {
+              color: #f00;
+            }
+          }
+          // 아이콘 여러 개 담긴 폴더
+          .icon-child {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #000;
+            border-radius: 7px;
+            z-index: 5;
+            padding: 5px;
+            // 아이콘 이름 바꾸기
+            .icon-child-rename {
+              position: absolute;
+              width: 100%;
+              top: -35px;
+              left: 0;
+              &::before {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                top: 0;
+                right: 0;
+                z-index: -1;
+                opacity: 0.12;
+                background: #000;
+                border-radius: 40%;
+                content: "";
+                filter: blur(25px);
+              }
+              input {
+                width: 100%;
+                font-size: 20px;
+                text-align: center;
+                border: none;
+                background-color: transparent;
+                color: #fff;
+                font-weight: bold;
+                text-shadow: 1.5px 1.5px 1px #111;
+                border-radius: 5px 5px 1px 1px;
+                &:hover {
+                  background-color: rgba(255, 255, 255, 0.3);
+                }
+              }
+            }
+            ul {
+              margin: 0;
+              padding: 0;
+              display: flex;
+              flex-wrap: wrap;
+              width: 240px;
+              min-height: 240px;
+              li {
+                width: 120px;
+                height: 120px;
+                > button {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+            }
+            &.three {
+              ul {
+                width: 360px;
+              }
+            }
+            &.no-over {
+              top: 0;
+              left: 0;
+            }
+            &.over-width {
+              top: 0;
+              right: 0;
+            }
+            &.over-height {
+              bottom: 0;
+              left: 0;
+            }
+            &.over-all {
+              bottom: 0;
+              right: 0;
+            }
+            &.over-title {
+              top: 35px;
+            }
+            &.over-titleWidth {
+              top: 35px;
+              right: 0;
+            }
+          }
+        }
+      }
+      .icon-img {
+        height: 65px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        img {
+          width: 64px;
+          height: 64px;
+        }
+      }
+      .dir-icon {
+        height: 65px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        color: #fff;
+        i {
+          display: flex;
+        }
+      }
+      .icon-name {
+        min-height: 31.3px;
+        font-size: 13px;
+        overflow: hidden;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p {
+          word-break: keep-all;
+          display: -webkit-box;
+          -webkit-line-clamp: 2; /* 두 줄까지 표시 */
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis; /* 생략 부호 설정 */
+          text-shadow: 1.5px 1.5px 1px #111;
+          color: #fff;
+        }
+      }
+    }
+    section#iconsScr {
+      > div.side {
+        position: fixed;
+        display: flex;
+        width: 50px;
+        height: 100%;
+        top: 0;
+        z-index: 2;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        > button {
+          width: 100%;
+          color: #fff;
+          height: calc(100% - 100px);
+        }
+        &.left {
+          visibility: hidden;
+        }
+        &.right {
+          right: 0;
+        }
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+          i {
+            color: yellow;
+            font-size: 32px;
+          }
+        }
+      }
+      > div.tbo {
+        position: fixed;
+        display: flex;
+        width: 100%;
+        height: 50px;
+        top: 0;
+        z-index: 2;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        > button {
+          width: calc(100% - 100px);
+          height: 100%;
+          color: #fff;
+        }
+        &.top {
+          visibility: hidden;
+        }
+        &.bottom {
+          top: auto;
+          bottom: 60px;
+        }
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+          i {
+            color: yellow;
+            font-size: 32px;
+          }
+        }
+      }
+    }
+  }
+  #popupMain {
+    .popup-btns {
+      position: fixed;
+      background-color: #fff;
+      top: 0;
+      right: 10px;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 4px 4px 13px #333;
+      padding: 0px 10px 0 15px;
+      background-color: rgba(37, 45, 54, 0.8);
+      z-index: 4;
+      color: #ddd;
+      display: flex;
+      align-items: center;
+      user-select: none;
+      &:hover {
+        background-color: rgba(45, 55, 66);
+      }
+      .module {
+        padding-right: 15px;
+        button {
+          color: #fff;
+          font-size: 20px;
+          position: relative;
+          > span {
+            position: absolute;
+            font-size: 13px;
+            color: #fff;
+            background-color: #f00;
+            width: 24px;
+            height: 24px;
+            border-radius: 50px;
+            bottom: 0;
+            right: -11px;
+            font-weight: 800;
+            line-height: 24px;
+          }
+          &:hover {
+            color: #ccc;
+          }
+        }
+      }
+    }
+    .app-popup {
+      position: fixed;
+      width: 300px;
+      background-color: rgb(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 4px 4px 13px #333;
+      top: 65px;
+      z-index: 99999;
+      // todo 리스트
+      &.schedule-space {
+        right: 70.5px;
+        &:after {
+          right: 61px;
+        }
+        .title {
+          width: 100%;
+          height: 50px;
+          border-bottom: 1px solid lightgray;
+          span {
+            width: calc(100% - 55px);
+            height: 100%;
+            display: inline-block;
+            color: #000;
+            padding: 10px 15px;
+            font-size: 18px;
+          }
+          button {
+            display: inline-block;
+            width: 50px;
+            height: 100%;
+            font-size: 24px;
+            line-height: 0px;
+          }
+        }
+        .list {
+          padding-bottom: 10px;
+          max-height: calc(100vh - 240px);
+          overflow: auto;
+          /* 스크롤 */
+          &::-webkit-scrollbar {
+            width: 3px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: #000;
+          }
+          > div {
+            padding: 0 10px 5px 10px;
+            > button {
+              width: 100%;
+              text-align: left;
+              display: flex;
+              align-items: center;
+              i {
+                color: #888;
+              }
+            }
+            .boxs {
+              max-height: 150px;
+              overflow: auto;
+              .schedule-box {
+                background: #fff;
+                width: 100%;
+                min-height: 40px;
+                border-radius: 5px;
+                color: #000;
+                display: flex;
+                align-items: center;
+                border: 1px solid #ddd;
+                &:nth-child(n + 2) {
+                  margin-top: 3px;
+                }
+                > button,
+                > label {
+                  margin: 0 10px;
+                }
+                .round-checkbox {
+                  position: relative;
+                  display: inline-block;
+                  width: 20px;
+                  height: 20px;
+                  background-color: #fff; /* 체크박스 배경 색상 */
+                  border: 2px solid #aaa; /* 체크박스 테두리 */
+                  border-radius: 50%; /* 둥근 모양 */
+                  input[type="checkbox"] {
+                    display: none;
+                  }
+                  .marking {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: #fff; /* 체크 마크 색상 */
+                    display: none; /* 기본적으로 안 보이게 설정 */
+                  }
+                  &.checked {
+                    background-color: #aaa; /* 체크된 배경 색상 */
+                    .marking {
+                      display: block; /* 체크된 상태일 때 보이게 설정 */
+                    }
+                  }
+                }
+                .content {
+                  min-width: 0;
+                  flex-grow: 1;
+                  h4,
+                  h5 {
+                    margin: 0;
+                  }
+                  h4 {
+                    font-size: 15px;
+                  }
+                  h5 {
+                    font-size: 12px;
+                    color: #777;
+                    display: flex;
+                    align-items: center;
+                    i {
+                      margin-left: 5px;
+                      color: #f00;
+                    }
+                    span {
+                      color: #f00;
+                    }
+                  }
+                }
+                > button > i {
+                  opacity: 0;
+                  transition: all 0.5s;
+                }
+                &:hover {
+                  > button > i {
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+          > div.complete {
+            margin-top: 5px;
+            > button {
+              position: relative;
+              background-color: #ccc;
+              border-radius: 5px 5px 0 0;
+              padding: 10px 0;
+              > button {
+                position: absolute;
+                right: 5px;
+              }
+            }
+            .schedule-box {
+              background-color: #eee;
+              opacity: 0.6;
+              &:first-child {
+                border-radius: 0 0 5px 5px;
+              }
+            }
+          }
+        }
+        .new-schedule {
+          padding: 0 10px 10px 10px;
+          display: flex;
+          align-items: center;
+          border-top: 1px solid lightgray;
+          h5 {
+            margin: 0;
+            padding: 10px 0 0 0;
+            color: #f00;
+          }
+          > form > div {
+            position: relative;
+          }
+          input[type="text"] {
+            font-size: 18px;
+            min-width: 0;
+            border: none;
+            border-bottom: 3px solid #fff;
+            background-color: transparent;
+            color: #555;
+            width: 235px;
+            padding-right: 35px;
+            &:focus {
+              outline: none;
+            }
+          }
+          .submit-btn {
+            position: absolute;
+            right: 52px;
+            padding: 0;
+            bottom: 0;
+            height: 100%;
+          }
+          .date-wrap {
+            #datepicker {
+              height: 0;
+              text-align: right;
+              padding: 0;
+              border: none;
+              font-size: 15px;
+              font-weight: bold;
+            }
+          }
+          label {
+            display: inline-block;
+            padding: 0 5px;
+            vertical-align: bottom;
+            i {
+              color: #333;
+            }
+          }
+          label.date-view {
+            display: block;
+            color: #000;
+            text-align: right;
+          }
+        }
+      }
+      // 배너 조작
+      &.banner-space {
+        right: 50.3px;
+        &:after {
+          right: 35px;
+        }
+        .title {
+          width: 100%;
+          height: 50px;
+          border-bottom: 1px solid lightgray;
+          span {
+            width: calc(100% - 55px);
+            height: 100%;
+            display: inline-block;
+            color: #000;
+            padding: 10px 15px;
+            font-size: 18px;
+          }
+          button {
+            display: inline-block;
+            width: 50px;
+            height: 100%;
+            font-size: 24px;
+            line-height: 0px;
+          }
+        }
+        .list {
+          > button {
+            width: 100%;
+            height: 60px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            > i {
+              font-size: 24px;
+            }
+            .etc-control {
+              height: 100%;
+              min-width: 0;
+              flex-grow: 1;
+              text-align: left;
+              padding: 0 10px 0 10px;
+              h3,
+              h4 {
+                margin: 0;
+                padding: 0;
+                height: 50%;
+              }
+              h3 {
+                font-size: 16px;
+              }
+              h4 {
+                color: #aaa;
+                font-size: 14px;
+              }
+            }
+          }
+          > hr {
+            margin: 0 10px;
+          }
+        }
+        .all-control {
+          display: block;
+          width: 100%;
+          text-align: center;
+          padding: 10px 0;
+          span {
+            display: inline-block;
+            width: 250px;
+            height: 30px;
+            background-color: rgb(85, 107, 207);
+            color: #fff;
+            border-radius: 15px;
+            line-height: 28px;
+          }
+          &:hover {
+            span {
+              background-color: rgb(85, 141, 206);
+            }
+          }
+          &.disabled {
+            cursor: not-allowed;
+            span {
+              background-color: #999;
+            }
+          }
+        }
+      }
+      // 알람
+      &.alert-space {
+        right: 18.8px;
+        &:after {
+          right: 18px;
+        }
+        .title {
+          width: 100%;
+          height: 50px;
+          border-bottom: 1px solid lightgray;
+          span {
+            width: calc(100% - 55px);
+            height: 100%;
+            display: inline-block;
+            color: #000;
+            padding: 10px 15px;
+            font-size: 18px;
+          }
+          button {
+            display: inline-block;
+            width: 50px;
+            height: 100%;
+            font-size: 24px;
+            line-height: 0px;
+          }
+        }
+        .list {
+          max-height: calc(100vh - 180px);
+          overflow: auto;
+          /* 스크롤 */
+          &::-webkit-scrollbar {
+            width: 3px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: #000;
+          }
+          > button {
+            width: 100%;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            min-height: 50px;
+            border-bottom: 1px solid lightgray;
+            i {
+              font-size: 30px;
+            }
+            .content {
+              min-width: 0;
+              flex-grow: 1;
+              text-align: left;
+              padding: 0 0 0 10px;
+              h2,
+              h3,
+              h4,
+              h5 {
+                margin: 0;
+                padding: 0;
+              }
+              h2 {
+                font-size: 17px;
+                font-weight: bolder;
+              }
+              h3 {
+                font-size: 15px;
+                font-weight: bolder;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+              h4 {
+                font-size: 13px;
+                overflow: hidden;
+                word-break: break-word;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+              }
+              h5 {
+                text-align: right;
+                font-size: 12px;
+                color: #555;
+              }
+            }
+            &:hover {
+              background-color: rgba(240, 240, 240, 1);
+              box-shadow: 0 0 5px;
+            }
+            // 이미지 없는 알람
+            &.noImg {
+              .content {
+                padding: 0;
+              }
+            }
+            // 고정 & 긴급
+            &.pin {
+              background-color: #ffcbcb;
+              box-shadow: 0 0 5px;
+            }
+          }
+        }
+      }
+      &:after {
+        height: 20.4px;
+        width: 19.8px;
+        position: absolute;
+        display: block;
+        opacity: 1;
+        z-index: 3;
+        border: 13.3px solid transparent;
+        content: "";
+        overflow: visible;
+        --nipple-color: var(--color-bg);
+        --nipple-color: rgba(255, 255, 255, 0.9);
+        border-bottom-color: var(--nipple-color);
+        top: -23.6px;
+      }
+    }
+  }
+  // 배너들
+  aside#bannerMain {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    &.moving {
+      z-index: 0;
+      opacity: 0.5;
+    }
+    // 오늘할일 베너
+    .todayschedule {
+      width: 300px;
+      text-align: center;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 5px 5px 0 0;
+      .bottom-ment {
+        position: relative;
+        width: 100%;
+        h4 {
+          padding: 10px 0 5px;
+        }
+        .goal_txt {
+          font-size: 30px;
+          border: none;
+          position: relative;
+          background-color: transparent;
+          border-bottom: 3px solid #fff;
+          text-align: center;
+          font-weight: bolder;
+          color: #fff;
+          caret-color: #fff;
+          width: 100%;
+          max-width: calc(100vw - 30px);
+          padding: 0 50px;
+          &:hover {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #222;
+            border-radius: 5px 5px 0 0;
+          }
+          &:focus {
+            outline: none;
+            background-color: transparent;
+            color: #fff;
+            border-radius: 0;
+          }
+          &::placeholder {
+            font-weight: 1000;
+          }
+        }
+        button {
+          position: absolute;
+          bottom: 4.6px;
+          right: 10px;
+          color: #fff;
+          // &.focus {
+          // color: #000;
+          // }
+          &:hover {
+            color: #999;
+          }
+        }
+      }
+    }
+    // 할일 체크베너
+    .schedule {
+      width: 300px;
+      position: fixed;
+      background-color: rgba(0, 0, 0, 0.2);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      h3 {
+        text-align: center;
+        padding: 10px 0 5px;
+        margin: 0;
+      }
+      h6 {
+        text-align: right;
+        padding: 0;
+        margin: 0;
+        button {
+          color: #fff;
+        }
+      }
+      .schedule-list {
+        ul,
+        li {
+          margin: 0;
+          padding: 0;
+        }
+        li {
+          padding: 7px 0;
+          border-radius: 5px;
+          .checkbox-wrap {
+            width: 40px;
+            height: 100%;
+            text-align: center;
+            .round-checkbox {
+              position: relative;
+              display: inline-block;
+              width: 20px;
+              height: 20px;
+              background-color: #fff; /* 체크박스 배경 색상 */
+              border: 2px solid #aaa; /* 체크박스 테두리 */
+              border-radius: 5px; /* 둥근 모양 */
+              cursor: pointer;
+              input[type="checkbox"] {
+                display: none;
+              }
+              .marking {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #fff; /* 체크 마크 색상 */
+                display: none; /* 기본적으로 안 보이게 설정 */
+              }
+              &.checked {
+                background-color: #aaa; /* 체크된 배경 색상 */
+                .marking {
+                  display: block; /* 체크된 상태일 때 보이게 설정 */
+                }
+              }
+            }
+          }
+          .work {
+            position: relative;
+            width: calc(100% - 45px);
+            .title {
+              width: calc(100% - 60px);
+              display: inline-block;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+            .clock {
+              width: 45px;
+              padding: 0 15px 0 5px;
+              display: inline-block;
+              font-size: 15px;
+              color: rgb(233, 233, 123);
+            }
+          }
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            font-weight: bold;
+            .clock {
+              color: #f00;
+            }
+          }
+          > label {
+          }
+        }
+      }
+    }
+    // 날씨베너
+    .weather {
+      position: fixed;
+      margin-right: 5px;
+      top: 80px;
+      right: 0;
+      h3 {
+        margin: 0;
+        text-align: right;
+        font-size: 17px;
+      }
+      > div {
+        text-align: right;
+        img {
+          width: 150px;
+          height: 60px;
+        }
+      }
+    }
+  }
+  // 메뉴바
+  footer#mainFooter {
+    position: fixed;
+    z-index: 99999;
+    bottom: 0;
+    width: 100%;
+    // background-color: rgb(33, 54, 64);
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 58px;
+    user-select: none;
+    display: flex;
+    // 왼쪽 메뉴리스트버튼
+    .menu-btn {
+      display: block;
+      border-radius: 0 10px 10px 0;
+      border-radius: 0 5px 5px 0;
+      width: 50px;
+      height: 100%;
+      text-align: center;
+      background-color: #9ab3d9;
+      color: #555;
+      font-size: 25px;
+    }
+    // 현재 실행된
+    .current-url {
+      position: relative;
+      width: calc(100% - 65px);
+      height: 100%;
+      display: block;
+      overflow: hidden;
+      > div {
+        height: 100%;
+        overflow-x: scroll;
+        &::-webkit-scrollbar {
+          height: 0px;
+        }
+        .page-block-wrap {
+          display: inline-flex;
+          height: 100%;
+          .page-block {
+            display: inline-block;
+            height: 100%;
+            .page-box {
+              position: relative;
+              text-align: left;
+              width: 150px;
+              height: 100%;
+              padding: 0 5px;
+              overflow: hidden;
+              background-color: rgba(41, 41, 41, 0.3);
+              color: #fff;
+              .page-title {
+                padding: 0 5px;
+                display: inline-block;
+                width: calc(100% - 30px);
+                span {
+                  overflow: hidden;
+                  max-width: 100%;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  display: inline-block;
+                }
+              }
+              .underline {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 97%;
+                height: 1px;
+                background-color: rgba(255, 255, 255, 0.5);
+                transition: all 0.2s;
+              }
+              .close-page {
+                position: absolute;
+                right: 10px;
+                visibility: hidden;
+                opacity: 0;
+                color: #f00;
+                font-size: 20px;
+                transition: all 0.3s;
+              }
+              &.hover {
+                .close-page {
+                  visibility: visible;
+                  opacity: 1;
+                }
+              }
+              &.on {
+                background-color: rgba(61, 61, 61, 0.5);
+                .underline {
+                  border-top: 2px solid rgb(255, 242, 61);
+                  width: 100%;
+                  height: 2px;
+                }
+              }
+              &:hover {
+                background-color: rgba(94, 94, 94, 0.5);
+                .underline {
+                  width: 100%;
+                  height: 3px;
+                }
+              }
+            }
+            &:nth-child(n + 2) {
+              margin-left: 2px;
+            }
+          }
+        }
+      }
+      > button {
+        display: none;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        color: #fff;
+        font-size: 30px;
+        padding: 0 2px;
+        background-color: rgba(255, 255, 255, 0.1);
+        &.left {
+          left: 0;
+        }
+        &.right {
+          right: 0;
+        }
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.3);
+          color: #fff;
+        }
+        &:active {
+          color: #ff0;
+        }
+      }
+    }
+    // 오른쪽 알람 팝업버튼
+    .right-wrap {
+      text-align: center;
+      display: block;
+      height: 100%;
+      align-items: center;
+      .main-btn {
+        font-size: 0;
+        border-left: 1px solid #fff;
+        width: 17px;
+        height: 100%;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+  }
+  // 페이지
+  .page-wrap {
+    position: fixed;
+    visibility: hidden;
+    border: 1px solid rgb(25, 79, 107);
+    // z-index: 4;
+    box-shadow: 3px 3px 8px #333;
+    transition: all 0.03s;
+    user-select: none;
+    border-radius: 5px;
+    overflow: hidden;
+    .page-top {
+      position: relative;
+      width: 100%;
+      height: 35px;
+      background-color: rgb(211, 227, 253);
+      border-bottom: 1px solid rgb(151, 151, 151);
+      display: flex;
+      align-items: center;
+      .move-btn {
+        text-align: left;
+        padding: 0 10px;
+        flex-grow: 1;
+        min-width: 0;
+        font-weight: 600;
+        font-size: 17px;
+        content: "";
+        height: 100%;
+        cursor: auto;
+      }
+      .right-wrap {
+        height: 100%;
+        > button {
+          width: 50px;
+          height: 100%;
+          font-size: 20px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+    .page-screen {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 35px);
+      background-color: #fff;
+      .page-cover {
+        display: block;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 100%;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .page-resize-top {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 8px;
+      cursor: n-resize;
+    }
+    .page-resize-right {
+      position: absolute;
+      top: 0;
+      right: 0px;
+      width: 8px;
+      height: 100%;
+      cursor: e-resize;
+    }
+    .page-resize-bottom {
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      height: 8px;
+      cursor: n-resize;
+    }
+    .page-resize-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 100%;
+      cursor: e-resize;
+    }
+    .page-resize-topLeft {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      cursor: nw-resize;
+    }
+    .page-resize-topRight {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      cursor: ne-resize;
+    }
+    .page-resize-bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      cursor: sw-resize;
+    }
+    .page-resize-bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      cursor: se-resize;
+    }
+    &.off {
+      width: 20vw;
+      height: 20vw;
+      bottom: 58px;
+      left: 0;
+    }
+    &.on {
+      /* TEST */
+      visibility: visible;
+      width: 960px;
+      height: 700px;
+      top: 0;
+      left: 0;
+      //   left: 50px;
+      //   top: 50px;
+      // bottom: 58px;
+      transition: all 0.1s;
+    }
+    &.max-screen {
+      width: 100vw;
+      height: calc(100% - 58px);
+      top: 0;
+      left: 0;
+    }
+    &.moving {
+      transition: all 0s;
+      .page-top {
+        background-color: rgb(150, 163, 184);
+      }
+      .page-cover {
+        opacity: 0;
+      }
+      .page-screen {
+        opacity: 0.5;
+      }
+    }
+    .full-close {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: #000;
+      font-size: 25px;
+      line-height: 0px;
+      &:hover {
+        border: 1px solid black;
+        // background-color: #000;
+        // color: #000;
+      }
+    }
+  }
+  // 페이지 풀스크린 일 때
+  #mainFooter.full {
+    bottom: -65px;
+  }
+  #pages .full {
+    top: -35px;
+    height: calc(100% + 35px);
+  }
+  // 인트라 메인메뉴리스트
+  #mainMenu {
+    position: fixed;
+    z-index: 99998;
+    width: 100%;
+    height: calc(100vh - 58px);
+    background-color: rgb(37, 37, 37, 0.95);
+    // background-color: #5c708f;
+    bottom: calc(-100% - 640px);
+    // bottom: 58px; // 개발중 메뉴열기
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+    transition: all 0.1s;
+    &.on {
+      bottom: 58px;
+    }
+    .menuInfo {
+      width: 48px;
+      height: 100%;
+      position: absolute;
+      overflow: hidden;
+      transition: all 0.2s;
+      &.open {
+        background-color: rgb(50, 48, 54, 0.99);
+        width: 255px;
+      }
+      &.setting {
+        .highlight {
+          left: -255px;
+        }
+      }
+      .highlight {
+        position: relative;
+        width: 510px;
+        height: 100%;
+        display: flex;
+        transition: all 0.2s;
+        > div {
+          position: relative;
+          width: 255px;
+          .bottom-space {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+          }
+          .top-space > button,
+          .bottom-space > button {
+            display: block;
+            position: relative;
+            width: 100%;
+            padding: 6px 12px;
+            text-align: left;
+            color: #fff;
+            height: 48px;
+            &:hover {
+              background-color: rgb(80, 80, 80);
+            }
+            span:nth-child(2) {
+              padding-left: 12px;
+              font-size: 15px;
+            }
+            .bris-icon {
+              border: 1px solid #fff;
+              border-radius: 4px;
+              font-size: 18px;
+              display: inline-block;
+              width: 24px;
+              height: 24px;
+              text-align: center;
+              line-height: 20px;
+              &.mobile {
+                font-size: 11.5px;
+              }
+            }
+            .noread {
+              position: absolute;
+              width: 22px;
+              height: 22px;
+              background-color: #f00;
+              border-radius: 100%;
+              top: 22.3px;
+              left: 26.4px;
+              text-align: center;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+      .right-open {
+        position: relative;
+        width: 48px;
+        height: 100%;
+      }
+    }
+    .menuList {
+      // width: calc(40% - 24px);
+      width: calc(100% - 24px);
+      // height: 100%;
+      height: calc(50% - 19px);
+      overflow: auto;
+      padding: 10px;
+      margin-left: 48px;
+      border-bottom: 3px solid #fff;
+      background-color: #4e4e4e;
+      .sort {
+        display: flex;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #888;
+        margin-bottom: 5px;
+        > div {
+          width: 50%;
+        }
+        .cur-menu {
+          button {
+            font-size: 24px;
+            color: #fff;
+            font-weight: bold;
+            &:hover {
+              color: #ff0;
+            }
+          }
+        }
+        .sort-btn {
+          display: flex;
+          justify-content: center;
+          button {
+            color: #fff;
+            display: inline-block;
+            padding: 0 10px;
+            height: 20px;
+            &:nth-child(1) {
+              border-left: 1px solid #fff;
+              border-top: 1px solid #fff;
+              border-bottom: 1px solid #fff;
+              border-radius: 3px 0 0 3px;
+            }
+            &:nth-child(n + 2) {
+              border-left: 1px solid #fff;
+              border-right: 1px solid #fff;
+              border-top: 1px solid #fff;
+              border-bottom: 1px solid #fff;
+            }
+            &:last-child {
+              border-radius: 0 3px 3px 0;
+            }
+            &.on {
+              background-color: rgb(129, 127, 118);
+            }
+            &:hover {
+              background-color: rgb(101, 99, 92);
+            }
+          }
+        }
+      }
+      .menu-search {
+        position: relative;
+        input {
+          border: none;
+          background-color: transparent;
+          padding-left: 35px;
+          padding-right: 25px;
+          color: #fff;
+          &:focus {
+            box-shadow: none;
+          }
+        }
+        .search-icon {
+          position: absolute;
+          top: 0;
+          left: 5px;
+          height: 100%;
+        }
+        .search-reset {
+          position: absolute;
+          right: 5px;
+          top: 0;
+          height: 100%;
+        }
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        li {
+          width: 100%;
+          > button {
+            position: relative;
+            width: 100%;
+            height: 35px;
+            // padding: 0 0 0 30px;
+            color: #fff;
+            display: block;
+            text-align: left;
+            > i {
+              width: 30px;
+              display: inline-block;
+              text-align: center;
+            }
+            span {
+              display: inline-block;
+              width: calc(100% - 65px);
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            &.sortOn {
+              padding: 0 0 0 10px;
+            }
+            &.sort-title {
+              font-size: 20px;
+              padding-left: 10px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              &.on {
+                background-color: rgb(155, 152, 141);
+              }
+            }
+            &:hover {
+              background-color: rgb(101, 99, 92);
+            }
+            .menu-modify {
+              position: absolute;
+              top: 0;
+              right: 0;
+              color: #fff;
+              height: 100%;
+              padding: 0 2px;
+              &:hover {
+                color: #ff0;
+              }
+            }
+          }
+        }
+      }
+      > ul {
+        margin-top: 3px;
+      }
+      &.trash {
+        position: relative;
+        overflow: visible;
+      }
+      .quick-trashcan {
+        position: absolute;
+        width: calc(100% + 48px);
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.8);
+        top: 0;
+        left: -48px;
+        &:hover {
+          color: #f00;
+        }
+      }
+      /* 스크롤 */
+      &::-webkit-scrollbar {
+        width: 5px;
+        height: 1px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #fff;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: rgb(37, 37, 37);
+        border-left: 1px solid rgb(37, 37, 37);
+      }
+    }
+    .menuQuick {
+      // width: calc(60% - 24px);
+      width: calc(100% - 24px);
+      position: relative;
+      height: calc(50% + 21px);
+      padding: 10px 8px 10px 8px;
+      overflow: auto;
+      margin-left: 48px;
+      .quick-group {
+        width: 100%;
+        color: #fff;
+        &.move {
+          border: 1px solid #fff;
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+        &.new {
+          opacity: 0.8;
+        }
+        .title {
+          width: 100%;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          input[type="text"] {
+            font-size: 15px;
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            width: 100%;
+            &:focus {
+              border: none;
+              outline: none;
+            }
+          }
+        }
+        .btns {
+          width: 100%;
+          button {
+            color: #fff;
+            margin: 2px;
+            padding: 4px;
+            width: calc(33% - 4px);
+            text-align: left;
+            aspect-ratio: 1 / 1;
+            background-color: rgb(0, 0, 0);
+            position: relative;
+            &:hover {
+              background-color: rgb(77, 77, 77);
+              border: 1px solid rgb(158, 158, 158);
+            }
+            .btns-icon {
+              padding-bottom: 20px;
+              text-align: center;
+              i {
+              }
+            }
+            h6 {
+              margin: 0;
+              position: absolute;
+              width: 100%;
+              left: 0;
+              bottom: 0;
+              font-size: 12px;
+              padding-bottom: 5px;
+              word-break: keep-all;
+              padding: 1px 2px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+      .new-quick {
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* 스크롤 */
+      &::-webkit-scrollbar {
+        width: 5px;
+        height: 1px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #000;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: rgb(37, 37, 37);
+        border-left: 1px solid rgb(37, 37, 37);
+      }
+    }
+  }
+  // 메뉴 옮길 때 잔상
+  .pointer-space {
+    position: fixed;
+    // border-radius: 50%;
+    pointer-events: none; /* 이 부분이 중요합니다. */
+    padding: 2px;
+    text-align: center;
+    &.icon {
+      top: -60px;
+      left: -60px;
+      width: 120px;
+      height: 120px;
+      z-index: 5;
+      opacity: 0.7;
+    }
+    &.menu {
+      top: -49.805px;
+      left: -49.805px;
+      width: 99.61px;
+      height: 99.61px;
+      padding: 4px;
+      z-index: 99999;
+      opacity: 1;
+      background-color: rgb(0, 0, 0, 0.6);
+      color: #fff;
+      h6 {
+        margin: 0;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        font-size: 12px;
+        padding-bottom: 5px;
+        word-break: keep-all;
+        text-align: left;
+        padding: 1px 2px;
+      }
+    }
+  }
+  /* 스크롤 */
+  &::-webkit-scrollbar {
+    height: 0px;
+  }
 }
 // 아이콘 포커스 & 호버
 .icon-act {
-	&:hover,
-	&:focus {
-		border: 1px solid #ccc;
-		background-color: rgba(255, 255, 255, 0.2);
-		z-index: 3;
-	}
-	&:hover {
-		background-color: rgba(255, 255, 255, 0.4);
-	}
-	&:focus {
-		height: auto;
-		p {
-			height: auto;
-			display: block;
-		}
-	}
+  &:hover,
+  &:focus {
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 3;
+  }
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  &:focus {
+    height: auto;
+    p {
+      height: auto;
+      display: block;
+    }
+  }
 }
 // 스위치 checkbox, label
 .switch {
-	.switch_label {
-		position: relative;
-		cursor: pointer;
-		display: inline-block;
-		width: 58px;
-		height: 28px;
-		background: #999;
-		border: 2px solid #999;
-		border-radius: 20px;
-		transition: 0.2s;
-		&:hover {
-			background: #888;
-		}
-		> span {
-			position: absolute;
-			top: 1.6px;
-			left: 3px;
-			display: inline-block;
-			width: 20px;
-			height: 20px;
-			border-radius: 20px;
-			background: #fff;
-			transition: 0.2s;
-		}
-	}
-	.switch_checkbox {
-		position: absolute;
-		/* hidden */
-		appearance: none;
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		&:checked + .switch_label {
-			background: rgb(110, 218, 110);
-			border: 2px solid rgb(121, 204, 121);
-			&:hover {
-				background: rgb(121, 204, 121);
-			}
-			> span {
-				left: 34px;
-				background: #fff;
-				box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1254901961);
-			}
-		}
-	}
+  .switch_label {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    width: 58px;
+    height: 28px;
+    background: #999;
+    border: 2px solid #999;
+    border-radius: 20px;
+    transition: 0.2s;
+    &:hover {
+      background: #888;
+    }
+    > span {
+      position: absolute;
+      top: 1.6px;
+      left: 3px;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      background: #fff;
+      transition: 0.2s;
+    }
+  }
+  .switch_checkbox {
+    position: absolute;
+    /* hidden */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    &:checked + .switch_label {
+      background: rgb(110, 218, 110);
+      border: 2px solid rgb(121, 204, 121);
+      &:hover {
+        background: rgb(121, 204, 121);
+      }
+      > span {
+        left: 34px;
+        background: #fff;
+        box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1254901961);
+      }
+    }
+  }
 }
 // 뒷배경 그림자 주기
 .add-shadow::before {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	top: 0;
-	right: 0;
-	z-index: -1;
-	opacity: 0.12;
-	background: #000;
-	border-radius: 40%;
-	content: "";
-	filter: blur(25px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 0.12;
+  background: #000;
+  border-radius: 40%;
+  content: "";
+  filter: blur(25px);
 }
 /* 모달창 */
 .modal {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 0;
-	left: 0;
-	z-index: 100000;
-	color: #000;
-	.modal-background {
-		width: 100%;
-		height: 100%;
-		background: rgba(0, 0, 0, 0.6);
-		position: absolute;
-		z-index: 900;
-		cursor: auto;
-	}
-	.modal-board {
-		position: absolute;
-		width: 100%;
-		max-width: 500px;
-		z-index: 901;
-		&.big {
-			max-width: 800px;
-		}
-		.modal-content {
-			height: 100%;
-			margin: 0 15px;
-			position: relative;
-			overflow: hidden;
-			background: #fff;
-			border: 0.1px solid #686868;
-			border-radius: 20px;
-			.modal-title {
-				font-size: 16px;
-				font-weight: 400;
-				padding: 15px 50px 15px 20px;
-			}
-			.modal-con {
-				position: relative;
-				max-height: calc(100vh - 220px);
-				font-size: 18px;
-				width: 100%;
-				padding: 0 20px 30px;
-				overflow-y: auto;
-				overflow-x: hidden;
-				#iconSelectList > button {
-					display: inline-grid;
-				}
-				.bg-preview {
-					display: block;
-					width: 50vw;
-					height: 50vh;
-					border: 1px solid black;
-					border-style: dashed;
-					&.on {
-						border: none;
-					}
-				}
-				.bg-list {
-					width: 100%;
-					margin-left: 0;
-					> button,
-					label {
-						width: 33.3%;
-						aspect-ratio: 1 / 1;
-						padding: 3px;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						cursor: pointer;
-						&.pick {
-							background-color: #aaa;
-						}
-						&:hover {
-							border: 3px solid #555;
-							padding: 0;
-						}
-					}
-				}
-			}
-			.modal-btn_wrap {
-				position: absolute;
-				right: 20px;
-				top: 20px;
-				.modal_close {
-					background: url("../img/ico_close_40x40.png") no-repeat 0 0;
-					width: 16px;
-					height: 16px;
-					font-size: 0;
-					background-size: 100% auto;
-					vertical-align: top;
-				}
-			}
-			.modal-confirm {
-				padding-right: 10px;
-				text-align: right;
-				position: absolute;
-				right: 0;
-				bottom: 5px;
-				button {
-					width: 60px;
-					height: 40px;
-					&:hover {
-						box-shadow: 1px 1px 4px black;
-					}
-					&:active {
-						box-shadow: none;
-						background-color: #e1e1e1;
-					}
-				}
-				span {
-					margin-left: 2px;
-				}
-			}
-		}
-	}
-	&.active .modal-board {
-		animation-duration: 0.4s;
-		animation-fill-mode: both;
-		animation-name: fadeInToCenter;
-	}
-	&.delay .modal-board {
-		animation-duration: 0.35s;
-		animation-name: fadeOutToBottom;
-	}
-	@keyframes fadeOutToBottom {
-		0% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-40px);
-		}
-		55% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-			transform: translateY(101%);
-		}
-	}
-	@keyframes fadeInToCenter {
-		0% {
-			opacity: 0;
-			transform: translateY(101%);
-		}
-		40% {
-			transform: translateY(-30px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  color: #000;
+  .modal-background {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    z-index: 900;
+    cursor: auto;
+  }
+  .modal-board {
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    z-index: 901;
+    &.big {
+      max-width: 800px;
+    }
+    .modal-content {
+      height: 100%;
+      margin: 0 15px;
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+      border: 0.1px solid #686868;
+      border-radius: 20px;
+      .modal-title {
+        font-size: 16px;
+        font-weight: 400;
+        padding: 15px 50px 15px 20px;
+      }
+      .modal-con {
+        position: relative;
+        max-height: calc(100vh - 220px);
+        font-size: 18px;
+        width: 100%;
+        padding: 0 20px 30px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        #iconSelectList > button {
+          display: inline-grid;
+        }
+        .bg-preview {
+          display: block;
+          width: 50vw;
+          height: 50vh;
+          border: 1px solid black;
+          border-style: dashed;
+          &.on {
+            border: none;
+          }
+        }
+        .bg-list {
+          width: 100%;
+          margin-left: 0;
+          > button,
+          label {
+            width: 33.3%;
+            aspect-ratio: 1 / 1;
+            padding: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            &.pick {
+              background-color: #aaa;
+            }
+            &:hover {
+              border: 3px solid #555;
+              padding: 0;
+            }
+          }
+        }
+      }
+      .modal-btn_wrap {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        .modal_close {
+          background: url("../img/ico_close_40x40.png") no-repeat 0 0;
+          width: 16px;
+          height: 16px;
+          font-size: 0;
+          background-size: 100% auto;
+          vertical-align: top;
+        }
+      }
+      .modal-confirm {
+        padding-right: 10px;
+        text-align: right;
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        button {
+          width: 60px;
+          height: 40px;
+          &:hover {
+            box-shadow: 1px 1px 4px black;
+          }
+          &:active {
+            box-shadow: none;
+            background-color: #e1e1e1;
+          }
+        }
+        span {
+          margin-left: 2px;
+        }
+      }
+    }
+  }
+  &.active .modal-board {
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    animation-name: fadeInToCenter;
+  }
+  &.delay .modal-board {
+    animation-duration: 0.35s;
+    animation-name: fadeOutToBottom;
+  }
+  @keyframes fadeOutToBottom {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-40px);
+    }
+    55% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(101%);
+    }
+  }
+  @keyframes fadeInToCenter {
+    0% {
+      opacity: 0;
+      transform: translateY(101%);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

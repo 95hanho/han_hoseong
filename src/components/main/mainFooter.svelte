@@ -127,7 +127,7 @@
                             clearTimeout(hoverIndex);
                             view.hover = false;
                         }}>
-                        <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.customColor : view.color}`} />
+                        <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.custom_color : view.color}`} />
                         <div class="page-title">
                             <span>{view.name}</span>
                         </div>

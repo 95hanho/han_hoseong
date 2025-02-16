@@ -146,6 +146,7 @@
                 icons[movingRow][movingCol] = null;
                 await commonService.set_icon({
                     ...movingIcon,
+                    children:[],
                     row, col,
                     type: "update_icon",
                 });
@@ -491,7 +492,7 @@
                     </div>
                     {:else if icon.icon}
                     <div class="dir-icon">
-                        <i class={`bi ${icon.icon} fs-64px`} style={`color:${icon.color === 'custom' ? icon.customColor : icon.color}`}/>
+                        <i class={`bi ${icon.icon} fs-64px`} style={`color:${icon.color === 'custom' ? icon.custom_color : icon.color}`}/>
                     </div>
                     {:else}
                     <div class="icon-img">
@@ -538,7 +539,7 @@
                             >
                                 {#if childIcon.icon}
                                 <div class="dir-icon">
-                                    <i class={`bi ${childIcon.icon} fs-64px`} style={`color:${childIcon.color === 'custom' ? childIcon.customColor : childIcon.color}`}/>
+                                    <i class={`bi ${childIcon.icon} fs-64px`} style={`color:${childIcon.color === 'custom' ? childIcon.custom_color : childIcon.color}`}/>
                                 </div>
                                 {:else}
                                 <div class="icon-img">
@@ -571,7 +572,7 @@
         </div>
         {:else if movingIcon.icon}
         <div class="icon-img">
-            <i class={`bi ${movingIcon.icon} fs-48px`} style={`color:${movingIcon.color === 'custom' ? movingIcon.customColor : movingIcon.color}`}/>
+            <i class={`bi ${movingIcon.icon} fs-48px`} style={`color:${movingIcon.color === 'custom' ? movingIcon.custom_color : movingIcon.color}`}/>
         </div>
         {/if}
         <div class="icon-name">

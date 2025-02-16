@@ -116,7 +116,7 @@
                 dispatch('change_cur_zIndex', {value:cur_zIndex});
                 c_vps();
             }}>
-            <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.customColor : view.color}`} />
+            <i class={`bi ${view.icon} fs-24px`} style={`color:${view.color === 'custom' ? view.custom_color : view.color}`} />
             {view.parent + ") " + view.name}
         </button>
         <div class="right-wrap">

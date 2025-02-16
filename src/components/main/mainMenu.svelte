@@ -200,6 +200,12 @@
                     return qSubIdx !== -1;
                 });
                 quickList[qIdx].menus = quickList[qIdx].menus.filter((v, i) => i !== qSubIdx);
+                // 전체삭제는 따로 처리
+                if(quickList.length == 1 && quickList[0].menus.length == 0) {
+                    commonService.set_quicks(quickList);
+                }
+                $moveMenu = null;
+                quickMenu_moveOn = false
             }}>
             <i class="bi bi-trash fs-50px"></i>
         </button>
@@ -316,7 +322,7 @@
         </div>
         {:else}
         <div class="icon">
-            <i class={`bi ${$moveMenu.icon} fs-48px`} style={`color:${$moveMenu.color === 'custom' ? $moveMenu.customColor : $moveMenu.color}`}/>
+            <i class={`bi ${$moveMenu.icon} fs-48px`} style={`color:${$moveMenu.color === 'custom' ? $moveMenu.custom_color : $moveMenu.color}`}/>
         </div>
         {/if}
         <h6 class="title">{$moveMenu.name}</h6>

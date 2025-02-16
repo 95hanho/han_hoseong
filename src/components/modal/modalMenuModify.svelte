@@ -68,7 +68,7 @@
                             {#if !$modal_menu.icon}
                             <img src={ico_quick_home} alt="기본">
                             {:else}
-                            <i class={`bi ${$modal_menu.icon} fs-64px`} style={`color:${$modal_menu.color === 'custom' ? $modal_menu.customColor : $modal_menu.color}`}/>
+                            <i class={`bi ${$modal_menu.icon} fs-64px`} style={`color:${$modal_menu.color === 'custom' ? $modal_menu.custom_color : $modal_menu.color}`}/>
                             {/if}
                         </div>
                         </div>
@@ -77,15 +77,15 @@
                         <div class="col-md-9">
                             <select class="form-select" style={`color:${$modal_menu.color};background-color:${$modal_menu.color === '#fff' && '#aaa'}`}
                             bind:value={$modal_menu.color}>
-                            <option style="color:#000" value={undefined}>-기본-</option>
+                            <option style="color:#000" value={""}>-기본-</option>
                             {#if $modal_menu.icon}
-                            <option style="color:#f00" value="#f00">레드</option>
-                            <option style="color:#0f0" value="#0f0">그린</option>
-                            <option style="color:#00f" value="#00f">블루</option>
-                            <option style="color:#ff0" value="#ff0">노랑</option>
-                            <option style="color:#fff" value="#fff">하양</option>
-                            <option style="color:#000" value="#000">블랙</option>
-                            <option style="color:#000" value="custom">사용자설정</option>
+                            <option value="#f00">레드</option>
+                            <option value="#0f0">그린</option>
+                            <option value="#00f">블루</option>
+                            <option value="#ff0">노랑</option>
+                            <option value="#fff">하양</option>
+                            <option value="#000">블랙</option>
+                            <option value="custom">사용자설정</option>
                             {/if}
                             </select>
                         </div>
@@ -94,7 +94,7 @@
                         <div class="row mb-15px">
                         <label for="123" class="form-label col-form-label col-md-3">색상 사용자설정</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" bind:value={$modal_menu.customColor}>
+                            <input type="text" class="form-control" bind:value={$modal_menu.custom_color}>
                             <p class="c_red">* 색상 16진수 값을 입력해주세요.</p>
                         </div>
                         </div>

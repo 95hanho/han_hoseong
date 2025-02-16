@@ -38,7 +38,7 @@
   $:if(setting_bg["background-position"] !== "center") {
     setting_bg["background-position"] = `${positionX}% ${positionY}%`;
   }
-  let customColor = "";
+  let custom_color = "";
 
   let bg_imageList = [];
   bg_imageList.push(bg_ex1, bg_ex2, bg_ex3, bg_ex4, bg_ex5, bg_ex6);
@@ -67,7 +67,7 @@
     sizeY = 0;
     positionX = 0;
     positionY = 0;
-    customColor = "";
+    custom_color = "";
   }
 
   // 아이콘수정
@@ -79,7 +79,7 @@
       ["background-image"]: setting_bg["background-image"],
       ["background-size"]: setting_bg["background-size"] === "cover" ? "cover" : `${sizeX}px ${sizeY}px`,
       ["background-position"]: setting_bg["background-position"] === "center" ? "center" : `${positionX}% ${positionY}%`,
-      ["background-color"]: setting_bg["background-color"] !== 'custom' ? setting_bg["background-color"] : customColor,
+      ["background-color"]: setting_bg["background-color"] !== 'custom' ? setting_bg["background-color"] : custom_color,
     }
     commonService.set_bgInfo($bg_info);
   }
@@ -184,7 +184,7 @@
                             <select class="form-select" bind:value={setting_bg["background-color"]}
                               on:change={((e) => {
                                 if(e.target.value === 'custom') {
-                                  customColor = "";
+                                  custom_color = "";
                                 }
                               })}>
                               <option style="color:#000" value={undefined}>-기본-</option>
@@ -200,7 +200,7 @@
                           </div>
                           {#if setting_bg["background-color"] === 'custom'}
                           <div class="col-md-4">
-                            <input type="text" class="form-control" bind:value={customColor}>
+                            <input type="text" class="form-control" bind:value={custom_color}>
                           </div>
                           {/if}
                         </div>

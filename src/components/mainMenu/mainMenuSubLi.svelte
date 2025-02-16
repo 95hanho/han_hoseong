@@ -74,6 +74,7 @@
         )}
         on:mousemove={(e) => subMenu_mousemove(e)}
         on:click|preventDefault={(e) => {
+            subMenu_mouseup();
             if(subMenu.frame_on) {
                 $inPage = {
                     ...subMenu,
@@ -83,8 +84,8 @@
             } else window.open(subMenu.url);
         }}
     >
-        <i class={`bi ${subMenu.icon} fs-18px`} style={`color:${subMenu.color === 'custom' ? subMenu.customColor : subMenu.color}`}></i>
-        {subMenu.name}
+        <i class={`bi ${subMenu.icon} fs-18px`} style={`color:${subMenu.color === 'custom' ? subMenu.custom_color : subMenu.color}`}></i>
+        <span>{subMenu.name}</span>
         <button class="menu-modify" on:mousedown|stopPropagation 
             on:click|stopPropagation={() => {
                 modal_menuModify.open({...subMenu});
