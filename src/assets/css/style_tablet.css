@@ -13,9 +13,8 @@
     width: 500px;
   }
   .wrapper footer#mainFooter .menu-btn {
-    background-image: url(../img/exc_intranet/intralogo.gif);
     background-size: cover;
-    width: 184px;
+    width: 224px;
     height: 58px;
   }
   .wrapper footer#mainFooter .menu-btn:hover {

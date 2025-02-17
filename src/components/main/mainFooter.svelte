@@ -98,7 +98,8 @@
     <button class="menu-btn" on:click={() => {
         dispatch("change_menuOn", {value:!menuOn});
     }}>
-        <i class="bi bi-menu-up"></i>
+        <span class="fab fa-windows"></span>
+        <span>hanho portfolio</span>
     </button>
     <!-- 가운데 -->
     <div class="current-url">

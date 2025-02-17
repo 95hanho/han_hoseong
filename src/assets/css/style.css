@@ -996,9 +996,14 @@
   width: 50px;
   height: 100%;
   text-align: center;
-  background-color: #9ab3d9;
-  color: #555;
-  font-size: 25px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #2672ec;
+  padding: 0 20px;
+}
+.wrapper footer#mainFooter .menu-btn span:first-child {
+  margin-right: 5px;
+  font-size: 30px;
 }
 .wrapper footer#mainFooter .current-url {
   position: relative;
