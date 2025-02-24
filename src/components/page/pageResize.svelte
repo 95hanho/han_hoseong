@@ -129,7 +129,7 @@
         lastMoveY = 0;
         rsDownOn = false;
         resizeCase = 0;
-        dispatch('change_resizing', {value:true});
+        dispatch('change_resizing', {value:false});
     }
 
     onMount(() => {

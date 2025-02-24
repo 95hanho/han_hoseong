@@ -10,6 +10,8 @@ const instance = axios.create({
 });
 instance.defaults.withCredentials = true; // 쿠키 전송 허락락
 
+let disconnected = false;
+
 // 토큰체크 안하는 url
 const notTokenCheckUrl = [
   API_URL.TESTLOGIN,
@@ -34,7 +36,9 @@ instance.interceptors.response.use(
   },
   (err) => {
     console.log(err);
-    if (err.status == 401) {
+    if (err.response.status == 403 && !disconnected) {
+      modal_alert.open("권한이 없어서 정보가 저장되지 않습니다.");
+      disconnected = true;
     }
     return Promise.reject(err.response.data);
   }

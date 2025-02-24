@@ -64,8 +64,12 @@
 
     // 오른쪽 즐겨찾기리스트
     let quickList = [];
+    let init_quickList = false;
     $: if(quickList && quickList.length > 0) {
-        commonService.set_quicks(quickList);
+        if(init_quickList) {
+            commonService.set_quicks(quickList);
+        }
+        init_quickList = true;
     }
     // 퀵 리스트 그룹 사라질 때 quickList에서 뺌
     $: if(quickList.some((v) => v.menus.length === 0)) {
